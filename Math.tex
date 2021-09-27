@@ -456,18 +456,23 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 	\begin{multicols}{2}
 		\begin{tikzpicture}
 			\begin{axis}[
-			width=160,
+			width=200,
 			height = 200,
-			domain=-1:1, 
+			domain=-3.1:3.1, 
 			samples=500, 
 			axis x line=center,
 			axis y line=center,
-			xtick={-1,-0.5,0,0.5,1}, 
+			xtick={-3.14,-1.57,0,1.57,3.14}, 
 			ytick={-1.57,1.57,3.14}, 
+			xticklabels={$-\pi$, $-\frac{\pi}{2}$, $0$, $\frac{\pi}{2}$, $\pi$},
 			yticklabels={$-\pi$/2,$\pi$/2,$\pi$},
 			grid=both]
-			\addplot[color = blue]  {asin(x)/180*pi};
-			\addplot[color = red]  {acos(x)/180*pi};
+			\addplot[color = blue,domain=-1:1]  {asin(x)/180*pi};
+			\addlegendentry{$arcsin (x)$}
+			\addplot[color = red, domain=-1:1]  {acos(x)/180*pi};
+			\addlegendentry{$arccos (x)$}
+			\addplot[color = magenta]  {atan(x)/180*pi};
+			\addlegendentry{$arctan (x)$}
 			\end{axis}
 		\end{tikzpicture}
 		
@@ -533,7 +538,57 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 
 \section{Differenzierbarkeit}
 
+\begin{definition}[Landau-Symbole]
+	Seien $f,g : \mathbb{R} \rightarrow \mathbb{C}$ Funktionen, $x_0 \in \mathbb{R}$
+	\begin{description}[noitemsep]
+		\item $f(x) = \mathcal{O}(g(x))$ für $x \rightarrow x_0$ falls: $\exists \epsilon > 0: \exists c > 0 : \forall x \in \mathbb{R}$ mit $|x - x _0| < \epsilon : |f(x)| < c \cdot |g(x)|$, d.h. in einer Umgebung von $x_0$ wird $f(x)$ von $g(x)$ mal einer Konstante beschränkt.
+		\item $f(x) = o(g(x))$ für $x \rightarrow x_0$ falls $\lim_{x \rightarrow x_0} \frac{f(x)}{g(x)} = 0 $
+		\item $f(x) = \mathcal{O}(g(x))$ für $x \rightarrow \infty$ falls: $\exists M > 0: \exists c > 0 : \forall x > M : |f(x)| < c \cdot |g(x)|$, d.h. ab einer Schranke $M$ wird $f(x)$ durch $g(x)$ beschränkt.
+		\item $f(x) = \mathcal{O}(g(x))$ für $x \rightarrow -\infty$ falls: $\exists M > 0: \exists c > 0 : \forall x < -M : |f(x)| < c \cdot |g(x)|$, d.h. ab einer Schranke $M$ wird $f(x)$ durch $g(x)$ beschränkt.	
+		\item $f(x) = o(g(x))$ für $x \rightarrow x_0 \in \{\pm \infty\}$ falls $\lim_{x \rightarrow x_0} \frac{f(x)}{g(x)} = 0 $
+	\end{description}
+\end{definition}
 
+\begin{definition}[Differenzierbarkeit]
+	Eine Funktion $f : I \rightarrow \mathbb{R}, I \subseteq \mathbb{R}$ heißt differenzierbar in $x_0 \in I$, falls $\lim_{x \rightarrow x_0} \frac{f(x) - f(x_0)}{x - x_0}$ bzw. $\lim_{h \rightarrow 0} \frac{f(x_0 + h) - f(x_0)}{h}$ existiert. Man schreibt dafür $f'(x_0)$ (Lagrange), $\frac{\partial f}{\partial x_0}$ (Leibniz). Ist $f$ differenzierbar für alle $x_0 \in I$, so heißt $f$ differenzierbar.
+\end{definition}
+
+\begin{satz}[Rechenregeln differenzierbrer Funktionen]
+	Seien $f,g : I \subseteq \mathbb{R} \rightarrow \mathbb{R}$ in $x \in I$ differenzierbar, $c \in \mathbb{R}$.
+	\begin{description}[noitemsep]
+		\item $(c \cdot f)'(x) = c \cdot f'(x) $
+		\item $(f + g)'(x) = f'(x) + g'(x) $
+		\item $(f \cdot g)'(x) = f'(x) g(x) + f(x)g'(x) $  (Produktregel)
+		\item $(\frac{f}{g})'(x) = \frac{f'(x) g(x) - f(x)g'(x)}{g(x)^2} $	 (Quotientenregel)
+	\end{description}
+\end{satz}
+
+\begin{satz}[Kettenregel]
+	Sei $f : D \subseteq \mathbb{R} \rightarrow \mathbb{R}$, $g : E \subseteq \mathbb{R} \rightarrow \mathbb{R}$ und $g(E) \subseteq D$. Sei $x_0$ innererer Punkt von $E$, $g(x_0)$ innerer Punkt von $D$. Sei $g$ in $x_0$ und $f$ in $g(x_0)$ differenzierbar. Dann gilt: $(f \circ g)'(x_0) = f'(g(x_0)) \cdot g'(x_0)$
+ \end{satz}
+
+\begin{satz}[Ableitung der Umkehrfunktion]
+	Sei $f : I \subseteq \mathbb{R} \rightarrow J \subseteq \mathbb{R}$ bijektiv und differenzierbar in $y_0$. Dann ist $f^{-1} : J \rightarrow I$ differenzierbar in $y_0$ und $(f^{-1})'=\frac{1}{f'(f^{-1}(y_0))}$
+\end{satz}
+
+\begin{satz}[Elementare Ableitungen]
+	Es gelten folgende Ableitungen:
+	\begin{multicols}{2}
+		\begin{description}[noitemsep]
+			\item $(c)' = 0$
+			\item $(x^a)'=ax^{a-1}$
+			\item $(e^x)'=e^x$
+			\item $sin'(x) = cos(x)$
+			\item $cos'(x) = -sin(x)$
+			\item $tan'(x) = \frac{1}{cos(x)^2 = 1 + tan(x)^2}$
+			\item $ln'(x) = \frac{1}{x}$
+			\item $arcsin'(x) = \frac{1}{\sqrt{1 -x^2}}$	
+			\item $arccos'(x) = - \frac{1}{\sqrt{1 - x^2}}$	
+			\item $arctan'(x) = \frac{1}{1 + x^2}$
+			\item $(a^x)' = a^x ln(a)$
+		\end{description}
+	\end{multicols}
+\end{satz}
 
 \section{Anwendungen der Ableitung}
 

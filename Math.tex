@@ -7,11 +7,17 @@
 \usepackage{multicol}
 \begin{document}
 
+\newcommand{\function}[3]{#1 : #2 \rightarrow #3}
 \newcommand{\f}[2]{f : #1 \rightarrow #2 }
 \newcommand{\g}[2]{g : #1 \rightarrow #2 }
 
+\newcommand{\frr}{\f{\realset}{\realset}}
 \newcommand{\fab}{\f{[a,b]}{\realset}}
 \newcommand{\gab}{\g{[a,b]}{\realset}}
+\newcommand{\fabex}{\f{(a,b)}{\realset}}
+
+\newcommand{\functionab}[1]{#1 : [a,b] \rightarrow \realset}
+
 \newcommand{\liminfty}[1]{\lim_{#1 \rightarrow \infty}}
 \newcommand{\limninfty}[1]{\lim_{#1 \rightarrow -\infty} }
 \newcommand{\limto}[2]{\lim_{#1 \rightarrow #2} }
@@ -28,6 +34,11 @@
 \newcommand{\forallin}[2]{\forall #1 \in #2}
 \newcommand{\forallinreal}[1]{\forallin{#1}{\realset}}
 \newcommand{\forallxinreal}{\forallin{x}{\realset}}
+
+\newcommand{\series}[4]{\sum_{#1 = #2}^{#3} #4_{#1}}
+\newcommand{\serieszeroinfty}[2]{\series{#1}{0}{\infty}{#2}}
+\newcommand{\serieskzeroinfty}[1]{\serieszeroinfty{k}{#1}}
+\newcommand{\serieskinfty}[2]{\series{k}{#1}{\infty}{#2}}
 
 \newtheorem{definition}{Definition}
 \newtheorem{satz}{Satz}
@@ -60,7 +71,7 @@
 \section{Relle Zahlen}
 
 \begin{definition}
-	Eine Menge $A$ heißt \emph{abzählbar}, falls es eine surjektive Abbildung $f : \naturalset \rightarrow A $ gibt.
+	Eine Menge $A$ heißt \emph{abzählbar}, falls es eine surjektive Abbildung $\f{\naturalset}{A}$ gibt.
 \end{definition}
 
 \begin{definition}
@@ -189,23 +200,23 @@
 
 
 \begin{definition}
-	Zu einer Folge $\sequencean$ sei $(s_n)_{n \in \naturalset}$ mit $s_n := \sum_{k=0}^{n} a_k$ die Folge der Partialsummen. $\liminfty{n} s_n = \liminfty{n} \sum_{k=0}^{n} a_k = \sum_{k=0}^{\infty} a_k$ heißt Werte der Reihe. Die Reihe konvergiert, wenn $(s_n)_{n \in \naturalset}$ konvergiert, sonst divergiert sie.
+	Zu einer Folge $\sequencean$ sei $(s_n)_{n \in \naturalset}$ mit $s_n := \sum_{k=0}^{n} a_k$ die Folge der Partialsummen. $\liminfty{n} s_n = \liminfty{n} \sum_{k=0}^{n} a_k = \serieskzeroinfty{a}$ heißt Werte der Reihe. Die Reihe konvergiert, wenn $(s_n)_{n \in \naturalset}$ konvergiert, sonst divergiert sie.
 \end{definition}
 
 \begin{satz}[Konvergenzkriterium]
-	 $\sum_{k=0}^{\infty} a_k $ konvergiert $\rightarrow \liminfty{k} a_k = 0$
+	 $\serieskzeroinfty{a} $ konvergiert $\rightarrow \liminfty{k} a_k = 0$
 \end{satz}
 
 \begin{satz}[Majorantenkriterium]
 	Es gilt:
 	\begin{enumerate}[noitemsep]
-		\item Findet man zur Reihe	$\sum_{k=0}^{\infty} a_k $ eine Reihe $\sum_{k=0}^{\infty} b_k $ sodass $b_k \geq |a_k|$, dann gilt: $\sum_{k=0}^{\infty} b_k$ konvergiert $\rightarrow \sum_{k=0}^{\infty} a_k $ konvergiert. $\sum_{k=0}^{\infty} b_k $ heißt Majorante
-		\item Findet man zur Reihe	$\sum_{k=0}^{\infty} a_k $ eine Reihe $\sum_{k=0}^{\infty} b_k $ sodass $|b_k| \leq a_k$, dann gilt: $\sum_{k=0}^{\infty} b_k$ divergiert $\rightarrow \sum_{k=0}^{\infty} a_k $ divergiert. $\sum_{k=0}^{\infty} b_k $ heißt Minorante	
+		\item Findet man zur Reihe	$\serieskzeroinfty{a}$ eine Reihe $\serieskzeroinfty{b} $ sodass $b_k \geq |a_k|$, dann gilt: $\serieskzeroinfty{b}$ konvergiert $\rightarrow \sum_{k=0}^{\infty} a_k $ konvergiert. $\serieskzeroinfty{b} $ heißt Majorante
+		\item Findet man zur Reihe	$\serieskzeroinfty{a}$ eine Reihe $\serieskzeroinfty{b} $ sodass $|b_k| \leq a_k$, dann gilt: $\serieskzeroinfty{b}$ divergiert $\rightarrow \sum_{k=0}^{\infty} a_k $ divergiert. $\serieskzeroinfty{b} $ heißt Minorante	
 	\end{enumerate}
 \end{satz}
 
 \begin{satz}[Konvergenzkriterium]
-	Sind die Folgen $\sequencean$ und $\sequencebn$ asymptotisch gleich, dann sind $\sum_{k=0}^{\infty} a_k$ und $\sum_{k=0}^{\infty} b_k$ entweder beide konvergent oder beide divergent.
+	Sind die Folgen $\sequencean$ und $\sequencebn$ asymptotisch gleich, dann sind $\serieskzeroinfty{a}$ und $\serieskzeroinfty{b}$ entweder beide konvergent oder beide divergent.
 \end{satz}
 
 \begin{satz}[Quotientenkriterium]
@@ -225,20 +236,20 @@
 \end{satz}
 
 \begin{definition}
-	$\sum_{k=0}^{\infty} a_k$ ist absolut konvergent, wenn 	$\sum_{k=0}^{\infty} | a_k | $ konvergiert.
+	$\serieskzeroinfty{a}$ ist absolut konvergent, wenn 	$\sum_{k=0}^{\infty} | a_k | $ konvergiert.
 \end{definition}
 
 \begin{satz}[Integralkriterium]
-	Sei $f : [1,\infty] \rightarrow [0, \infty]$ monoton fallend. 	$\sum_{k=1}^{\infty} f(k) $ konvergiert $\leftrightarrow \int_{1}^{\infty} f(x) \medspace dx $ konvergiert
+	Sei $\f{[1,\infty]}{[0, \infty]}$ monoton fallend. 	$\sum_{k=1}^{\infty} f(k) $ konvergiert $\leftrightarrow \int_{1}^{\infty} f(x) \medspace dx $ konvergiert
 \end{satz}
 
 \begin{satz}[Rechenregeln für konvergente Reihen]
-	Sind $\sum_{k=1}^{\infty} a_k$ und $\sum_{k=1}^{\infty} b_k$ konvergente Reihen, dann gilt:
+	Sind $\serieskinfty{1}{a}$ und $\serieskinfty{1}{b}$ konvergente Reihen, dann gilt:
 	\begin{enumerate}[noitemsep]
-		\item \emph{\textbf{Summe konvergenter Reihen:}} $\sum_{k=0}^{\infty} a_k + \sum_{k=0}^{\infty} b_k = \sum_{k=0}^{\infty} (a_k + b_k)$
+		\item \emph{\textbf{Summe konvergenter Reihen:}} $\serieskzeroinfty{a} + \serieskzeroinfty{b} = \sum_{k=0}^{\infty} (a_k + b_k)$
 		\item \emph{\textbf{Multiplikation mit einer Konstante:}} $c \cdot \sum_{k=0}^{\infty} a_k = \sum_{k=0}^{\infty} c \cdot a_k$
 		\item \emph{\textbf{Cauchy-Produkt:}} Sind beide Reihen absolut konvergent, dann auch $\sum_{k=0}^{\infty} c_k$, wobei $c_k = \sum_{l=0}^{\infty} a_lb_{k-l}$
-		\item \emph{\textbf{Divergente Teilsumme:}}  Ist $\sum_{k=0}^{\infty} b_k$ divergent, dann auch $\sum_{k=0}^{\infty} (a_k + b_k) $
+		\item \emph{\textbf{Divergente Teilsumme:}}  Ist $\serieskzeroinfty{b}$ divergent, dann auch $\sum_{k=0}^{\infty} (a_k + b_k) $
 	\end{enumerate}
 \end{satz}
 
@@ -255,11 +266,11 @@
 
 \section{Stetigkeit}
 \begin{definition}
-	Für eine Funktion $f : \realset \rightarrow \realset$ definiert man $\liminfty{x} f(x) = b \in \realset \cup \{\pm \infty\}$, wenn für jede relle Folge $(x_n)_{n \in \naturalset}$ mit $\liminfty{n} = + \infty$ gilt, dass $\liminfty{n} f(x_n) = b$ ist. Analog gilt dies für $- \infty$
+	Für eine Funktion $\frr$ definiert man $\liminfty{x} f(x) = b \in \realset \cup \{\pm \infty\}$, wenn für jede relle Folge $(x_n)_{n \in \naturalset}$ mit $\liminfty{n} = + \infty$ gilt, dass $\liminfty{n} f(x_n) = b$ ist. Analog gilt dies für $- \infty$
 \end{definition}
 
 \begin{definition}[Stetigkeit]
-	Eine Funktion $f : D \rightarrow \realset$ heißt im Punkt $x \in D$ stetig, falls für alle Folgen $(x_n)_{n \in \naturalset}$ in $D$ mit $\liminfty{n} x_n = x$ gilt: $\liminfty{n} f(x_n) = f(x)$. Man schreibt dann auch $\limto{x}{y} f(y) = f(x)$. $f$ ist stetig auf $D$, wenn $f$ in jedem $x \in D$ stetig ist. 
+	Eine Funktion $\f{D}{\realset}$ heißt im Punkt $x \in D$ stetig, falls für alle Folgen $(x_n)_{n \in \naturalset}$ in $D$ mit $\liminfty{n} x_n = x$ gilt: $\liminfty{n} f(x_n) = f(x)$. Man schreibt dann auch $\limto{x}{y} f(y) = f(x)$. $f$ ist stetig auf $D$, wenn $f$ in jedem $x \in D$ stetig ist. 
 \end{definition}
 
 \begin{definition}[Rechts-/Linksseitiger Grenzwert]
@@ -287,7 +298,7 @@
 \end{definition}
 
 \begin{satz}
-	Sei $K \subseteq \realset$ kompakt. Jede stetige Funktion $f : K \rightarrow \realset$ nimmt auf $K$ ihr Maximum und Minimum an, d.h. $\exists \bar{x}, \underline{x}: \forallin{x}{K} : f(\underline{x}) \leq f(x) \leq f(\bar{x})$. Man schreibt:
+	Sei $K \subseteq \realset$ kompakt. Jede stetige Funktion $\f{K}{\realset}$ nimmt auf $K$ ihr Maximum und Minimum an, d.h. $\exists \bar{x}, \underline{x}: \forallin{x}{K} : f(\underline{x}) \leq f(x) \leq f(\bar{x})$. Man schreibt:
 	
 	\begin{enumerate}[noitemsep]
 		\item $\underline{x} = argmin \{ f(x) \} \medspace$, $f(\underline{x}) = min \{f(x)\}$
@@ -571,7 +582,7 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 \end{definition}
 
 \begin{definition}[Differenzierbarkeit]
-	Eine Funktion $f : I \rightarrow \realset, I \subseteq \realset$ heißt differenzierbar in $x_0 \in I$, falls $\lim_{x \rightarrow x_0} \frac{f(x) - f(x_0)}{x - x_0}$ bzw. $\lim_{h \rightarrow 0} \frac{f(x_0 + h) - f(x_0)}{h}$ existiert. Man schreibt dafür $f'(x_0)$ (Lagrange), $\frac{\partial f}{\partial x_0}$ (Leibniz). Ist $f$ differenzierbar für alle $x_0 \in I$, so heißt $f$ differenzierbar.
+	Eine Funktion $\f{I}{\realset}, I \subseteq \realset$ heißt differenzierbar in $x_0 \in I$, falls $\lim_{x \rightarrow x_0} \frac{f(x) - f(x_0)}{x - x_0}$ bzw. $\lim_{h \rightarrow 0} \frac{f(x_0 + h) - f(x_0)}{h}$ existiert. Man schreibt dafür $f'(x_0)$ (Lagrange), $\frac{\partial f}{\partial x_0}$ (Leibniz). Ist $f$ differenzierbar für alle $x_0 \in I$, so heißt $f$ differenzierbar.
 \end{definition}
 
 \begin{satz}[Rechenregeln differenzierbrer Funktionen]
@@ -585,11 +596,11 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 \end{satz}
 
 \begin{satz}[Kettenregel]
-	Sei $f : D \subseteq \realset \rightarrow \realset$, $g : E \subseteq \realset \rightarrow \realset$ und $g(E) \subseteq D$. Sei $x_0$ innererer Punkt von $E$, $g(x_0)$ innerer Punkt von $D$. Sei $g$ in $x_0$ und $f$ in $g(x_0)$ differenzierbar. Dann gilt: $(f \circ g)'(x_0) = f'(g(x_0)) \cdot g'(x_0)$
+	Sei $\f{ D \subseteq \realset}{\realset}$, $g : E \subseteq \realset \rightarrow \realset$ und $g(E) \subseteq D$. Sei $x_0$ innererer Punkt von $E$, $g(x_0)$ innerer Punkt von $D$. Sei $g$ in $x_0$ und $f$ in $g(x_0)$ differenzierbar. Dann gilt: $(f \circ g)'(x_0) = f'(g(x_0)) \cdot g'(x_0)$
  \end{satz}
 
 \begin{satz}[Ableitung der Umkehrfunktion]
-	Sei $f : I \subseteq \realset \rightarrow J \subseteq \realset$ bijektiv und differenzierbar in $y_0$. Dann ist $f^{-1} : J \rightarrow I$ differenzierbar in $y_0$ und $(f^{-1})'=\frac{1}{f'(f^{-1}(y_0))}$
+	Sei $\f{I \subseteq \realset}{J \subseteq \realset} $ bijektiv und differenzierbar in $y_0$. Dann ist $f^{-1} : J \rightarrow I$ differenzierbar in $y_0$ und $(f^{-1})'=\frac{1}{f'(f^{-1}(y_0))}$
 \end{satz}
 
 \begin{satz}[Elementare Ableitungen]
@@ -607,6 +618,7 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 			\item $arccos'(x) = - \frac{1}{\sqrt{1 - x^2}}$	
 			\item $arctan'(x) = \frac{1}{1 + x^2}$
 			\item $(a^x)' = a^x ln(a)$
+			\item $ln(u(x))'=\frac{u'(x)}{u(x)}$
 		\end{description}
 	\end{multicols}
 \end{satz}
@@ -635,7 +647,7 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 \end{satz}
 
 \begin{satz}
-	Sei $f : (a,b) \rightarrow \realset$ differenzierbar, sei $f'(x_0) = 0, x_0 \in (a,b)$.
+	Sei $\fabex$ differenzierbar, sei $f'(x_0) = 0, x_0 \in (a,b)$.
 	\begin{description}[noitemsep]
 		\item $f' \geq 0$ in $(a, x_0)$ und $f' \leq 0$ in $(x_0, b) \rightarrow x_0$ ist globales Maximum
 		\item $f' \leq 0$ in $(a, x_0)$ und $f' \geq 0$ in $(x_0, b) \rightarrow x_0$ ist globales Minimum
@@ -643,7 +655,7 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 \end{satz}
 
 \begin{satz}
-	Seien $f,g :(a,b) \rightarrow \realset$ differenzierbar und $f' = g'$ auf $(a,b)$. Dann gibt unterscheiden sich $f,g$ nur um eine Konstante, d.h. $\exists c \in \realset : f = g + c$ auf $(a,b)$.
+	Seien $f,g : (a,b) \rightarrow \realset$ differenzierbar und $f' = g'$ auf $(a,b)$. Dann gibt unterscheiden sich $f,g$ nur um eine Konstante, d.h. $\exists c \in \realset : f = g + c$ auf $(a,b)$.
 \end{satz}
 
 \begin{satz}[L'Hospital]
@@ -656,7 +668,7 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 \end{satz}
 
 \begin{definition}
-	Für zweimal differenzierbares $f : (a,b) \rightarrow \realset$ gilt:
+	Für zweimal differenzierbares $\fabex$ gilt:
 	\begin{enumerate}[noitemsep]
 		\item $f$ heißt \emph{konvex} $\leftrightarrow f'' \geq 0$ auf $(a,b)$
 		\item $f$ heißt \emph{konkav} $\leftrightarrow f'' \leq 0$ auf $(a,b)$		
@@ -664,7 +676,7 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 \end{definition}
 
 \begin{satz}
-	Sei $f : (a,b) \rightarrow \realset$ zweimal differenzierbar und $f'(x_0)=0$ und $\exists x_0 \in (a,b) : f'(x_0) = 0$.
+	Sei $\fabex$ zweimal differenzierbar und $f'(x_0)=0$ und $\exists x_0 \in (a,b) : f'(x_0) = 0$.
 	
 	\begin{enumerate}[noitemsep]
 		\item $f''(x_0) > 0 \rightarrow f$ besitzt in $x_0$ ein striktes lokales Minimum
@@ -733,8 +745,29 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 \end{satz}
 
 \begin{satz}[Hauptsatz der Differential und Integralrechnung]
-	Sei $\fab$ stetig
+	Sei $\fab$ stetig. Die Funktion $\functionab{F}$ mit $F(x) = \int_{a}^{x} f(t) dt$ ist in jedem $x \in (a,b)$ differenzierbar und es gilt: $F'(x) = f(x)$.
 \end{satz}
+
+\begin{satz}
+	Sei $\fab$ stetig und $\functionab{F}$ Stammfunktion von $f$. Dann gilt: $\int_{a}^{b}f(x)dx = F(b) - F(a) := [F(x)]_a^b$. Für eine Stammfunktion von $f$ schreibt man auch $\int f(x) dx$ (unbestimmtes Integral).
+\end{satz}
+
+\begin{satz}[Partielle Integration]
+	Seien $\functionab{g,f}$ stetig differenzierbar. Dann gilt:
+	\begin{description}[noitemsep]
+		\item $\int_{a}^{b} f(x)g'(x)dx = [f(x)g(x)]_a^b - \int_{a}^{b} f'(x)g(x)dx$
+		\item $\int f(x)g'(x)dx = f(x)g(x) - \int f'(x)g(x)dx$	
+	\end{description}
+\end{satz}
+
+\begin{satz}[Integration durch Substitution]
+	Seien $\functionab{g,f}$ stetig differenzierbar. Dann gilt für jede stetige Funktion $\function{f}{g([a,b])}{\realset}$:
+	\begin{description}[noitemsep]
+		\item $\int_{a}^{b} f(g(t))g'(t) = \int_{g(a)}^{g(b)}f(x)dx$
+		\item $\int f(g(t))g'(t) = \int f(x)dx$
+	\end{description}
+\end{satz}
+
 
 \section{Potenzreihen}
 

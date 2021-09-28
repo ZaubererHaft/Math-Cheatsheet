@@ -7,6 +7,9 @@
 \usepackage{multicol}
 \begin{document}
 
+\newcommand{\fab}{f : [a, b] \rightarrow \mathbb{R} }
+\newcommand{\gab}{g : [a, b] \rightarrow \mathbb{R}}
+\newcommand{\liminfty}[1]{\lim_{#1 \rightarrow \infty} }
 
 \newtheorem{definition}{Definition}
 \newtheorem{satz}{Satz}
@@ -110,7 +113,7 @@
 
 
 \begin{definition}
-	Eine Folge $(a_n)_{n \in \mathbb{N}}$ konvergiert gegen $a \in \mathbb{R}$ genau dann wenn \\ $\forall \epsilon > 0 : \exists n_0 \in \mathbb{N} : \forall n \geq n_0 : | a_n - a | < \epsilon$, d.h. egal wie klein $\epsilon$, findet man eine Indexschranke $n_0$ sodass alle Folgeindices $a_n$ einen Abstand zu $a$ kleiner als $\epsilon$ haben. Wir schreiben $\lim_{n \rightarrow \infty} a_n = a$
+	Eine Folge $(a_n)_{n \in \mathbb{N}}$ konvergiert gegen $a \in \mathbb{R}$ genau dann wenn \\ $\forall \epsilon > 0 : \exists n_0 \in \mathbb{N} : \forall n \geq n_0 : | a_n - a | < \epsilon$, d.h. egal wie klein $\epsilon$, findet man eine Indexschranke $n_0$ sodass alle Folgeindices $a_n$ einen Abstand zu $a$ kleiner als $\epsilon$ haben. Wir schreiben $\liminfty{n} a_n = a$
 \end{definition}
 
 \begin{definition}
@@ -593,11 +596,11 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 \section{Anwendungen der Ableitung}
 
 \begin{satz}
-	Sei $f : [a,b] \rightarrow \mathbb{R}$ differenzierbar auf $(a,b)$. Wenn $f$ in $x_0$ ein lokales Extremum besitzt, dann gilt $f'(x_0) = 0$.
+	Sei $\fab$ differenzierbar auf $(a,b)$. Wenn $f$ in $x_0$ ein lokales Extremum besitzt, dann gilt $f'(x_0) = 0$.
 \end{satz}
 
 \begin{satz}[Mittelwertsatz]
-	Sei $f : [a,b] \rightarrow \mathbb{R}$ differenzierbar auf $[a,b]$, differenzierbar auf $(a,b)$. Dann gibt es ein $\xi \in (a,b)$ sodass $\frac{f(b) - f(a)}{b - a} = f'(\xi)$.
+	Sei $\fab$ differenzierbar auf $[a,b]$, differenzierbar auf $(a,b)$. Dann gibt es ein $\xi \in (a,b)$ sodass $\frac{f(b) - f(a)}{b - a} = f'(\xi)$.
 \end{satz}
 
 \begin{satz}[Satz von Rolle]
@@ -655,41 +658,65 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 	Ist $f$ differenzierbar, so ist $f$ stetig.
 \end{satz}
 
+\pagebreak
+
 \section{Integrale}
 
 \begin{multicols}{2}
-	\begin{tikzpicture}[scale=0.85]
-	\def\a{1.7}
-	\def\b{5.7}
-	\def\c{3.7}
+	\begin{tikzpicture}[scale=0.75]
+	\def\a{0.7}
+	\def\b{4.2}
+	\def\c{2.7}
 	\def\L{0.5} % width of interval
 	
 	\pgfmathsetmacro{\Va}{2*sin(\a r+1)+4} \pgfmathresult
 	\pgfmathsetmacro{\Vb}{2*sin(\b r+1)+4} \pgfmathresult
 	\pgfmathsetmacro{\Vc}{2*sin(\c r+1)+4} \pgfmathresult
 	
-	\draw[->,thick] (-0.5,0) -- (7,0) coordinate (x axis) node[below] {$x$};
+	\draw[->,thick] (-0.5,0) -- (6,0) coordinate (x axis) node[below] {$x$};
 	\draw[->,thick] (0,-0.5) -- (0,7) coordinate (y axis) node[left] {$y$};
-	\foreach \f in {1.7,2.2,...,6.2} {\pgfmathparse{2*sin(\f r+1)+4} \pgfmathresult
+	\foreach \f in {0.7,1.2,1.7,2.2,...,4.7} {\pgfmathparse{2*sin(\f r+1)+4} \pgfmathresult
 		\draw[fill=blue!20] (\f-\L/2,\pgfmathresult |- x axis) -- (\f-\L/2,\pgfmathresult) -- (\f+\L/2,\pgfmathresult) -- (\f+\L/2,\pgfmathresult |- x axis) -- cycle;}
-	\node at (\a-\L/2,-5pt) {\footnotesize{$a=x_0$}};
+	\node at (\a-\L/2+0.25,-5pt) {\footnotesize{$a=x_0$}};
 	\node at (\b+\L/2+\L,-5pt) {\footnotesize{$b=x_n$}};
 	\draw[blue] (\c-\L/2,0) -- (\c-\L/2,\Vc) -- (\c+\L/2,\Vc) -- (\c+\L/2,0);
-	\draw[dashed] (\c,0) node[below] {\footnotesize{$\xi_i$}} -- (\c,\Vc) -- (0,\Vc) node[left] {$f(\xi_i)$};
-	\node at (\a+5*\L/2,-5pt) {\footnotesize{$x_{j-1}$}};
+	\draw[dashed] (\c,0) node[below] {\footnotesize{$\xi_j$}} -- (\c,\Vc) -- (0,\Vc) node[left] {$f(\xi_j)$};
+	\node at (\a+5*\L/2 - 0.1,-5pt) {\footnotesize{$x_{j-1}$}};
 	\node at (\a+7*\L/2,-5pt) {\footnotesize{$x_j$}};
 	\node at (\a+5*\L,-5pt) {\footnotesize{$x_{j+1}$}};
-	\draw[blue,thick,smooth,samples=100,domain=1.45:6.2] plot(\x,{2*sin(\x r+1)+4});
+	\draw[blue,thick,smooth,samples=100,domain=0.25:5.2] plot(\x,{2*sin(\x r+1)+4});
 	\filldraw[black] (\c,\Vc) circle (.03cm);
 	\end{tikzpicture}
 	
 	\begin{definition}[Riemann-Summe]
-		Sei $Z$ eine Zerlegung von $[a,b]$ : $a = x_0 < x_1 < \dots < x_{n-1} < x_n = b$. Die Feinheit von $Z$ ist $|Z| = max_{1 \leq j \leq n}\{|x_j - x_{j-1}|\}$. Gegeben sei ein Zerlegung $Z$. Sei $\xi \in [x_{j-1}, x_j]$ mit $1 \leq j \leq n$ beliebig. $S_Z = \sum_{j=1}^{n} f(\xi) \cdot (x_j-x_{j-1})$ heißt Riemann-Summe, wobei $f(\xi)$ Höhe der Rechtecksflächen.
+		Sei $Z$ eine Zerlegung von $[a,b]$ : $a = x_0 < x_1 < \dots < x_{n-1} < x_n = b$. Die Feinheit von $Z$ ist $|Z| = max_{1 \leq j \leq n}\{|x_j - x_{j-1}|\}$. Gegeben sei ein Zerlegung $Z$. Sei $\xi \in [x_{j-1}, x_j]$ mit $1 \leq j \leq n$ beliebig. $S_Z = \sum_{j=1}^{n} f(\xi) \cdot (x_j-x_{j-1})$ heißt \emph{Riemann-Summe}, wobei $f(\xi)$ Höhe der Rechtecksflächen.
 	\end{definition}
 \end{multicols}
 
+\begin{definition}[Riemann-integrierbar]
+	$\fab$ heißt \emph{Riemann-integrierbar}, falls für alle Zerlegungsfolgen $(Z_n)_{n \in \mathbb{N}}$ mit Feinheit $|Z_n| \overset{n \rightarrow \infty}{\rightarrow} 0$ die zugehörigen Riemann-Summen $S_{Z_n}$ für jede Wahl der Zwischenpunkte gegen den selben Grenzwert $I(f)$ konvergieren: $\lim_{n \rightarrow \infty} \sum_{j=1}^n f(\xi_f) \cdot (x_j - x_{j-1}) = I(f) := \int_{a}^{b}f(x) dx$
+\end{definition}
 
+\begin{satz}[Rechenregeln für Integrale]
+	Seien $f,g : [a,b] \rightarrow \mathbb{R}$ Riemann-integrierbar, $\delta, \mu \in \mathbb{R}$. Es gilt:
+	\begin{description}[noitemsep]
+		\item $\int_{a}^{a} f(x) dx = 0$, $\int_{b}^{a} f(x) dx = - \int_{a}^{b} f(x) dx$, $\int_{a}^{b} 1 dx = \int_{a}^{b} dx = b - a$
+		\item $\int_{a}^{b} f(x) dx \geq 0$ für $f \geq 0$ auf $[a,b]$, $\int_{a}^{b} \delta f(x) + \mu g(x) dx = \delta \int_{a}^{b}f(x) dx + \mu \int_{a}^{b} g(x) dx$
+		\item $\int_{a}^{b} f(x) dx = \int_{a}^{c} f(x) dx + \int_{c}^{b} f(x) dx$ für $a < b < c$
+	\end{description} 
+\end{satz}
 
+\begin{satz}
+	Jede stetige Funktion ist Riemann-integrierbar.
+\end{satz}
+
+\begin{satz}[Mittelwertsatz der Integralrechnung]
+	Sei $\fab$ stetig, $\gab$ integrierbar und $g \geq 0$ oder $g \leq 0$. Dann gibt es ein $\xi \in [a,b]$ sodass $\int_{a}^{b}f(x)g(x) dx = f(\xi) \cdot \int_{a}^{b} g(x) dx$. Für $g=1$ ergibt sich der Spezialfall $\int_{a}^{b}f(x)dx = f(\xi) \cdot \int_{a}^{b} dx = f(\xi) \cdot (b - a)$
+\end{satz}
+
+\begin{satz}[Hauptsatz der Differential und Integralrechnung]
+	Sei $\fab$ stetig
+\end{satz}
 
 \section{Potenzreihen}
 

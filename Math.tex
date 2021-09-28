@@ -592,8 +592,103 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 
 \section{Anwendungen der Ableitung}
 
+\begin{satz}
+	Sei $f : [a,b] \rightarrow \mathbb{R}$ differenzierbar auf $(a,b)$. Wenn $f$ in $x_0$ ein lokales Extremum besitzt, dann gilt $f'(x_0) = 0$.
+\end{satz}
+
+\begin{satz}[Mittelwertsatz]
+	Sei $f : [a,b] \rightarrow \mathbb{R}$ differenzierbar auf $[a,b]$, differenzierbar auf $(a,b)$. Dann gibt es ein $\xi \in (a,b)$ sodass $\frac{f(b) - f(a)}{b - a} = f'(\xi)$.
+\end{satz}
+
+\begin{satz}[Satz von Rolle]
+	Gilt neben dem Mittelwertsatz zusätzlich $f(a) = f(b)$, dann gibt es ein $\xi \in (a,b)$ sodass $f'(\xi) = 0$.
+\end{satz}
+
+\begin{satz}[Monotonie und Ableitungen]
+	\begin{description}[noitemsep]
+		\item $\forall x\in(a,b) : f'(x) > 0 \rightarrow f$ ist auf $[a,b]$ streng monoton wachsend
+		\item $\forall x\in(a,b) : f'(x) < 0 \rightarrow f$ ist auf $[a,b]$ streng monoton fallend
+		\item $\forall x\in(a,b) : f'(x) \geq 0 \rightarrow f$ ist auf $[a,b]$ monoton wachsend
+		\item $\forall x\in(a,b) : f'(x) \leq 0 \rightarrow f$ ist auf $[a,b]$ monoton fallend
+	\end{description}
+\end{satz}
+
+\begin{satz}
+	Sei $f : (a,b) \rightarrow \mathbb{R}$ differenzierbar, sei $f'(x_0) = 0, x_0 \in (a,b)$.
+	\begin{description}[noitemsep]
+		\item $f' \geq 0$ in $(a, x_0)$ und $f' \leq 0$ in $(x_0, b) \rightarrow x_0$ ist globales Maximum
+		\item $f' \leq 0$ in $(a, x_0)$ und $f' \geq 0$ in $(x_0, b) \rightarrow x_0$ ist globales Minimum
+	\end{description}
+\end{satz}
+
+\begin{satz}
+	Seien $f,g :(a,b) \rightarrow \mathbb{R}$ differenzierbar und $f' = g'$ auf $(a,b)$. Dann gibt unterscheiden sich $f,g$ nur um eine Konstante, d.h. $\exists c \in \mathbb{R} : f = g + c$ auf $(a,b)$.
+\end{satz}
+
+\begin{satz}[L'Hospital]
+	Seien $a,b \in \mathbb{R} \cup \{+ \infty, - \infty\}$. Seien $f, g : (a,b) \rightarrow \mathbb{R}$ differenzierbar mit $g'(x) \neq 0$. Sei $x_0 \in (a,b)$ und es gelte:
+	\begin{enumerate}[noitemsep]
+		\item $\lim_{x \rightarrow x_0} f(x) = 0 = \lim_{x \rightarrow x_0} g(x)$ oder
+		\item$\lim_{x \rightarrow x_0} f(x) = \pm \infty = \lim_{x \rightarrow x_0} g(x)$
+	\end{enumerate}
+	Falls $\lim_{x \rightarrow x_0} \frac{f'(x)}{g'(x)}$ existiert, gilt: $\lim_{x \rightarrow x_0} \frac{f(x)}{g(x)} = \lim_{x \rightarrow x_0} \frac{f'(x)}{g'(x)}$.
+\end{satz}
+
+\begin{definition}
+	Für zweimal differenzierbares $f : (a,b) \rightarrow \mathbb{R}$ gilt:
+	\begin{enumerate}[noitemsep]
+		\item $f$ heißt \emph{konvex} $\leftrightarrow f'' \geq 0$ auf $(a,b)$
+		\item $f$ heißt \emph{konkav} $\leftrightarrow f'' \leq 0$ auf $(a,b)$		
+	\end{enumerate}
+\end{definition}
+
+\begin{satz}
+	Sei $f : (a,b) \rightarrow \mathbb{R}$ zweimal differenzierbar und $f'(x_0)=0$ und $\exists x_0 \in (a,b) : f'(x_0) = 0$.
+	
+	\begin{enumerate}[noitemsep]
+		\item $f''(x_0) > 0 \rightarrow f$ besitzt in $x_0$ ein striktes lokales Minimum
+		\item $f''(x_0) < 0 \rightarrow f$ besitzt in $x_0$ ein striktes lokales Maximum	
+	\end{enumerate}
+\end{satz}
+
+\begin{satz}[Differenzierbarkeit und Stetigkeit]
+	Ist $f$ differenzierbar, so ist $f$ stetig.
+\end{satz}
 
 \section{Integrale}
+
+\begin{multicols}{2}
+	\begin{tikzpicture}[scale=0.85]
+	\def\a{1.7}
+	\def\b{5.7}
+	\def\c{3.7}
+	\def\L{0.5} % width of interval
+	
+	\pgfmathsetmacro{\Va}{2*sin(\a r+1)+4} \pgfmathresult
+	\pgfmathsetmacro{\Vb}{2*sin(\b r+1)+4} \pgfmathresult
+	\pgfmathsetmacro{\Vc}{2*sin(\c r+1)+4} \pgfmathresult
+	
+	\draw[->,thick] (-0.5,0) -- (7,0) coordinate (x axis) node[below] {$x$};
+	\draw[->,thick] (0,-0.5) -- (0,7) coordinate (y axis) node[left] {$y$};
+	\foreach \f in {1.7,2.2,...,6.2} {\pgfmathparse{2*sin(\f r+1)+4} \pgfmathresult
+		\draw[fill=blue!20] (\f-\L/2,\pgfmathresult |- x axis) -- (\f-\L/2,\pgfmathresult) -- (\f+\L/2,\pgfmathresult) -- (\f+\L/2,\pgfmathresult |- x axis) -- cycle;}
+	\node at (\a-\L/2,-5pt) {\footnotesize{$a=x_0$}};
+	\node at (\b+\L/2+\L,-5pt) {\footnotesize{$b=x_n$}};
+	\draw[blue] (\c-\L/2,0) -- (\c-\L/2,\Vc) -- (\c+\L/2,\Vc) -- (\c+\L/2,0);
+	\draw[dashed] (\c,0) node[below] {\footnotesize{$\xi_i$}} -- (\c,\Vc) -- (0,\Vc) node[left] {$f(\xi_i)$};
+	\node at (\a+5*\L/2,-5pt) {\footnotesize{$x_{j-1}$}};
+	\node at (\a+7*\L/2,-5pt) {\footnotesize{$x_j$}};
+	\node at (\a+5*\L,-5pt) {\footnotesize{$x_{j+1}$}};
+	\draw[blue,thick,smooth,samples=100,domain=1.45:6.2] plot(\x,{2*sin(\x r+1)+4});
+	\filldraw[black] (\c,\Vc) circle (.03cm);
+	\end{tikzpicture}
+	
+	\begin{definition}[Riemann-Summe]
+		Sei $Z$ eine Zerlegung von $[a,b]$ : $a = x_0 < x_1 < \dots < x_{n-1} < x_n = b$. Die Feinheit von $Z$ ist $|Z| = max_{1 \leq j \leq n}\{|x_j - x_{j-1}|\}$. Gegeben sei ein Zerlegung $Z$. Sei $\xi \in [x_{j-1}, x_j]$ mit $1 \leq j \leq n$ beliebig. $S_Z = \sum_{j=1}^{n} f(\xi) \cdot (x_j-x_{j-1})$ heißt Riemann-Summe, wobei $f(\xi)$ Höhe der Rechtecksflächen.
+	\end{definition}
+\end{multicols}
+
+
 
 
 \section{Potenzreihen}

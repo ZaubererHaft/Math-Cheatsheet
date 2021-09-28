@@ -7,14 +7,27 @@
 \usepackage{multicol}
 \begin{document}
 
-\newcommand{\f}{f : \mathbb{R} \rightarrow \mathbb{R} }
-\newcommand{\fab}{f : [a, b] \rightarrow \mathbb{R} }
-\newcommand{\gab}{g : [a, b] \rightarrow \mathbb{R}}
+\newcommand{\f}[2]{f : #1 \rightarrow #2 }
+\newcommand{\g}[2]{g : #1 \rightarrow #2 }
+
+\newcommand{\fab}{\f{[a,b]}{\realset}}
+\newcommand{\gab}{\g{[a,b]}{\realset}}
 \newcommand{\liminfty}[1]{\lim_{#1 \rightarrow \infty}}
 \newcommand{\limninfty}[1]{\lim_{#1 \rightarrow -\infty} }
 \newcommand{\limto}[2]{\lim_{#1 \rightarrow #2} }
 \newcommand{\limup}[2]{\lim_{#1 \uparrow #2} }
 \newcommand{\limdown}[2]{\lim_{#1 \downarrow #2} }
+\newcommand{\realset}{\mathbb{R}}
+\newcommand{\complexset}{\mathbb{C}}
+\newcommand{\naturalset}{\mathbb{N}}
+\newcommand{\sequence}[2]{(#1_{#2})_{#2 \in \naturalset}}
+\newcommand{\sequencean}{\sequence{a}{n}}
+\newcommand{\sequencebn}{\sequence{b}{n}}
+\newcommand{\inreal}[1]{#1 \in \realset}
+\newcommand{\xinreal}[1]{x \in \realset}
+\newcommand{\forallin}[2]{\forall #1 \in #2}
+\newcommand{\forallinreal}[1]{\forallin{#1}{\realset}}
+\newcommand{\forallxinreal}{\forallin{x}{\realset}}
 
 \newtheorem{definition}{Definition}
 \newtheorem{satz}{Satz}
@@ -47,33 +60,33 @@
 \section{Relle Zahlen}
 
 \begin{definition}
-	Eine Menge $A$ heißt \emph{abzählbar}, falls es eine surjektive Abbildung $f : \mathbb{N} \rightarrow A $ gibt.
+	Eine Menge $A$ heißt \emph{abzählbar}, falls es eine surjektive Abbildung $f : \naturalset \rightarrow A $ gibt.
 \end{definition}
 
 \begin{definition}
 	Die reellen Zahlen sind angeordnet, d.h. es gibt ein Prädikat $a > 0$ sodass
 	\begin{enumerate}[noitemsep]
-		\item $\forall a \in \mathbb{R}$ gilt genau einer der Aussagen $a = 0, a < 0, -a < 0$
-		\item $\forall a,b \in \mathbb{R}$ mit $a > 0, b > 0$ gilt: $a + b > 0, a \cdot b > 0$
+		\item $\forallinreal{a}$ gilt genau einer der Aussagen $a = 0, a < 0, -a < 0$
+		\item $\forallinreal{a,b}$ mit $a > 0, b > 0$ gilt: $a + b > 0, a \cdot b > 0$
 	\end{enumerate}
 \end{definition}
 
 \begin{definition}
 	Folgende Mengen nennen wir Intervalle:
 	\begin{align}
-		(a,b) &:= \{ x \in \mathbb{R} \medspace | \medspace  a    < x    < b \} & \textnormal{offenes Intervall}       \\
-		[a,b] &:= \{ x \in \mathbb{R} \medspace | \medspace  a \leq x \leq b \} & \textnormal{geschlossenes Intervall} \\
-		(a,b] &:= \{ x \in \mathbb{R} \medspace | \medspace  a    < x \leq b \} & \textnormal{halboffenes Intervall}   \\
-		[a,b) &:= \{ x \in \mathbb{R} \medspace | \medspace  a \leq x    < b \} & \textnormal{halboffenes Intervall}	
+		(a,b) &:= \{ \inreal{x} \medspace | \medspace  a    < x    < b \} & \textnormal{offenes Intervall}       \\
+		[a,b] &:= \{ \inreal{x} \medspace | \medspace  a \leq x \leq b \} & \textnormal{geschlossenes Intervall} \\
+		(a,b] &:= \{ \inreal{x} \medspace | \medspace  a    < x \leq b \} & \textnormal{halboffenes Intervall}   \\
+		[a,b) &:= \{ \inreal{x} \medspace | \medspace  a \leq x    < b \} & \textnormal{halboffenes Intervall}	
 	\end{align}
 \end{definition}
 
 \begin{definition}
-	Eine Menge $M \subseteq \mathbb{R}$ heißt \emph{beschränkt}, wenn
+	Eine Menge $M \subseteq \realset$ heißt \emph{beschränkt}, wenn
 	\begin{enumerate}[noitemsep]
-		\item $\exists s_0 \in \mathbb{R} : \forall a \in M : a \leq s_0$; $s_0$ heißt \emph{Obere Schranke}
+		\item $\exists s_0 \in \realset : \forallin{a}{M} : a \leq s_0$; $s_0$ heißt \emph{Obere Schranke}
 		\item Ist $s_0$ zusätzlich die kleinste obere Schranke, so heißt $s_0$ \emph{Supremum}
-		\item $\exists s_0 \in \mathbb{R} : \forall a \in M : s_0 \leq a$; $s_0$ heißt \emph{Untere Schranke}
+		\item $\exists s_0 \in \realset : \forallin{a}{M} : s_0 \leq a$; $s_0$ heißt \emph{Untere Schranke}
 		\item Ist $s_0$ zusätzlich die größte untere Schranke, so heißt $s_0$ \emph{Infimum}
 	\end{enumerate}
 \end{definition}
@@ -81,24 +94,24 @@
 \begin{satz}[Supremumsaxiom]
 	Es gilt:
 	\begin{enumerate}[noitemsep]
-		\item Jede nichtleere nach oben beschränlte Menge $M \subseteq \mathbb{R}$ besitzt ein Supremum, $sup(M) \in \mathbb{R}$
-		\item Jede nichtleere nach unten beschränlte Menge $M \subseteq \mathbb{R}$ besitzt ein Infimum, $inf(M) \in \mathbb{R}$
+		\item Jede nichtleere nach oben beschränlte Menge $M \subseteq \realset$ besitzt ein Supremum, $sup(M) \in \realset$
+		\item Jede nichtleere nach unten beschränlte Menge $M \subseteq \realset$ besitzt ein Infimum, $inf(M) \in \realset$
 		\item $sup(M) \in M \rightarrow sup(M)$ heißt auch Maximum von $M$
 		\item $inf(M) \in M \rightarrow inf(M)$ heißt auch Minimum von $M$
 	\end{enumerate}
 \end{satz}
 
 \begin{satz}[Archimedizität]
-	$\mathbb{R}$ ist archimedisch, d.h. $\forall a \in \mathbb{R} : \exists n \in \mathbb{N} : a < n $. Jede relle Zahl besitzt also ein natürliches Supremum. Insbesondere gilt auch (offensichtlich, aber für Konvergenzbeweise hilfreich): $\frac{1}{n} < a$.
+	$\realset$ ist archimedisch, d.h. $\forallinreal{a} : \exists n \in \naturalset : a < n $. Jede relle Zahl besitzt also ein natürliches Supremum. Insbesondere gilt auch (offensichtlich, aber für Konvergenzbeweise hilfreich): $\frac{1}{n} < a$.
 \end{satz}
 
 \begin{satz}[Abschätzungen]
 	Es gelten die folgenden Abschätzungen:
 	
 	\begin{enumerate}[noitemsep]
-		\item \textbf{\emph{Dreiecksungleichung:}} $\forall x, y \in \mathbb{R} : | x + y | \leq |x| + |y|$
-		\item \textbf{\emph{Umgekehrte Dreiecksungleichung:}} 	$\forall x, y \in \mathbb{R} : | x + y | \geq ||x| - |y||$
-		\item \textbf{\emph{Cauchy-Schwarz-Ungleichung:}} 	$\forall x, y \in \mathbb{R}^n : | <x + y> | \leq ||x|| + ||y||$
+		\item \textbf{\emph{Dreiecksungleichung:}} $\forallinreal{x,y} : | x + y | \leq |x| + |y|$
+		\item \textbf{\emph{Umgekehrte Dreiecksungleichung:}} 	$\forallinreal{x,y} : | x + y | \geq ||x| - |y||$
+		\item \textbf{\emph{Cauchy-Schwarz-Ungleichung:}} 	$\forallinreal{x,y}^n : | <x + y> | \leq ||x|| + ||y||$
 		\item \textbf{\emph{Abschätzen von Polynomen}} 	$ax^2 + bx + c \leq (a + b + c)x^2 $
 		\item \textbf{\emph{Abschätzen der Wurzel:}} 	$\sqrt{ab} \leq \frac{a + b}{2}$
 		\item \textbf{\emph{Bernoulli-Ungleichung:}} 	$(1+x)^n \geq 1 + nx$ für $x > -1$	
@@ -113,28 +126,28 @@
 \section{Folgen}
 
 \begin{definition}
-	Eine Folge reeller Zahlen ist eine Abbildung $\mathbb{N} \rightarrow \mathbb{R} : n \rightarrow a_n$. $(a_n)_{n \in \mathbb{N}}$ beschreibt dabei die Folge, $a_n$ einen Folgenindex
+	Eine Folge reeller Zahlen ist eine Abbildung $\naturalset \rightarrow \realset : n \rightarrow a_n$. $\sequencean$ beschreibt dabei die Folge, $a_n$ einen Folgenindex
 \end{definition}
 
 
 \begin{definition}
-	Eine Folge $(a_n)_{n \in \mathbb{N}}$ konvergiert gegen $a \in \mathbb{R}$ genau dann wenn \\ $\forall \epsilon > 0 : \exists n_0 \in \mathbb{N} : \forall n \geq n_0 : | a_n - a | < \epsilon$, d.h. egal wie klein $\epsilon$, findet man eine Indexschranke $n_0$ sodass alle Folgeindices $a_n$ einen Abstand zu $a$ kleiner als $\epsilon$ haben. Wir schreiben $\liminfty{n} a_n = a$
+	Eine Folge $\sequencean$ konvergiert gegen $a \in \realset$ genau dann wenn \\ $\forall \epsilon > 0 : \exists n_0 \in \naturalset : \forall n \geq n_0 : | a_n - a | < \epsilon$, d.h. egal wie klein $\epsilon$, findet man eine Indexschranke $n_0$ sodass alle Folgeindices $a_n$ einen Abstand zu $a$ kleiner als $\epsilon$ haben. Wir schreiben $\liminfty{n} a_n = a$
 \end{definition}
 
 \begin{definition}
-	Eine Folge $(a_n)_{n \in \mathbb{N}}$ divergiert, wenn sie nicht konvergiert. Sie konvergiert zusätzlich uneigentlich gegen
+	Eine Folge $\sequencean$ divergiert, wenn sie nicht konvergiert. Sie konvergiert zusätzlich uneigentlich gegen
 	\begin{enumerate}[noitemsep]
-		\item $+ \infty$ genau dann wenn $\forall k > 0 : \exists n_0 \in \mathbb{N} : \forall n \geq n_0 : a_n \geq k$, d.h. ab einen Index sind all $a_n \geq k$
-		\item $- \infty$ genau dann wenn $\forall k > 0 : \exists n_0 \in \mathbb{N} : \forall n \geq n_0 : a_n \leq -k$, d.h. ab einen Index sind all $a_n \leq -k$		
+		\item $+ \infty$ genau dann wenn $\forall k > 0 : \exists n_0 \in \naturalset : \forall n \geq n_0 : a_n \geq k$, d.h. ab einen Index sind all $a_n \geq k$
+		\item $- \infty$ genau dann wenn $\forall k > 0 : \exists n_0 \in \naturalset : \forall n \geq n_0 : a_n \leq -k$, d.h. ab einen Index sind all $a_n \leq -k$		
 	\end{enumerate}
 \end{definition}
 
 \begin{definition}
-	Eine Folge $(a_n)_{n \in \mathbb{N}}$ heißt \emph{beschränkt}, falls $\exists c > 0 : \forall n \in \mathbb{N} : a_n \leq c$
+	Eine Folge $\sequencean$ heißt \emph{beschränkt}, falls $\exists c > 0 : \forallin{n}{\naturalset} : a_n \leq c$
 \end{definition}
 
 \begin{satz}[Rechenregeln für Grenzwerte]
-	Falls $\liminfty{n} a_n = a \in \mathbb{R}$ sowie \\ $\liminfty{n} b_n = b \in \mathbb{R}$, gilt:
+	Falls $\liminfty{n} a_n = a \in \realset$ sowie \\ $\liminfty{n} b_n = b \in \realset$, gilt:
 	\begin{enumerate}[noitemsep]
 		\item $\liminfty{n} (a_n \pm b_n) = \liminfty{n} a_n \pm \liminfty{n} b_n = a \pm b $
 		\item $\liminfty{n} c \cdot a_n = c \cdot \liminfty{n} a_n = c \cdot a  $
@@ -150,7 +163,7 @@
 \end{satz}
 
 \begin{definition}[Monotone Folgen]
-	Eine Folge $(a_n)_{n \in \mathbb{N}}$ heißt
+	Eine Folge $\sequencean$ heißt
 	\begin{enumerate}[noitemsep]
 		\item \emph{monoton fallend}, falls $a_n \geq a_{n+1}$ für alle $a_n$
 		\item \emph{monoton steigend}, falls $a_n \leq a_{n+1}$ für alle $a_n$
@@ -161,22 +174,22 @@
 \begin{satz}[Monotonie und Konvergenz]
 	Es gilt:
 	\begin{enumerate}[noitemsep]
-		\item $(a_n)_{n \in \mathbb{N}}$ monoton wachsend $\rightarrow \liminfty{n} a_n = sup(a_n)$
-		\item $(a_n)_{n \in \mathbb{N}}$ monoton fallend $\rightarrow \liminfty{n} a_n = inf(a_n)$
+		\item $\sequencean$ monoton wachsend $\rightarrow \liminfty{n} a_n = sup(a_n)$
+		\item $\sequencean$ monoton fallend $\rightarrow \liminfty{n} a_n = inf(a_n)$
 		\item Jede beschränkte monotone Folge konvergiert
 		\item Jede unbeschränkte monotone Folge konvergiert uneigentlich gegen $\pm \infty$
 	\end{enumerate}
 \end{satz}
 
 \begin{definition}[Asymptotische Gleichheit]
-	 $(a_n)_{n \in \mathbb{N}}$,  $(b_n)_{n \in \mathbb{N}}$ heißen asymptotisch gleich, falls $\liminfty{n} \frac{a_n}{b_n} = 1$. Man schreibt: $a_n \backsimeq b_n$
+	 $\sequencean$,  $\sequencebn$ heißen asymptotisch gleich, falls $\liminfty{n} \frac{a_n}{b_n} = 1$. Man schreibt: $a_n \backsimeq b_n$
 \end{definition}
 
 \section{Reihen}
 
 
 \begin{definition}
-	Zu einer Folge $(a_n)_{n \in \mathbb{N}}$ sei $(s_n)_{n \in \mathbb{N}}$ mit $s_n := \sum_{k=0}^{n} a_k$ die Folge der Partialsummen. $\liminfty{n} s_n = \liminfty{n} \sum_{k=0}^{n} a_k = \sum_{k=0}^{\infty} a_k$ heißt Werte der Reihe. Die Reihe konvergiert, wenn $(s_n)_{n \in \mathbb{N}}$ konvergiert, sonst divergiert sie.
+	Zu einer Folge $\sequencean$ sei $(s_n)_{n \in \naturalset}$ mit $s_n := \sum_{k=0}^{n} a_k$ die Folge der Partialsummen. $\liminfty{n} s_n = \liminfty{n} \sum_{k=0}^{n} a_k = \sum_{k=0}^{\infty} a_k$ heißt Werte der Reihe. Die Reihe konvergiert, wenn $(s_n)_{n \in \naturalset}$ konvergiert, sonst divergiert sie.
 \end{definition}
 
 \begin{satz}[Konvergenzkriterium]
@@ -192,7 +205,7 @@
 \end{satz}
 
 \begin{satz}[Konvergenzkriterium]
-	Sind die Folgen $(a_n)_{n \in \mathbb{N}}$ und $(b_n)_{n \in \mathbb{N}}$ asymptotisch gleich, dann sind $\sum_{k=0}^{\infty} a_k$ und $\sum_{k=0}^{\infty} b_k$ entweder beide konvergent oder beide divergent.
+	Sind die Folgen $\sequencean$ und $\sequencebn$ asymptotisch gleich, dann sind $\sum_{k=0}^{\infty} a_k$ und $\sum_{k=0}^{\infty} b_k$ entweder beide konvergent oder beide divergent.
 \end{satz}
 
 \begin{satz}[Quotientenkriterium]
@@ -208,7 +221,7 @@
 \end{satz}
 
 \begin{satz}[Leibnizkriterium]
-	Sei $(a_k)_{k \in \mathbb{N}}$ monoton fallend und $\liminfty{k} a_k = 0$. Dann ist $\sum_{k=0}^{\infty} (-1)^k a_k$ konvergent.
+	Sei $(a_k)_{k \in \naturalset}$ monoton fallend und $\liminfty{k} a_k = 0$. Dann ist $\sum_{k=0}^{\infty} (-1)^k a_k$ konvergent.
 \end{satz}
 
 \begin{definition}
@@ -242,15 +255,15 @@
 
 \section{Stetigkeit}
 \begin{definition}
-	Für eine Funktion $f : \mathbb{R} \rightarrow \mathbb{R}$ definiert man $\liminfty{x} f(x) = b \in \mathbb{R} \cup \{\pm \infty\}$, wenn für jede relle Folge $(x_n)_{n \in \mathbb{N}}$ mit $\liminfty{n} = + \infty$ gilt, dass $\liminfty{n} f(x_n) = b$ ist. Analog gilt dies für $- \infty$
+	Für eine Funktion $f : \realset \rightarrow \realset$ definiert man $\liminfty{x} f(x) = b \in \realset \cup \{\pm \infty\}$, wenn für jede relle Folge $(x_n)_{n \in \naturalset}$ mit $\liminfty{n} = + \infty$ gilt, dass $\liminfty{n} f(x_n) = b$ ist. Analog gilt dies für $- \infty$
 \end{definition}
 
 \begin{definition}[Stetigkeit]
-	Eine Funktion $f : D \rightarrow \mathbb{R}$ heißt im Punkt $x \in D$ stetig, falls für alle Folgen $(x_n)_{n \in \mathbb{N}}$ in $D$ mit $\liminfty{n} x_n = x$ gilt: $\liminfty{n} f(x_n) = f(x)$. Man schreibt dann auch $\limto{x}{y} f(y) = f(x)$. $f$ ist stetig auf $D$, wenn $f$ in jedem $x \in D$ stetig ist. 
+	Eine Funktion $f : D \rightarrow \realset$ heißt im Punkt $x \in D$ stetig, falls für alle Folgen $(x_n)_{n \in \naturalset}$ in $D$ mit $\liminfty{n} x_n = x$ gilt: $\liminfty{n} f(x_n) = f(x)$. Man schreibt dann auch $\limto{x}{y} f(y) = f(x)$. $f$ ist stetig auf $D$, wenn $f$ in jedem $x \in D$ stetig ist. 
 \end{definition}
 
 \begin{definition}[Rechts-/Linksseitiger Grenzwert]
-	Man schreibt $\limdown{x}{x_0} f(x) = c$, wenn für jede Folge $(x_n)_{n \in \mathbb{N}}$ mit $x_n > x_0$ für alle $n$ und $\limto{n}{x_n} = x_0$ gilt, dass $\liminfty{n} f(x_n) = c$. Man spricht vom \emph{Rechtsseitigem Grenzwert}. Analog definiert man den \emph{linksseitigen Grenzwert}.
+	Man schreibt $\limdown{x}{x_0} f(x) = c$, wenn für jede Folge $(x_n)_{n \in \naturalset}$ mit $x_n > x_0$ für alle $n$ und $\limto{n}{x_n} = x_0$ gilt, dass $\liminfty{n} f(x_n) = c$. Man spricht vom \emph{Rechtsseitigem Grenzwert}. Analog definiert man den \emph{linksseitigen Grenzwert}.
 \end{definition}
 
 \begin{satz}[Rechenregeln stetiger Funktionen]
@@ -258,23 +271,23 @@
 \end{satz}
 
 \begin{satz}[Zwischenwertsatz]
-	Sei $\fab$ stetig. Sei $y \in \mathbb{R}$ und $f(a) < y < f(b)$ oder $f(b) < y < f(a)$. Dann gilt: $\exists x \in (a,b) : f(x) = y$
+	Sei $\fab$ stetig. Sei $y \in \realset$ und $f(a) < y < f(b)$ oder $f(b) < y < f(a)$. Dann gilt: $\exists x \in (a,b) : f(x) = y$
 \end{satz}
 
 \begin{satz}
-	Sei $(n_k)_{k \in \mathbb{N}}$ eine streng monoton wachsende Folge in $\mathbb{N}$. Dann heißt  $(a_{n_k})_{k \in \mathbb{N}}$ \emph{Teilfolge} von $(a_n)_{n \in \mathbb{N}}$. $a^*$ heißt \emph{Häufungspunkt} der Folge  $(a_n)_{n \in \mathbb{N}}$, falls es eine Teilfolge  $(a_{n_k})_{k \in \mathbb{N}}$ mit $\liminfty{k} a_{n_k} = a^*$ gibt.
+	Sei $(n_k)_{k \in \naturalset}$ eine streng monoton wachsende Folge in $\naturalset$. Dann heißt  $(a_{n_k})_{k \in \naturalset}$ \emph{Teilfolge} von $\sequencean$. $a^*$ heißt \emph{Häufungspunkt} der Folge  $\sequencean$, falls es eine Teilfolge  $(a_{n_k})_{k \in \naturalset}$ mit $\liminfty{k} a_{n_k} = a^*$ gibt.
 \end{satz}
 
 \begin{satz}[Bolzano-Weierstrass]
-	Jede beschränkte Folge in $\mathbb{R}$ besitzt mindestens eine konvergente Teilfolge und damit einen Häufungspunkt.
+	Jede beschränkte Folge in $\realset$ besitzt mindestens eine konvergente Teilfolge und damit einen Häufungspunkt.
 \end{satz}
 
 \begin{definition}
-	Eine Menge $A \subseteq \mathbb{R}$ heißt abgeschlossen, wenn für jede Folge $(x_n)_{n \in \mathbb{N}}$ in $A$ gilt: $\liminfty{n} x_n = x \rightarrow x\in A$. Eine Menge $K \subseteq \mathbb{R}$ heißt kompakt, wenn $K$ abgeschlossen und beschränkt ist. Jede kompakte Menge besitzt ein Minimum und ein Maximum.
+	Eine Menge $A \subseteq \realset$ heißt abgeschlossen, wenn für jede Folge $(x_n)_{n \in \naturalset}$ in $A$ gilt: $\liminfty{n} x_n = x \rightarrow x\in A$. Eine Menge $K \subseteq \realset$ heißt kompakt, wenn $K$ abgeschlossen und beschränkt ist. Jede kompakte Menge besitzt ein Minimum und ein Maximum.
 \end{definition}
 
 \begin{satz}
-	Sei $K \subseteq \mathbb{R}$ kompakt. Jede stetige Funktion $f : K \rightarrow \mathbb{R}$ nimmt auf $K$ ihr Maximum und Minimum an, d.h. $\exists \bar{x}, \underline{x}: \forall x \in K : f(\underline{x}) \leq f(x) \leq f(\bar{x})$. Man schreibt:
+	Sei $K \subseteq \realset$ kompakt. Jede stetige Funktion $f : K \rightarrow \realset$ nimmt auf $K$ ihr Maximum und Minimum an, d.h. $\exists \bar{x}, \underline{x}: \forallin{x}{K} : f(\underline{x}) \leq f(x) \leq f(\bar{x})$. Man schreibt:
 	
 	\begin{enumerate}[noitemsep]
 		\item $\underline{x} = argmin \{ f(x) \} \medspace$, $f(\underline{x}) = min \{f(x)\}$
@@ -319,13 +332,13 @@
 		\item Ableitung: $\frac{\partial}{\partial x}(e^x) = e^x$, $\frac{\partial}{\partial x}(e^{-x}) = -e^{-x}$		
 		\item Abschätzung: $ 0 \leq 1 + x \leq e^x$,  $x < 1 \rightarrow e^x \leq \frac{1}{1 - x}$ 
 		\item Rechenregeln: $e^x \cdot e^y = e^{x+y}$, $e^x \div e^y = e^{x-y}$
-		\item Weitere Eigenschaften: stetig auf $\mathbb{R}$, differenzierbar auf $\mathbb{R}$, streng monoton wachsend, Wertemenge: $(0, \infty)$, $\liminfty{x} \frac{e^x}{x^m} = \infty$, $\limdown{x}{0} \frac{e^x - 1}{x} = 1$
+		\item Weitere Eigenschaften: stetig auf $\realset$, differenzierbar auf $\realset$, streng monoton wachsend, Wertemenge: $(0, \infty)$, $\liminfty{x} \frac{e^x}{x^m} = \infty$, $\limdown{x}{0} \frac{e^x - 1}{x} = 1$
 		\item Komplexe Exponentialfunktion: $e^{x+iy} = e^x(cos(y) + i sin(y)) \rightarrow e^{iy} = cos(y) + i sin(y)$
 	\end{description}
 \end{definition}
 
 \begin{definition}[Logarithmusfunktion]
-	$ln(e^x) := x$, $ln : (0, \infty) \rightarrow \mathbb{R}$
+	$ln(e^x) := x$, $ln : (0, \infty) \rightarrow \realset$
 	
 	\begin{description} [noitemsep]
 		\item Grenzwerte: $\liminfty{x} ln (x) = \infty$, $\limdown{x}{0} ln (x )= - \infty$
@@ -337,7 +350,7 @@
 \end{definition}
 
 \begin{definition}[Allgemeine Logarithmus - und Potenzfunktion]
- $\medspace$	\\ $x > 0, a \in \mathbb{R}$ : $x^a = e^{ln(x^a)} = e^{a ln(x)}$ \\ $b^x = y \leftrightarrow x = log_b \leftrightarrow y = \frac{ln (y)}{ln(b)}$
+ $\medspace$	\\ $x > 0, a \in \realset$ : $x^a = e^{ln(x^a)} = e^{a ln(x)}$ \\ $b^x = y \leftrightarrow x = log_b \leftrightarrow y = \frac{ln (y)}{ln(b)}$
 	\begin{description} [noitemsep]
 		\item Grenzwerte: $\liminfty{x} x^a = \begin{cases}
 		+ \infty & a > 0 \\ 
@@ -488,7 +501,7 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 			\begin{description}[noitemsep]
 				\item $arcsin : [-1,1] \rightarrow [0, \pi] : x \mapsto sin^{-1}(x) $
 				\item $arccos : [-1,1] \rightarrow [-\frac{\pi}{2},\frac{\pi}{2}] : x \mapsto cos^{-1}(x) $
-				\item $arctan : \mathbb{R} \rightarrow [-\frac{\pi}{2},\frac{\pi}{2}] : x \mapsto tan^{-1} $
+				\item $arctan : \realset \rightarrow [-\frac{\pi}{2},\frac{\pi}{2}] : x \mapsto tan^{-1} $
 			\end{description}
 	
 	\end{multicols}
@@ -499,7 +512,7 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 \begin{definition}
 	Als Erweiterung der reellen Zahlen sei definiert:
 	\begin{description}[noitemsep]
-		\item $z \in \mathbb{C}, z = x + iy$, wobei $x,y \in \mathbb{R}$ und $i := \sqrt{-1} \leftrightarrow i^2 = -1$
+		\item $z \in \complexset, z = x + iy$, wobei $x,y \in \realset$ und $i := \sqrt{-1} \leftrightarrow i^2 = -1$
 		\item $x := Re(z)$ nennt man \emph{Realteil} von $z$, $y := Im(z)$ heißt \emph{Imaginärteil} von $z$
 		\item $\bar{z} = z^* := x - iy, |z| = \sqrt{x^2 + y^2}$
 		\item $\rightarrow Re(z) = \frac{z + \bar{z}}{2}, Im(z) = \frac{z - \bar{z}}{2}$
@@ -547,9 +560,9 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 \section{Differenzierbarkeit}
 
 \begin{definition}[Landau-Symbole]
-	Seien $f,g : \mathbb{R} \rightarrow \mathbb{C}$ Funktionen, $x_0 \in \mathbb{R}$
+	Seien $f,g : \realset \rightarrow \complexset$ Funktionen, $x_0 \in \realset$
 	\begin{description}[noitemsep]
-		\item $f(x) = \mathcal{O}(g(x))$ für $x \rightarrow x_0$ falls: $\exists \epsilon > 0: \exists c > 0 : \forall x \in \mathbb{R}$ mit $|x - x _0| < \epsilon : |f(x)| < c \cdot |g(x)|$, d.h. in einer Umgebung von $x_0$ wird $f(x)$ von $g(x)$ mal einer Konstante beschränkt.
+		\item $f(x) = \mathcal{O}(g(x))$ für $x \rightarrow x_0$ falls: $\exists \epsilon > 0: \exists c > 0 : \forallxinreal$ mit $|x - x _0| < \epsilon : |f(x)| < c \cdot |g(x)|$, d.h. in einer Umgebung von $x_0$ wird $f(x)$ von $g(x)$ mal einer Konstante beschränkt.
 		\item $f(x) = o(g(x))$ für $x \rightarrow x_0$ falls $\lim_{x \rightarrow x_0} \frac{f(x)}{g(x)} = 0 $
 		\item $f(x) = \mathcal{O}(g(x))$ für $x \rightarrow \infty$ falls: $\exists M > 0: \exists c > 0 : \forall x > M : |f(x)| < c \cdot |g(x)|$, d.h. ab einer Schranke $M$ wird $f(x)$ durch $g(x)$ beschränkt.
 		\item $f(x) = \mathcal{O}(g(x))$ für $x \rightarrow -\infty$ falls: $\exists M > 0: \exists c > 0 : \forall x < -M : |f(x)| < c \cdot |g(x)|$, d.h. ab einer Schranke $M$ wird $f(x)$ durch $g(x)$ beschränkt.	
@@ -558,11 +571,11 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 \end{definition}
 
 \begin{definition}[Differenzierbarkeit]
-	Eine Funktion $f : I \rightarrow \mathbb{R}, I \subseteq \mathbb{R}$ heißt differenzierbar in $x_0 \in I$, falls $\lim_{x \rightarrow x_0} \frac{f(x) - f(x_0)}{x - x_0}$ bzw. $\lim_{h \rightarrow 0} \frac{f(x_0 + h) - f(x_0)}{h}$ existiert. Man schreibt dafür $f'(x_0)$ (Lagrange), $\frac{\partial f}{\partial x_0}$ (Leibniz). Ist $f$ differenzierbar für alle $x_0 \in I$, so heißt $f$ differenzierbar.
+	Eine Funktion $f : I \rightarrow \realset, I \subseteq \realset$ heißt differenzierbar in $x_0 \in I$, falls $\lim_{x \rightarrow x_0} \frac{f(x) - f(x_0)}{x - x_0}$ bzw. $\lim_{h \rightarrow 0} \frac{f(x_0 + h) - f(x_0)}{h}$ existiert. Man schreibt dafür $f'(x_0)$ (Lagrange), $\frac{\partial f}{\partial x_0}$ (Leibniz). Ist $f$ differenzierbar für alle $x_0 \in I$, so heißt $f$ differenzierbar.
 \end{definition}
 
 \begin{satz}[Rechenregeln differenzierbrer Funktionen]
-	Seien $f,g : I \subseteq \mathbb{R} \rightarrow \mathbb{R}$ in $x \in I$ differenzierbar, $c \in \mathbb{R}$.
+	Seien $f,g : I \subseteq \realset \rightarrow \realset$ in $x \in I$ differenzierbar, $c \in \realset$.
 	\begin{description}[noitemsep]
 		\item $(c \cdot f)'(x) = c \cdot f'(x) $
 		\item $(f + g)'(x) = f'(x) + g'(x) $
@@ -572,11 +585,11 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 \end{satz}
 
 \begin{satz}[Kettenregel]
-	Sei $f : D \subseteq \mathbb{R} \rightarrow \mathbb{R}$, $g : E \subseteq \mathbb{R} \rightarrow \mathbb{R}$ und $g(E) \subseteq D$. Sei $x_0$ innererer Punkt von $E$, $g(x_0)$ innerer Punkt von $D$. Sei $g$ in $x_0$ und $f$ in $g(x_0)$ differenzierbar. Dann gilt: $(f \circ g)'(x_0) = f'(g(x_0)) \cdot g'(x_0)$
+	Sei $f : D \subseteq \realset \rightarrow \realset$, $g : E \subseteq \realset \rightarrow \realset$ und $g(E) \subseteq D$. Sei $x_0$ innererer Punkt von $E$, $g(x_0)$ innerer Punkt von $D$. Sei $g$ in $x_0$ und $f$ in $g(x_0)$ differenzierbar. Dann gilt: $(f \circ g)'(x_0) = f'(g(x_0)) \cdot g'(x_0)$
  \end{satz}
 
 \begin{satz}[Ableitung der Umkehrfunktion]
-	Sei $f : I \subseteq \mathbb{R} \rightarrow J \subseteq \mathbb{R}$ bijektiv und differenzierbar in $y_0$. Dann ist $f^{-1} : J \rightarrow I$ differenzierbar in $y_0$ und $(f^{-1})'=\frac{1}{f'(f^{-1}(y_0))}$
+	Sei $f : I \subseteq \realset \rightarrow J \subseteq \realset$ bijektiv und differenzierbar in $y_0$. Dann ist $f^{-1} : J \rightarrow I$ differenzierbar in $y_0$ und $(f^{-1})'=\frac{1}{f'(f^{-1}(y_0))}$
 \end{satz}
 
 \begin{satz}[Elementare Ableitungen]
@@ -622,7 +635,7 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 \end{satz}
 
 \begin{satz}
-	Sei $f : (a,b) \rightarrow \mathbb{R}$ differenzierbar, sei $f'(x_0) = 0, x_0 \in (a,b)$.
+	Sei $f : (a,b) \rightarrow \realset$ differenzierbar, sei $f'(x_0) = 0, x_0 \in (a,b)$.
 	\begin{description}[noitemsep]
 		\item $f' \geq 0$ in $(a, x_0)$ und $f' \leq 0$ in $(x_0, b) \rightarrow x_0$ ist globales Maximum
 		\item $f' \leq 0$ in $(a, x_0)$ und $f' \geq 0$ in $(x_0, b) \rightarrow x_0$ ist globales Minimum
@@ -630,11 +643,11 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 \end{satz}
 
 \begin{satz}
-	Seien $f,g :(a,b) \rightarrow \mathbb{R}$ differenzierbar und $f' = g'$ auf $(a,b)$. Dann gibt unterscheiden sich $f,g$ nur um eine Konstante, d.h. $\exists c \in \mathbb{R} : f = g + c$ auf $(a,b)$.
+	Seien $f,g :(a,b) \rightarrow \realset$ differenzierbar und $f' = g'$ auf $(a,b)$. Dann gibt unterscheiden sich $f,g$ nur um eine Konstante, d.h. $\exists c \in \realset : f = g + c$ auf $(a,b)$.
 \end{satz}
 
 \begin{satz}[L'Hospital]
-	Seien $a,b \in \mathbb{R} \cup \{+ \infty, - \infty\}$. Seien $f, g : (a,b) \rightarrow \mathbb{R}$ differenzierbar mit $g'(x) \neq 0$. Sei $x_0 \in (a,b)$ und es gelte:
+	Seien $a,b \in \realset \cup \{+ \infty, - \infty\}$. Seien $f, g : (a,b) \rightarrow \realset$ differenzierbar mit $g'(x) \neq 0$. Sei $x_0 \in (a,b)$ und es gelte:
 	\begin{enumerate}[noitemsep]
 		\item $\lim_{x \rightarrow x_0} f(x) = 0 = \lim_{x \rightarrow x_0} g(x)$ oder
 		\item$\lim_{x \rightarrow x_0} f(x) = \pm \infty = \lim_{x \rightarrow x_0} g(x)$
@@ -643,7 +656,7 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 \end{satz}
 
 \begin{definition}
-	Für zweimal differenzierbares $f : (a,b) \rightarrow \mathbb{R}$ gilt:
+	Für zweimal differenzierbares $f : (a,b) \rightarrow \realset$ gilt:
 	\begin{enumerate}[noitemsep]
 		\item $f$ heißt \emph{konvex} $\leftrightarrow f'' \geq 0$ auf $(a,b)$
 		\item $f$ heißt \emph{konkav} $\leftrightarrow f'' \leq 0$ auf $(a,b)$		
@@ -651,7 +664,7 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 \end{definition}
 
 \begin{satz}
-	Sei $f : (a,b) \rightarrow \mathbb{R}$ zweimal differenzierbar und $f'(x_0)=0$ und $\exists x_0 \in (a,b) : f'(x_0) = 0$.
+	Sei $f : (a,b) \rightarrow \realset$ zweimal differenzierbar und $f'(x_0)=0$ und $\exists x_0 \in (a,b) : f'(x_0) = 0$.
 	
 	\begin{enumerate}[noitemsep]
 		\item $f''(x_0) > 0 \rightarrow f$ besitzt in $x_0$ ein striktes lokales Minimum
@@ -699,11 +712,11 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 \end{multicols}
 
 \begin{definition}[Riemann-integrierbar]
-	$\fab$ heißt \emph{Riemann-integrierbar}, falls für alle Zerlegungsfolgen $(Z_n)_{n \in \mathbb{N}}$ mit Feinheit $|Z_n| \overset{n \rightarrow \infty}{\rightarrow} 0$ die zugehörigen Riemann-Summen $S_{Z_n}$ für jede Wahl der Zwischenpunkte gegen den selben Grenzwert $I(f)$ konvergieren: $\liminfty{n} \sum_{j=1}^n f(\xi_f) \cdot (x_j - x_{j-1}) = I(f) := \int_{a}^{b}f(x) dx$
+	$\fab$ heißt \emph{Riemann-integrierbar}, falls für alle Zerlegungsfolgen $(Z_n)_{n \in \naturalset}$ mit Feinheit $|Z_n| \overset{n \rightarrow \infty}{\rightarrow} 0$ die zugehörigen Riemann-Summen $S_{Z_n}$ für jede Wahl der Zwischenpunkte gegen den selben Grenzwert $I(f)$ konvergieren: $\liminfty{n} \sum_{j=1}^n f(\xi_f) \cdot (x_j - x_{j-1}) = I(f) := \int_{a}^{b}f(x) dx$
 \end{definition}
 
 \begin{satz}[Rechenregeln für Integrale]
-	Seien $f,g : [a,b] \rightarrow \mathbb{R}$ Riemann-integrierbar, $\delta, \mu \in \mathbb{R}$. Es gilt:
+	Seien $f,g : [a,b] \rightarrow \realset$ Riemann-integrierbar, $\delta, \mu \in \realset$. Es gilt:
 	\begin{description}[noitemsep]
 		\item $\int_{a}^{a} f(x) dx = 0$, $\int_{b}^{a} f(x) dx = - \int_{a}^{b} f(x) dx$, $\int_{a}^{b} 1 dx = \int_{a}^{b} dx = b - a$
 		\item $\int_{a}^{b} f(x) dx \geq 0$ für $f \geq 0$ auf $[a,b]$, $\int_{a}^{b} \delta f(x) + \mu g(x) dx = \delta \int_{a}^{b}f(x) dx + \mu \int_{a}^{b} g(x) dx$

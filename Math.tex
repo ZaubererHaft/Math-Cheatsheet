@@ -7,9 +7,14 @@
 \usepackage{multicol}
 \begin{document}
 
+\newcommand{\f}{f : \mathbb{R} \rightarrow \mathbb{R} }
 \newcommand{\fab}{f : [a, b] \rightarrow \mathbb{R} }
 \newcommand{\gab}{g : [a, b] \rightarrow \mathbb{R}}
-\newcommand{\liminfty}[1]{\lim_{#1 \rightarrow \infty} }
+\newcommand{\liminfty}[1]{\lim_{#1 \rightarrow \infty}}
+\newcommand{\limninfty}[1]{\lim_{#1 \rightarrow -\infty} }
+\newcommand{\limto}[2]{\lim_{#1 \rightarrow #2} }
+\newcommand{\limup}[2]{\lim_{#1 \uparrow #2} }
+\newcommand{\limdown}[2]{\lim_{#1 \downarrow #2} }
 
 \newtheorem{definition}{Definition}
 \newtheorem{satz}{Satz}
@@ -129,19 +134,19 @@
 \end{definition}
 
 \begin{satz}[Rechenregeln für Grenzwerte]
-	Falls $\lim_{n \rightarrow \infty} a_n = a \in \mathbb{R}$ sowie \\ $\lim_{n \rightarrow \infty} b_n = b \in \mathbb{R}$, gilt:
+	Falls $\liminfty{n} a_n = a \in \mathbb{R}$ sowie \\ $\liminfty{n} b_n = b \in \mathbb{R}$, gilt:
 	\begin{enumerate}[noitemsep]
-		\item $\lim_{n \rightarrow \infty} (a_n \pm b_n) = \lim_{n \rightarrow \infty} a_n \pm \lim_{n \rightarrow \infty} b_n = a \pm b $
-		\item $\lim_{n \rightarrow \infty} c \cdot a_n = c \cdot \lim_{n \rightarrow \infty} a_n = c \cdot a  $
-		\item $\lim_{n \rightarrow \infty} a_nb_n = \lim_{n \rightarrow \infty} a_n \cdot \lim_{n \rightarrow \infty} b_n = ab  $
-		\item $b \neq 0 \rightarrow\lim_{n \rightarrow \infty} \frac{a_n}{b_n} = \frac{\lim_{n \rightarrow \infty} a_n}{\lim_{n \rightarrow \infty} b_n} = \frac{a}{b} $
-		\item $\lim_{n \rightarrow \infty} \sqrt{a_n} = \sqrt{a} $
-		\item $\lim_{n \rightarrow \infty} |a_n| = |a| $
+		\item $\liminfty{n} (a_n \pm b_n) = \liminfty{n} a_n \pm \liminfty{n} b_n = a \pm b $
+		\item $\liminfty{n} c \cdot a_n = c \cdot \liminfty{n} a_n = c \cdot a  $
+		\item $\liminfty{n} a_nb_n = \liminfty{n} a_n \cdot \liminfty{n} b_n = ab  $
+		\item $b \neq 0 \rightarrow\liminfty{n} \frac{a_n}{b_n} = \frac{\liminfty{n} a_n}{\liminfty{n} b_n} = \frac{a}{b} $
+		\item $\liminfty{n} \sqrt{a_n} = \sqrt{a} $
+		\item $\liminfty{n} |a_n| = |a| $
 	\end{enumerate}
 \end{satz}
 
 \begin{satz}[Einschließungsregel]
-	Es gelte $a_n \leq b_n \leq c_n$ für alle bis auf endlich viele $n$. Falls $\lim_{n \rightarrow \infty} a_n = \alpha$ und $\lim_{n \rightarrow \infty} c_n = \alpha $, dann ist auch $\lim_{n \rightarrow \infty} b_n = \alpha$.
+	Es gelte $a_n \leq b_n \leq c_n$ für alle bis auf endlich viele $n$. Falls $\liminfty{n} a_n = \alpha$ und $\liminfty{n} c_n = \alpha $, dann ist auch $\liminfty{n} b_n = \alpha$.
 \end{satz}
 
 \begin{definition}[Monotone Folgen]
@@ -156,26 +161,26 @@
 \begin{satz}[Monotonie und Konvergenz]
 	Es gilt:
 	\begin{enumerate}[noitemsep]
-		\item $(a_n)_{n \in \mathbb{N}}$ monoton wachsend $\rightarrow \lim_{n \rightarrow \infty} a_n = sup(a_n)$
-		\item $(a_n)_{n \in \mathbb{N}}$ monoton fallend $\rightarrow \lim_{n \rightarrow \infty} a_n = inf(a_n)$
+		\item $(a_n)_{n \in \mathbb{N}}$ monoton wachsend $\rightarrow \liminfty{n} a_n = sup(a_n)$
+		\item $(a_n)_{n \in \mathbb{N}}$ monoton fallend $\rightarrow \liminfty{n} a_n = inf(a_n)$
 		\item Jede beschränkte monotone Folge konvergiert
 		\item Jede unbeschränkte monotone Folge konvergiert uneigentlich gegen $\pm \infty$
 	\end{enumerate}
 \end{satz}
 
 \begin{definition}[Asymptotische Gleichheit]
-	 $(a_n)_{n \in \mathbb{N}}$,  $(b_n)_{n \in \mathbb{N}}$ heißen asymptotisch gleich, falls $\lim_{n \rightarrow \infty} \frac{a_n}{b_n} = 1$. Man schreibt: $a_n \backsimeq b_n$
+	 $(a_n)_{n \in \mathbb{N}}$,  $(b_n)_{n \in \mathbb{N}}$ heißen asymptotisch gleich, falls $\liminfty{n} \frac{a_n}{b_n} = 1$. Man schreibt: $a_n \backsimeq b_n$
 \end{definition}
 
 \section{Reihen}
 
 
 \begin{definition}
-	Zu einer Folge $(a_n)_{n \in \mathbb{N}}$ sei $(s_n)_{n \in \mathbb{N}}$ mit $s_n := \sum_{k=0}^{n} a_k$ die Folge der Partialsummen. $\lim_{n \rightarrow \infty} s_n = \lim_{n \rightarrow \infty} \sum_{k=0}^{n} a_k = \sum_{k=0}^{\infty} a_k$ heißt Werte der Reihe. Die Reihe konvergiert, wenn $(s_n)_{n \in \mathbb{N}}$ konvergiert, sonst divergiert sie.
+	Zu einer Folge $(a_n)_{n \in \mathbb{N}}$ sei $(s_n)_{n \in \mathbb{N}}$ mit $s_n := \sum_{k=0}^{n} a_k$ die Folge der Partialsummen. $\liminfty{n} s_n = \liminfty{n} \sum_{k=0}^{n} a_k = \sum_{k=0}^{\infty} a_k$ heißt Werte der Reihe. Die Reihe konvergiert, wenn $(s_n)_{n \in \mathbb{N}}$ konvergiert, sonst divergiert sie.
 \end{definition}
 
 \begin{satz}[Konvergenzkriterium]
-	 $\sum_{k=0}^{\infty} a_k $ konvergiert $\rightarrow \lim_{k \rightarrow \infty} a_k = 0$
+	 $\sum_{k=0}^{\infty} a_k $ konvergiert $\rightarrow \liminfty{k} a_k = 0$
 \end{satz}
 
 \begin{satz}[Majorantenkriterium]
@@ -193,7 +198,7 @@
 \begin{satz}[Quotientenkriterium]
 	Sei $a_k \neq 0$ bis auf endlich viele $k$. Dann gilt:
 	\begin{equation}
-		\lim_{k \rightarrow \infty} | \frac{a_{k + 1}}{a_k} | = 
+		\liminfty{k} | \frac{a_{k + 1}}{a_k} | = 
 		\begin{cases}
 		< 1 & \rightarrow \sum_{k=0}^{\infty} a_k \medspace \textnormal{ist konvergent} \\ 
 		> 1 & \rightarrow \sum_{k=0}^{\infty} a_k \medspace \textnormal{ist divergent}  \\
@@ -203,7 +208,7 @@
 \end{satz}
 
 \begin{satz}[Leibnizkriterium]
-	Sei $(a_k)_{k \in \mathbb{N}}$ monoton fallend und $\lim_{k \rightarrow \infty} a_k = 0$. Dann ist $\sum_{k=0}^{\infty} (-1)^k a_k$ konvergent.
+	Sei $(a_k)_{k \in \mathbb{N}}$ monoton fallend und $\liminfty{k} a_k = 0$. Dann ist $\sum_{k=0}^{\infty} (-1)^k a_k$ konvergent.
 \end{satz}
 
 \begin{definition}
@@ -237,15 +242,15 @@
 
 \section{Stetigkeit}
 \begin{definition}
-	Für eine Funktion $f : \mathbb{R} \rightarrow \mathbb{R}$ definiert man $\lim_{x \rightarrow \infty} f(x) = b \in \mathbb{R} \cup \{\pm \infty\}$, wenn für jede relle Folge $(x_n)_{n \in \mathbb{N}}$ mit $\lim_{n \rightarrow \infty} = + \infty$ gilt, dass $\lim_{n \rightarrow \infty} f(x_n) = b$ ist. Analog gilt dies für $- \infty$
+	Für eine Funktion $f : \mathbb{R} \rightarrow \mathbb{R}$ definiert man $\liminfty{x} f(x) = b \in \mathbb{R} \cup \{\pm \infty\}$, wenn für jede relle Folge $(x_n)_{n \in \mathbb{N}}$ mit $\liminfty{n} = + \infty$ gilt, dass $\liminfty{n} f(x_n) = b$ ist. Analog gilt dies für $- \infty$
 \end{definition}
 
 \begin{definition}[Stetigkeit]
-	Eine Funktion $f : D \rightarrow \mathbb{R}$ heißt im Punkt $x \in D$ stetig, falls für alle Folgen $(x_n)_{n \in \mathbb{N}}$ in $D$ mit $\lim_{n \rightarrow \infty} x_n = x$ gilt: $\lim_{n \rightarrow \infty} f(x_n) = f(x)$. Man schreibt dann auch $\lim_{y \rightarrow x} f(y) = f(x)$. $f$ ist stetig auf $D$, wenn $f$ in jedem $x \in D$ stetig ist. 
+	Eine Funktion $f : D \rightarrow \mathbb{R}$ heißt im Punkt $x \in D$ stetig, falls für alle Folgen $(x_n)_{n \in \mathbb{N}}$ in $D$ mit $\liminfty{n} x_n = x$ gilt: $\liminfty{n} f(x_n) = f(x)$. Man schreibt dann auch $\limto{x}{y} f(y) = f(x)$. $f$ ist stetig auf $D$, wenn $f$ in jedem $x \in D$ stetig ist. 
 \end{definition}
 
 \begin{definition}[Rechts-/Linksseitiger Grenzwert]
-	Man schreibt $\lim_{x \uparrow x_0} f(x) = c$, wenn für jede Folge $(x_n)_{n \in \mathbb{N}}$ mit $x_n > x_0$ für alle $n$ und $\lim_{n \rightarrow x_n} = x_0$ gilt, dass $\lim_{n \rightarrow \infty} f(x_n) = c$. Man spricht vom \emph{Rechtsseitigem Grenzwert}. Analog definiert man den \emph{linksseitigen Grenzwert}.
+	Man schreibt $\limdown{x}{x_0} f(x) = c$, wenn für jede Folge $(x_n)_{n \in \mathbb{N}}$ mit $x_n > x_0$ für alle $n$ und $\limto{n}{x_n} = x_0$ gilt, dass $\liminfty{n} f(x_n) = c$. Man spricht vom \emph{Rechtsseitigem Grenzwert}. Analog definiert man den \emph{linksseitigen Grenzwert}.
 \end{definition}
 
 \begin{satz}[Rechenregeln stetiger Funktionen]
@@ -253,11 +258,11 @@
 \end{satz}
 
 \begin{satz}[Zwischenwertsatz]
-	Sei $f:[a,b] \rightarrow \mathbb{R}$ stetig. Sei $y \in \mathbb{R}$ und $f(a) < y < f(b)$ oder $f(b) < y < f(a)$. Dann gilt: $\exists x \in (a,b) : f(x) = y$
+	Sei $\fab$ stetig. Sei $y \in \mathbb{R}$ und $f(a) < y < f(b)$ oder $f(b) < y < f(a)$. Dann gilt: $\exists x \in (a,b) : f(x) = y$
 \end{satz}
 
 \begin{satz}
-	Sei $(n_k)_{k \in \mathbb{N}}$ eine streng monoton wachsende Folge in $\mathbb{N}$. Dann heißt  $(a_{n_k})_{k \in \mathbb{N}}$ \emph{Teilfolge} von $(a_n)_{n \in \mathbb{N}}$. $a^*$ heißt \emph{Häufungspunkt} der Folge  $(a_n)_{n \in \mathbb{N}}$, falls es eine Teilfolge  $(a_{n_k})_{k \in \mathbb{N}}$ mit $\lim_{k \rightarrow \infty} a_{n_k} = a^*$ gibt.
+	Sei $(n_k)_{k \in \mathbb{N}}$ eine streng monoton wachsende Folge in $\mathbb{N}$. Dann heißt  $(a_{n_k})_{k \in \mathbb{N}}$ \emph{Teilfolge} von $(a_n)_{n \in \mathbb{N}}$. $a^*$ heißt \emph{Häufungspunkt} der Folge  $(a_n)_{n \in \mathbb{N}}$, falls es eine Teilfolge  $(a_{n_k})_{k \in \mathbb{N}}$ mit $\liminfty{k} a_{n_k} = a^*$ gibt.
 \end{satz}
 
 \begin{satz}[Bolzano-Weierstrass]
@@ -265,7 +270,7 @@
 \end{satz}
 
 \begin{definition}
-	Eine Menge $A \subseteq \mathbb{R}$ heißt abgeschlossen, wenn für jede Folge $(x_n)_{n \in \mathbb{N}}$ in $A$ gilt: $\lim_{n \rightarrow \infty} x_n = x \rightarrow x\in A$. Eine Menge $K \subseteq \mathbb{R}$ heißt kompakt, wenn $K$ abgeschlossen und beschränkt ist. Jede kompakte Menge besitzt ein Minimum und ein Maximum.
+	Eine Menge $A \subseteq \mathbb{R}$ heißt abgeschlossen, wenn für jede Folge $(x_n)_{n \in \mathbb{N}}$ in $A$ gilt: $\liminfty{n} x_n = x \rightarrow x\in A$. Eine Menge $K \subseteq \mathbb{R}$ heißt kompakt, wenn $K$ abgeschlossen und beschränkt ist. Jede kompakte Menge besitzt ein Minimum und ein Maximum.
 \end{definition}
 
 \begin{satz}
@@ -308,13 +313,13 @@
 \end{tikzpicture}
 
 \begin{definition}[Exponentialfunktion]
-	$e^x := \lim_{n \rightarrow \infty} (1 + \frac{x}{n})^n = \sum_{k=0}^{\infty} \frac{x^k}{k!}$
+	$e^x := \liminfty{n} (1 + \frac{x}{n})^n = \sum_{k=0}^{\infty} \frac{x^k}{k!}$
 	\begin{description} [noitemsep]
-		\item Grenzwerte: $\lim_{x \rightarrow \infty} e^x = \infty$, $\lim_{x \rightarrow -\infty} e^x = 0$, $\lim_{x \rightarrow 0} e^x = 1$
+		\item Grenzwerte: $\liminfty{x} e^x = \infty$, $\limninfty{x} e^x = 0$, $\limto{x}{0} e^x = 1$
 		\item Ableitung: $\frac{\partial}{\partial x}(e^x) = e^x$, $\frac{\partial}{\partial x}(e^{-x}) = -e^{-x}$		
 		\item Abschätzung: $ 0 \leq 1 + x \leq e^x$,  $x < 1 \rightarrow e^x \leq \frac{1}{1 - x}$ 
 		\item Rechenregeln: $e^x \cdot e^y = e^{x+y}$, $e^x \div e^y = e^{x-y}$
-		\item Weitere Eigenschaften: stetig auf $\mathbb{R}$, differenzierbar auf $\mathbb{R}$, streng monoton wachsend, Wertemenge: $(0, \infty)$, $\lim_{x \rightarrow \infty} \frac{e^x}{x^m} = \infty$, $\lim_{x \downarrow 0} \frac{e^x - 1}{x} = 1$
+		\item Weitere Eigenschaften: stetig auf $\mathbb{R}$, differenzierbar auf $\mathbb{R}$, streng monoton wachsend, Wertemenge: $(0, \infty)$, $\liminfty{x} \frac{e^x}{x^m} = \infty$, $\limdown{x}{0} \frac{e^x - 1}{x} = 1$
 		\item Komplexe Exponentialfunktion: $e^{x+iy} = e^x(cos(y) + i sin(y)) \rightarrow e^{iy} = cos(y) + i sin(y)$
 	\end{description}
 \end{definition}
@@ -323,28 +328,28 @@
 	$ln(e^x) := x$, $ln : (0, \infty) \rightarrow \mathbb{R}$
 	
 	\begin{description} [noitemsep]
-		\item Grenzwerte: $\lim_{x \rightarrow \infty} ln (x) = \infty$, $\lim_{x \downarrow 0} ln (x )= - \infty$
+		\item Grenzwerte: $\liminfty{x} ln (x) = \infty$, $\limdown{x}{0} ln (x )= - \infty$
 		\item Ableitung: $\frac{\partial}{\partial x} (ln(x)) = \frac{1}{x}$, $\frac{\partial}{\partial x} (ln(x + a)) = \frac{1}{x + a}$
 		\item Abschätzung: für $x > 1$ gilt $1 - \frac{1}{x} < ln(x) < x - 1$
 		\item Rechenregeln: $ln(xy) = ln(x) + ln(y)$, $ln(x \div y) = ln(x) - ln(y)$, $ln(x^k) = k \cdot ln(x)$
-		\item Weitere Eigenschaften: stetig auf $(0,\infty)$, differenzierbar auf $(0,\infty)$, streng monoton wachsend, Wertemenge: $(- \infty, \infty)$, $\lim_{x \downarrow 0} x \cdot ln(x) = 0$, $\lim_{x \mapsto \infty} \frac{x}{ln(x)^n} = \infty$,  $\lim_{x \rightarrow \infty} \frac{ln(x)}{ln(ln(x))} = \infty$,  $\lim_{x \downarrow 0} \frac{ln(1+x)}{x} = 1$
+		\item Weitere Eigenschaften: stetig auf $(0,\infty)$, differenzierbar auf $(0,\infty)$, streng monoton wachsend, Wertemenge: $(- \infty, \infty)$, $\limdown{x}{0} x \cdot ln(x) = 0$, $\lim_{x \mapsto \infty} \frac{x}{ln(x)^n} = \infty$,  $\liminfty{x} \frac{ln(x)}{ln(ln(x))} = \infty$,  $\limdown{x}{0} \frac{ln(1+x)}{x} = 1$
 	\end{description}
 \end{definition}
 
 \begin{definition}[Allgemeine Logarithmus - und Potenzfunktion]
  $\medspace$	\\ $x > 0, a \in \mathbb{R}$ : $x^a = e^{ln(x^a)} = e^{a ln(x)}$ \\ $b^x = y \leftrightarrow x = log_b \leftrightarrow y = \frac{ln (y)}{ln(b)}$
 	\begin{description} [noitemsep]
-		\item Grenzwerte: $\lim_{x \rightarrow \infty} x^a = \begin{cases}
+		\item Grenzwerte: $\liminfty{x} x^a = \begin{cases}
 		+ \infty & a > 0 \\ 
 		1        & a = 0  \\
 		0        & a < 0
 		\end{cases} \medspace \medspace $,
-		$\lim_{x \downarrow 0} x^a = \begin{cases}
+		$\limdown{x}{0} x^a = \begin{cases}
 		0        & a > 0 \\ 
 		1        & a = 0  \\
 		+ \infty & a < 0
 		\end{cases}$,\\
-		 $\lim_{x \rightarrow \infty} \frac{x^a}{b^x} = 0$, $a > 0 \rightarrow \lim_{x \downarrow 0} x^a ln(x) = 0$, $\lim_{x \downarrow 0} \frac{ln(1+x)}{x} = 1$
+		 $\liminfty{x} \frac{x^a}{b^x} = 0$, $a > 0 \rightarrow \limdown{x}{0} x^a ln(x) = 0$, $\limdown{x}{0} \frac{ln(1+x)}{x} = 1$
 		\item Ableitung: $\frac{\partial}{\partial x} (x^a) = a x^{a - 1}$, $\frac{\partial}{\partial x}(b^x) = ln(x) \cdot b^x$
 		\item Rechenregeln: $x^{\frac{m}{n}} = \sqrt[m]{x^n} = (\sqrt[m]{x})^n$
 	\end{description}
@@ -446,7 +451,7 @@ Sinus und Kosinus beschreiben die Länge der Ankathete bzw. Gegenkathete im Einh
 		\item $cos(0) = 1, cos (\frac{\pi}{2}) = 0, cos (\pi) = 1, cos(\frac{3 \pi}{2}) = 0, cos (2 \pi) = 1$
 		\item $tan(0) = 0, tan(\pi) = 0, tan(2 \pi) = 0 \dots$
 		\item Ableitung: $\frac{\partial}{\partial x}(cos(x)) = -sin(x), \frac{\partial}{\partial x}(sin(x)) = cos(x)$, \\ $\frac{\partial}{\partial x}(tan(x)) = \frac{1}{cos(x)^2} = 1 + tan(x)^2$
-		\item Grenzwerte $\lim_{x \rightarrow 0} \frac{sin(x)}{x} = 1, \lim_{x \rightarrow 0} \frac{1 - cos(x)}{0.5x} = 1, \lim_{x \downarrow 0} \frac{tan (x)}{x} = 1$
+		\item Grenzwerte $\limto{x}{0} \frac{sin(x)}{x} = 1, \limto{x}{0} \frac{1 - cos(x)}{0.5x} = 1, \limdown{x}{0} \frac{tan (x)}{x} = 1$
 		\item Rechenregeln: $cox(-x) = cos(x), sin(-x) = -sin(x)$ \\ $cos(x \pm y) = cos(x)cos(y) \pm sin(x)sin(y)$, \\ $sin(x \pm y) = sin(x)cos(y) \pm sin(y)cos(x)$
 		\item Weitere Eigenschaften: stetig und differenzierbar auf dem gesamten Definitionsbereich
 	\end{description}
@@ -694,7 +699,7 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 \end{multicols}
 
 \begin{definition}[Riemann-integrierbar]
-	$\fab$ heißt \emph{Riemann-integrierbar}, falls für alle Zerlegungsfolgen $(Z_n)_{n \in \mathbb{N}}$ mit Feinheit $|Z_n| \overset{n \rightarrow \infty}{\rightarrow} 0$ die zugehörigen Riemann-Summen $S_{Z_n}$ für jede Wahl der Zwischenpunkte gegen den selben Grenzwert $I(f)$ konvergieren: $\lim_{n \rightarrow \infty} \sum_{j=1}^n f(\xi_f) \cdot (x_j - x_{j-1}) = I(f) := \int_{a}^{b}f(x) dx$
+	$\fab$ heißt \emph{Riemann-integrierbar}, falls für alle Zerlegungsfolgen $(Z_n)_{n \in \mathbb{N}}$ mit Feinheit $|Z_n| \overset{n \rightarrow \infty}{\rightarrow} 0$ die zugehörigen Riemann-Summen $S_{Z_n}$ für jede Wahl der Zwischenpunkte gegen den selben Grenzwert $I(f)$ konvergieren: $\liminfty{n} \sum_{j=1}^n f(\xi_f) \cdot (x_j - x_{j-1}) = I(f) := \int_{a}^{b}f(x) dx$
 \end{definition}
 
 \begin{satz}[Rechenregeln für Integrale]

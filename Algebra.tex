@@ -1,0 +1,150 @@
+\section{Algebraische Strukturen und Matrizen}
+
+\begin{definition}[Gruppe]
+	Sei $G$ eine Menge. $\langle G, \cdot, 1 \rangle$ ist eine \emph{Gruppe}, falls gilt:
+	\begin{enumerate}[noitemsep]
+		\item Abgeschlossenheit: $\cdot : G \times G \rightarrow G$
+		\item Assoziativität: $\forall a,b,c \in G : a \cdot (b \cdot c) = (a \cdot b) \cdot c$
+		\item Neutrales Element: $\forallin{a}{G}: a \cdot 1 = a = 1 \cdot a$
+		\item Inverses Element: $\forallin{a}{G}: \exists a^{-1} \in G: a \cdot a^{-1} = 1 = a^{-1} \cdot a$
+	\end{enumerate}
+
+	Die Gruppe heißt endlich, falls gilt: $|G| < \infty$. $G$ heißt \emph{kommutativ}, falls zusätzlich gilt:
+	\begin{description}
+		\item $\forallin{a,b}{G}: a \cdot b = b \cdot a$
+	\end{description}
+\end{definition}
+
+\begin{definition}[Körper]
+	Eine Menge $\fieldk$ mit zwei Verknüpfungen, geschrieben $+$ und $\cdot$, $\langle \fieldk,+,\cdot \rangle$, heißt \emph{Körper} wenn folgendes gilt:
+	
+	\begin{enumerate}[noitemsep]
+		\item $\langle \fieldk, +, 0 \rangle$ ist eine kommutative Gruppe
+		\item $\langle \fieldk, \cdot, 1 \rangle$ ist eine kommutative Gruppe
+		\item Distributivität: $\forallin{a,b,c}{\fieldk}: a \cdot b + a \cdot c = a \cdot (b +c)$
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}[Matrix]
+	Sei $\fieldk$ ein beliebiger Körper und $m,n \in \naturalset \setminus \{0\}$. Eine Abbildung $\setonetom \times \setoneton \rightarrow \fieldk$ heißt \emph{Matrix}. Man schreibt:
+
+	\begin{align*}
+		\begin{pmatrix}
+			a_{1,1} & \dots & a_{1,n} \\
+			\vdots  &       &         \\
+			a_{m,1} & \dots & a_{m,n}
+		\end{pmatrix}
+		= (\subij{a})_{1 \leq i \leq m \atop 1 \leq j \leq n}
+		= (\subij{a}) = A \in \fieldk^{\mtimesn}
+	\end{align*}	
+
+	Eine $1 \times n$ Matrix heißt \emph{Zeilenvektor}, eine $m \times 1$ Matrix heißt \emph{Spaltenvektor}. Man schreibt mit $\fieldk^m = \fieldk^{m \times 1}$ und nennt dies $m$-dimensionaler Standardraum. 
+\end{definition}
+
+\begin{definition}[Eigenschaften von Matrizen]
+	Es gilt:
+	\begin{enumerate}[noitemsep]
+		\item Zwei Matrizen $A,B$ sind gleich, wenn beide $\mtimesn$ Matrizen sind und $\forallin{i}{\setonetom}, \forallin{j}{\setoneton} : \subij{a} = \subij{b}$.
+		\item Eine $\mtimesn$ Matrix heißt \emph{quadratisch}, falls $m=n$
+		\item Für $A = (\subij{a}) \in \fieldkmtimesn$ ist $A^T = (a_{j,i}) \in \fieldk^{n \times m} $ die \emph{transponierte Matrix}
+		\item Eine Matrix heißt \emph{symmetrisch}, wenn $A^T = A$ gilt.
+		\item 	Elemente aus $\fieldk$ heißen auch \emph{Skalare}. 
+	\end{enumerate}
+
+\end{definition}
+
+\begin{definition}[Rechnen mit Matrizen]
+	Für $A, B \in \fieldkmtimesn, D \in \fieldk^{n \times l}, s \in \fieldk$ gilt:
+	\begin{description}[noitemsep]
+		\item $A + B := (\subij{a} + \subij{b}) \in \fieldkmtimesn$
+		\item $s \cdot A = (s \cdot \subij{a}) \in \fieldkmtimesn$
+		\item $A \cdot D = C = (\subij{c}) \in \fieldk^{m \times l}$ mit $\subij{c} = \sum_{k=1}^{n}a_{i,k} d_{k,j}$
+	\end{description}
+\end{definition}
+
+\pagebreak
+
+\begin{satz}[Rechenregeln mit Matrizen]
+	Für Matrizen $A,B,C$ und Skalare $s,t$ mit definierten Summen und Matrizen gilt:
+	\begin{multicols}{2}
+		\begin{enumerate}[noitemsep]
+			\item $s \cdot (A + B) = s \cdot A + s \cdot B$
+			\item $(s+t) \cdot A = s \cdot A + t \cdot A$
+			\item $s \cdot (t \cdot A) = (s \cdot t) \cdot A$
+			\item $1 \cdot A = A$
+			\item $(A \cdot B) \cdot C = A \cdot (B \cdot C)$
+			\item $A \cdot (B + C) = A \cdot B + A \cdot C$
+			\item $(A + B) \cdot C = A \cdot C + B \cdot C$
+			\item $I_n \cdot A = A = A \cdot I_n$ wobei \\
+			  $I_n = \begin{pmatrix}
+			  1 &        & 0 \\
+			    & \ddots &   \\
+			  0 &        & 1
+			\end{pmatrix}$ Einheitsmatrix
+		\end{enumerate}
+	\end{multicols}
+\end{satz}
+
+
+\section{LGS}
+
+\begin{definition}[Lineares Gleichungssystem]
+	Eine Gleichung der Form $Ax=b$ mit $A \in \fieldkmtimesn, b \in \fieldk^m$ heißt lineares Gleichungssystem (LGS). Die Lösungsmenge ist die Menge aller $x \in \fieldk^n$ sodass $Ax = b$ gilt. $A$ heißt \emph{Koeffizientenmatrix}. Wird $b$ an $A$ angeheftet, schreibt man $(A|b) \in \fieldk^{m \times (n+1)}$ und nennt dies \emph{erweiterte Koeffizientenmatrix}.
+\end{definition}
+
+\begin{definition}[homogenes LGS]
+	Gilt $b = 0$, so heißt das LGS \emph{homogen}, ansonsten nennt man es \emph{inhomogen}.
+\end{definition}
+
+\begin{satz}[Zeilenoperationen]
+	Elementare Zeilenoperationen vereinfachen das LGS ohne die Lösungsmenge zu verändern:
+	\begin{description}[noitemsep]
+		\item Typ I: Vertauschen zweier Zeilen
+		\item Typ II: Multiplizieren einer Zeile mit einem Skalar $s \in \fieldk \setminus \{0\}$
+		\item Typ III: Addieren des s-fachen einer Zeile zu einer anderen
+	\end{description}
+\end{satz}
+
+\begin{definition}[Zeilenstufenform]
+	$A$ ist in Zeilenstufenform, wenn gilt:
+	\begin{enumerate}[noitemsep]
+		\item beginnt eine Zeile mit $k$ Nullen, so stehen unter diesen Nullen lauter Nullen
+		\item unter dem ersten Eintrag $\neq 0$ einer jeden Zeile stehen lauter Nullen
+		\item $A$ ist in strenger Zeilenstufenform wenn zusätzlich gilt: über dem ersten Eintrag $\neq 0$ einer jeden Zeile stehen lauter Nullen
+	\end{enumerate}
+\end{definition}
+
+\begin{satz}
+	Möglichkeiten der Lösungsmenge eines LGS:
+	\begin{description}[noitemsep]
+		\item Unlösbar $\leftrightarrow$ der erste Eintrag $\neq 0$ einer Zeile ist an Spalte $n+1$
+		\item Eindeutig lösbar $\leftrightarrow$ Anzahl der Zeilen $\neq 0$ ist gleich Anzahl der Spalten und der erste Eintrag $\neq 0$ einer jeden Zeile ist an Spalte $n$.
+		\item Uneindeutig lösbar $\leftrightarrow$ Anzahl der Zeilen $\neq 0$ ist kleiner der Anzahl der Spalten und der erste Eintrag $\neq 0$ einer jeden Zeile ist nicht an Spalte $n+1$.		
+	\end{description}
+\end{satz}
+
+\begin{definition}[Rang einer Matrix]
+	Sei $A'$ eine Matrix in Zeilenstufenform, die aus $A$ durch elementare Zeilenoperationen hervorgegangen ist. $rng(A)$ ist dann die Anzahl der Zeilen von $A'$ die mindestens einen Eintrag $\neq 0$ haben.
+\end{definition}
+
+\pagebreak
+
+\section{Vektorräume}
+
+\section{Linearkombinationen und Basen}
+
+\section{Lineare Abbildungen}
+
+\section{Darstellungsmatrizen}
+
+\section{Determinanten}
+
+\section{Eigenwerte und Eigenvektoren}
+
+\section{Skalarprodukt}
+
+\pagebreak
+
+\section{Symmetrische Matrizen}
+
+\pagebreak

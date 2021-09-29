@@ -639,10 +639,10 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 
 \begin{satz}[Monotonie und Ableitungen]
 	\begin{description}[noitemsep]
-		\item $\forall x\in(a,b) : f'(x) > 0 \rightarrow f$ ist auf $[a,b]$ streng monoton wachsend
-		\item $\forall x\in(a,b) : f'(x) < 0 \rightarrow f$ ist auf $[a,b]$ streng monoton fallend
-		\item $\forall x\in(a,b) : f'(x) \geq 0 \rightarrow f$ ist auf $[a,b]$ monoton wachsend
-		\item $\forall x\in(a,b) : f'(x) \leq 0 \rightarrow f$ ist auf $[a,b]$ monoton fallend
+		\item $\forallin{x}{(a,b)}: f'(x) > 0 \rightarrow f$ ist auf $[a,b]$ streng monoton wachsend
+		\item $\forallin{x}{(a,b)}: f'(x) < 0 \rightarrow f$ ist auf $[a,b]$ streng monoton fallend
+		\item $\forallin{x}{(a,b)}: f'(x) \geq 0 \rightarrow f$ ist auf $[a,b]$ monoton wachsend
+		\item $\forallin{x}{(a,b)}: f'(x) \leq 0 \rightarrow f$ ist auf $[a,b]$ monoton fallend
 	\end{description}
 \end{satz}
 
@@ -771,12 +771,104 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 
 \section{Potenzreihen}
 
+\begin{definition}
+	Funktionsdarstellungen der Form $f(x) = \serieskzeroinfty{a}x^k, |x| < r$ nennt man Entwicklung von $f$ in eine Potenzreihe. DIe größtmögliche Gültigkeitsschranke für Konvergenz nennt man Konvergenzradius der Potenzreihe.
+\end{definition}
+
+\begin{satz}[Taylor'sche Formel]
+	Sei $\epsilon > 0, \f{(a-\epsilon, a +\epsilon)}{\realset}$ n-mal stetig differenzierbar. $f(x+h) = \sum_{k = 0}^n \frac{f^{(k)}(x)}{k!} \cdot h^k + o(h^n)$ für $h \rightarrow 0$. $T_{n,x}f(h) = \sum_{k = 0}^n \frac{f^{(k)}(x)}{k!} \cdot h^k$ heißt Taylorpolynom von $f$ in $x$.
+\end{satz}
+
+\begin{satz}
+	Zu jeder Potenzreihe $\serieskzeroinfty{a}x^k$ gibt es einen Konvergenzradius sodass $\forallin{z}{\complexset}$ gilt:
+	\begin{description}[noitemsep]
+		\item $|z| < r \rightarrow $ die Potenzreihe konvergiert absolut
+		\item $|z| > r \rightarrow $ die Potenzreihe divergiert
+		\item der Fall $|z| = r$ muss gesondert betrachtet werden
+	\end{description}
+	Falls die Folge $\sequence{\sqrt[k]{|a|}}{k}$ konvergiert, so ist $r = \frac{1}{\liminfty{k}\sqrt[k]{|a|_k}}$
+\end{satz}
+
+\begin{definition}
+	Eine Funktion heißt \emph{analytisch}, wenn sie sich mit positivem Konvergenzradius in eine Potenzreihe entwickeln lässt.
+\end{definition}
+
+\begin{satz}
+	Sind $f,g$ in $x=0$ analytisch, $f(x) = \serieskzeroinfty{a}x^k, |x| < r_f$, $g(x) = \serieskzeroinfty{b}x^k, |x| < r_g$. Dann gilt:
+	\begin{enumerate}[noitemsep]
+		\item $f'$ ist in $x=0$ analytisch und $f'(x) = \frac{\partial}{\partial x} \serieskzeroinfty{a}x^k = \sum_{k=0}^{\infty} \frac{\partial}{\partial x}a_kx^k, |x| < r_f$
+		\item Die Koeffizienten sind eindeutig $a_k = \frac{f^{(k)}(0)}{k!}, k \in \naturalset_0$
+		\item Stammfunktionen sind in $x=0$ analytisch: $\int_{0}^{x}f(t)dt = \int_{0}^{x}\serieskzeroinfty{a}t^k dt= \sum_{k=0}^{\infty}\int_{0}^{x}a_k t^k dt$
+		\item $f + g, f \cdot g$ sind analytisch mit
+		\begin{description}
+			\item $(f + g)(x) = \sum_{k=0}^{\infty} (a_k+b_k)x^k, |x|=\min\{r_f, r_g\}$
+			\item $(f \cdot g)(x) = \sum_{k=0}^{\infty} \sum_{j=0}^{k} a_jb_{k-j}x^k, |x|=\min\{r_f, r_g\}$
+		\end{description}
+	\end{enumerate}
+\end{satz}
 
 \section{Mehr über Integrale}
+\begin{definition}
+	Ist $f : [a,b)$ auf $[\alpha, \beta]$ integrierbar für alle $a < \beta < b$, dann heißt $\int_{a}^{b} f(x) dx = \limto{\beta}{b} \int_{a}^{\beta} f(x) dx$ \emph{uneigentliches Integral}. Analog verfährt man mit der unteren Grenze.
+\end{definition}
 
+\begin{definition}
+	Ist $f : (a,b)$ auf $[\alpha, \beta]$ integrierbar für alle $a < \alpha < \beta < b$, dann heißt $\int_{a}^{b} f(x) dx = \limto{\alpha}{a} \int_{\alpha}^{c} f(x) dx + \limto{\beta}{b} \int_{c}^{\beta} f(x) dx$ \emph{uneigentliches Integral}, falls die Grenzwerte für ein $c \in (a,b)$ existieren.
+\end{definition}
+
+\begin{definition}
+	Wir betrachten $f(x,y)$. Für ein festes/konstantes $x$ schreiben wir die Ableitung $y \mapsto f(x,y) : \partial y f(x,y)$ oder $\partial_2 f(x,y)$.
+\end{definition}
+
+\begin{satz}
+	Sei $f : [a,b] \times [c,d]$ stetig. Es gilt:
+	\begin{enumerate}[noitemsep]
+		\item $F : y \mapsto \int_{a}^{b} f(x,y) dx$ ist stetig
+		\item (Fubini) $\int_{c}^{d} F(y) dx= \int_{c}^{d} \int_{a}^{b} f(x,y) dx dy =  \int_{a}^{b} \int_{c}^{d} f(x,y) dy dx $
+		\item Besitzt $f$ eine stetig partielle Ableitung $\partial_y$, dann ist $F$ differenzierbar mit $F'(y) = \int_{a}^{b} \partial_y f(x,y) dx$ und $\frac{\partial}{\partial y} \int_{a}^{b} f(x,y) dx = \int_{a}^{b} \frac{\partial}{\partial y} f(x,y) dx$ 
+	\end{enumerate}
+\end{satz}
+
+\begin{satz}
+	Sei die Funktionsfolge $f_k : [a,b] \mapsto \realset$ integrierbar und es gebe $a_k \geq 0$ sodass $|f_k| \leq a_k$ für alle $x \in [a,b]$ und $\serieskinfty{1}{a} < \infty$. \\
+	$\rightarrow f(x) = \sum_{k=1}^{\infty} f_k(x)$ konvergiert und es gilt: $\int_{a}^{b}f(x)dx = \int_{a}^{b} \sum_{k=1}^{\infty} f_k(x)dx =  \sum_{k=1}^{\infty} \int_{a}^{b}f_k(x) dx$
+\end{satz}
+
+\begin{satz}
+	Seien $a,b \in \mathbb{Z}$, sei $\fab$ stetig und monoton, $a < b, f \geq 0$. Es gilt
+	\begin{description}[noitemsep]
+		\item $f$ monoton wachsend $\rightarrow \sum_{k=a}^{b-1} f(k) \leq \int_{a}^{b}f(x)dx \leq \sum_{k=a+1}^{b}f(k)$
+		\item $f$ monoton fallend  $\rightarrow \sum_{k=a+1}^{b} f(k) \leq \int_{a}^{b}f(x)dx \leq \sum_{k=a}^{b-1}f(k)$
+	\end{description}
+\end{satz}
+
+\begin{satz}[Integralkriterium für Reihen]
+	$\rightarrow$ siehe Blatt Reihen
+\end{satz}
+
+\begin{satz}[Riemannsche Zetafunktion]
+	$\rightarrow$ siehe Blatt Reihen
+\end{satz}
+
+\begin{satz}
+	Die folgenden uneigentlichen Integrale gelten: \\
+	$\int_{0}^{1} \frac{1}{x^\alpha} dx = 
+		\begin{cases}
+			+ \infty              &, \alpha > 1 \\ 
+	 		\frac{1}{1 - \alpha}  &, \alpha < 1
+		\end{cases}$, 
+	$\int_{1}^{\infty} \frac{1}{x^\alpha} dx = 
+		\begin{cases}
+			\frac{1}{\alpha - 1}  &, \alpha > 1 \\
+			+ \infty              &, \alpha < 1 
+		\end{cases}$
+\end{satz}
+
+\pagebreak
 
 \section{Differentialrechnung mehrerer Veränderlicher}
 
+\pagebreak
 
 \section{Gewöhnliche Differentialgleichungen}
 

@@ -1,0 +1,56 @@
+\section{ODEs}
+\begin{itemize}
+	\item linear, nonlinear, homogen, inhomogeneous
+	\item analytical solutions
+	\item Population models, oscillators
+	\item Stable solutions
+	\item Direction field, phase plots
+\end{itemize}
+
+
+\section{PDE}
+
+\begin{itemize}
+	\item time-dependent PDE: we have a dependency on the time derivative: $\frac{\partial f}{\partial t} = ...$
+	\item stationary PDE: PDE is not dependent on time derivative but to a function 
+	\item equilibrium solution of stationary PDE: function is equal to 0
+	\item initial value problem: time-dependent differential equation with given $u(t=0)$
+	\item boundary value problem: no time dependency, values on boundaries given
+	\item classes of boundary conditions: Dirichlet/Neumann/Robin/Mixed
+	\item initial boundary problem: both starting value and values at boundaries given
+	\item spacing, mesh size: height(s) of grid discretizing domain
+	\item Heat equation vs. poisson equation
+	\item Laplace operator
+\end{itemize}
+
+\section{Numerical approaches}
+\begin{itemize}
+	\item forward difference
+	\item backward difference
+	\item central difference 
+	\item stiffness matrix
+	\item implicit/explicit methods
+	\item visualization: stepping vs integration
+	\item stability of an differential equation
+\end{itemize}
+
+Derivatives and physical/engineering  terms: 
+
+\begin{tabular}{c|c|c}
+	$f$ & $f'$ & $f''$ \\
+	\hline
+	Population & Growth & - \\ 
+	\hline
+	Position & Velocity & Acceleration \\
+	\hline
+	Position & Displacement & Curvature
+\end{tabular}
+
+Gradient/Jacobi - changes w.r.t all components
+
+Divergence - Outflow per unit volume (sum of all flows in all direction)
+
+curl/vorticity - measurement of how fast a flow rotates
+
+total derivative
+

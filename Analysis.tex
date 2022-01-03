@@ -237,10 +237,7 @@
 
 	Achtung: $\bar{x}, \underline{x}$ müssen nicht eindeutig sein.
 \end{satz}
-
-\pagebreak
-
- 	
+	
 \section{Funktionen}
 
 \begin{tikzpicture}
@@ -309,8 +306,6 @@
 	\end{description}
 \end{definition}
 
-\pagebreak
-
 \section{Trigonometrische Funktionen}
 
 \begin{definition}[Einheitskreis]
@@ -340,18 +335,69 @@ Sinus und Kosinus beschreiben die Länge der Ankathete bzw. Gegenkathete im Einh
 	\end{axis}
 	\end{tikzpicture}
 	\begin{itemize}[label={}, noitemsep]
-		\item \textcolor{red}{Ankathete(x)} $= cos(x)$
-		\item \textcolor{blue}{Gegenkathete(x)} $= sin(x)$
-		\item \textcolor{orange}{Hypthenuse(x)} $= 1 \overset{\text{Pythagoras}}{=} cos(x)^2 + sin(x)^2$	
-		\item \textcolor{magenta}{Tangente(x)} $= tan(x)$			
+		\item \textcolor{red}{Ankathete} $= cos(\phi) = a$
+		\item \textcolor{blue}{Gegenkathete} $= sin(\phi) = b$
+		\item \textcolor{orange}{Hypthenuse} $= 1 \overset{\text{Pythagoras}}{=} cos(\phi)^2 + sin(\phi)^2 = c$	
+		\item \textcolor{magenta}{Tangente(x)} $= tan(\phi)$			
 		\item $\pi := \frac{\textnormal{Kreisumfang U}}{\textnormal{Durchmesser d}} \overset{\text{Einheitskreis}}{=} \frac{U}{2} \leftrightarrow 2 \pi = U $
 		\item $\rightarrow$ Kosinus und Sinus sind $2 \pi$ periodisch
 		\item $\rightarrow cos(2 \pi x) = cos(x)$, $sin(2 \pi x) = sn(x)$
 	\end{itemize}
 \end{multicols}
+\end{definition}
 
+\begin{definition}[Rechtwinkliges Dreieck]
+	Der (Ko)sinus eines Winkels beschreibt das Verhältnis der Länge der \textcolor{red}{Ankathete}/ \textcolor{blue}{Gegenkathete} zur \textcolor{orange}{Hypothenuse} eines rechtwinkligen Dreiecks
+\end{definition}
 
+\begin{multicols}{2}
+\begin{tikzpicture}[scale=0.8]
+\coordinate (a) at (4.4,0) {};
+\coordinate (b) at (0,0) {};
+\coordinate (c) at (2,2) {};
+\draw[thick,red] (b) -- (c) node [midway, above, sloped] (TextNode) {a};
+\draw[thick,blue] (c) -- (a) node [midway, above, sloped] (TextNode) {b};
+\draw[thick,orange] (b) -- (a) node [midway, above, sloped] (TextNode) {c};
+\draw pic["$\alpha$", draw=black, <->, angle eccentricity=1.2, angle radius=1cm]
+{angle=a--b--c};
+\draw pic["$90^{\circ}$", draw=black, <->, angle eccentricity=0.5, angle radius=1cm]
+{angle=b--c--a};
+\end{tikzpicture}
+	\begin{itemize}[label={}, noitemsep]
+	\item $cos (\alpha) = \frac{a}{c} = \frac{| \medspace \vec{a} \medspace|}{|\medspace \vec{c} \medspace |}$
+	\item $sin (\alpha) = \frac{b}{c} = \frac{| \medspace \vec{b} \medspace|}{|\medspace \vec{c} \medspace |}$	
+\end{itemize}
+\end{multicols}
 
+\begin{definition}[Skalarprodukt in geometrischer Definition]
+	Das Skalarprodukt ordnet zwei Vektoren ein Skalar zu, das die Ähnlichkeit der Richtung beschreibt (, d.h. $0$ = identisch, $1$ = senkrecht).
+	\begin{equation*}
+	\langle a, b \rangle = |a| \cdot |b| \cdot cos(\alpha) = a^2 + b^2
+	\end{equation*}
+\end{definition}
+
+\begin{definition}[Kreuzrprodukt in geometrischer Definition]
+	Das Skalarprodukt ordnet zwei Vektoren $a,b$ ein Vektor zu, der senkrecht auf beiden steht und als Länge den Flächeninhalt des durch $a,b$ aufgespannten Parallelogramms hat.
+	
+	\begin{multicols}{2}
+			\begin{tikzpicture}[scale=0.75]
+		\draw[-,fill=white!95!blue](0,0)--(3,0)--(4,1)--(1,1)--cycle;
+		\node at (2,0.5) {$|\textcolor{red}{a}\times \textcolor{blue}{b}|$};
+		\draw[ultra thick,-latex,red](0,0)--(3,0)node[midway,below]{$a$};
+		\draw[ultra thick,-latex,blue](0,0)--(1,1)node[midway,above]{$b$};
+		\draw[ultra thick,-latex,purple!50!purple](0,0)--(0,3)node[pos=0.7,right]{$a\times b$};
+		\draw (0.6,0) arc [start angle=0,end angle=45,radius=0.6]
+		node[pos=0.7,right]{$\theta$};
+		\end{tikzpicture}
+		
+		\begin{equation*}
+			a \times b = det(e_3 , a , b) = \begin{pmatrix}
+			 a_2b_3 - a_3b_2 \\
+			 a_3b_1 - a_1b_3 \\
+			 a_1b_2 - a_2b_1
+			\end{pmatrix}
+		\end{equation*}
+	\end{multicols}
 \end{definition}
 
 \begin{definition}[Analytisch]
@@ -394,7 +440,6 @@ Sinus und Kosinus beschreiben die Länge der Ankathete bzw. Gegenkathete im Einh
 			\item $\rightarrow cos(x) = sin(x + \frac{\pi}{2})$, $sin(x) = cos(x - \frac{\pi}{2})$ 	
 			\item $tan : (- \frac{\pi}{2}, \frac{\pi}{2}) \rightarrow (-\infty, \infty) : x \rightarrowtail \frac{sin(x)}{cos(x)}$
 	\end{itemize}
-		
 	\end{multicols}
 \end{definition}
 
@@ -411,12 +456,11 @@ Sinus und Kosinus beschreiben die Länge der Ankathete bzw. Gegenkathete im Einh
 	\end{description}
 \end{definition}
 
-\pagebreak
 
 \begin{definition}[Umkehrfunktionen]
 Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 	\begin{multicols}{2}
-		\begin{tikzpicture}
+		\begin{tikzpicture}[scale=0.9]
 			\begin{axis}[
 			width=200,
 			height = 200,
@@ -437,14 +481,11 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 			\addlegendentry{$arctan (x)$}
 			\end{axis}
 		\end{tikzpicture}
-		
-	
 			\begin{description}[noitemsep]
 				\item $arcsin : [-1,1] \rightarrow [0, \pi] : x \mapsto sin^{-1}(x) $
 				\item $arccos : [-1,1] \rightarrow [-\frac{\pi}{2},\frac{\pi}{2}] : x \mapsto cos^{-1}(x) $
 				\item $arctan : \realset \rightarrow [-\frac{\pi}{2},\frac{\pi}{2}] : x \mapsto tan^{-1} $
 			\end{description}
-	
 	\end{multicols}
 \end{definition}
 
@@ -495,6 +536,35 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 	
 \end{satz}
 
+\pagebreak
+
+\section{Frequenzanalyse und Fourier-Reihe}
+\begin{definition}[Trigonometrisches Polynom]
+	Man definiert analog zu regulären Polynomen Polynome mit trigonometrischen Funktionen mit Grad $n$ als Basis im Intervall $[-\frac{T}{2}, \frac{T}{2}]$ 
+	\begin{align*}
+		F_n(t) := \frac{a_0}{2} + \sum_{k=1}^{n} (a_k cos(k\omega t) + b_k sin(k \omega t))
+	\end{align*}
+	wobei $\omega := \frac{2 \pi}{T}$ und $a_k, b_k$ Fourierkoeffizienten genannt werden.
+\end{definition}
+
+\begin{satz}
+	Unter Rücksichtnahme der Norm für Funktionen, $||f|| := \int_a^b |f(x)|^2$, minimieren für eine stetige, beschränkte Funktion $f$ die folgenden Koeffizienten das approximierende trigonometrische Polynom;
+	
+	\begin{align*}
+		a_k = \frac{2}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} cos(k \omega t)f(t) dt,
+		b_k = \frac{2}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} sin(k \omega t)f(t) dt,	
+	\end{align*}
+	
+	An jeder Stelle, an der $f$ differenzierbar ist, konvergiert dann $F_n$ für $n \rightarrow \infty$ gegen den Funktionswert. Wir schreiben
+	
+	\begin{align*}
+		f(t) = \frac{a_0}{2} + \sum_{k=1}^{\infty}a_k cos(k \omega t) + b_k sin(k \omega t)
+	\end{align*}
+\end{satz}
+
+\begin{definition}[Spektrum]
+	Für eine Funktion dargestellt als Fourierreihe, z.B. $f(t) = cos()$
+\end{definition}
 
 \pagebreak
 
@@ -798,6 +868,83 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 
 \section{Differentialrechnung mehrerer Veränderlicher}
 
+\begin{definition}[Parametrisierbare Kurve]
+	Eine parametrisierbare Kurve ist eine Abbildung $\function{\gamma}{[a, b]}{\realset^n} : t \mapsto (\gamma_1(t), \dots, \gamma_n(t))$, deren Komponenten $\gamma_i$ stetig sind. $\gamma$ heißt differenzierbar, wenn all $\gamma_i$ differenzierbar sind. Die Menge $\gamma([a,b]) ) \{\gamma(t) \medspace | \medspace t \in [a,b] \}$ heißt Spur von $\gamma$.
+\end{definition}
+
+\begin{definition}[Tangentialvektor]
+	Eine Kurve $\function{\gamma}{[a,b]}{\realset^n}$ sei differenzierbar. $\gamma'(t) := (\suboneton{\gamma'})$ heißt \emph{Tangentialvektor} an der Stelle $t$. Falls $\gamma'(t) \neq 0$, so heißt $T_\gamma = \frac{\gamma'(t)}{||\gamma'(t)||}$ \emph{Tangentialeinheitsvektor}.
+\end{definition}
+
+\begin{definition}[partielle Ableitung]
+	Betrachte $\function{f}{\realset^n}{\realset} : (\suboneton{x}) \mapsto f(\suboneton{x}) \in \realset$. Ist die Funktion $\function{f}{\realset}{\realset} : \xi \mapsto f(x_1, \dots, x_{k-1}, \xi, x_{k+1}, \dots, x_n)$ differenzierbar, heißt ihre Ableitung an der Stelle $x_k$ partielle Ableitung. Wir schreiben $\frac{\partial f}{\partial x_k}$ bzw. $\partial_k f(x)$. Der Vektor $\nabla f(x) = grad(f(x)) = (\partial_1 f(x) \dots \partial_n f(x))^T$ heißt Gradient.
+\end{definition}
+
+\begin{definition}
+	Die Matrix $Hf(x) := (\partial_j \partial_i f(x))_{1 \leq i \leq j \leq n}$ heißt \emph{Hesse-Matrix}
+\end{definition}
+
+\begin{satz}
+	Sei $U \subseteq \realset^n$ offen, $\function{f}{U}{\realset}$ zweimal stetig differenzierbar, d.h. $\partial_i \partial_j$ existiert für alle $i, j$. Dann gilt:
+	\begin{enumerate}[noitemsep]
+		\item Falls $f$ in $x \in U$ ein lokales Extremum besitzt, gilt $\nabla f(x) = 0$. Im Falle eines lokalen Minimums ist $Hf(x)$ positiv semidefinit, im Falle eines lokalen Maximums $Hf(x)$ negativ semidefinit.
+		\item Falls $\nabla f(x) = 0$ und $Hf(x)$ positiv definit, dann hat $f$ ein striktes lokales Minimum. Falls $\nabla f(x) = 0$ und $Hf(x)$ negativ definit, dann hat $f$ ein striktes lokales Maximum. 
+	\end{enumerate}
+\end{satz}
+
+\begin{definition}
+	Sei $U \subseteq \realset^n, \function{f}{U}{\realset^m}$. $f$ heißt in $x \in U $ differenzierbar, falls es eine lineare Abbildung $\function{A}{\realset^n}{\realset^m} : h \mapsto A(h) := Ah$ gibt, sodass gilt: $f(x+h) = f(x) + Ah + \mathcal{o}(||h||)$ für $h \rightarrow 0$. Diese Abbildung kann man als Matrix beschreiben $A \in \realset^{n \times m}$. Es gilt: $f$ ist differenzierbar $\leftrightarrow$ alle Komponenten sind in $x$ differenzierbar.
+	Die Matrix $A$ heißt auch Jacobi Matrix. Man schreibt:
+	$A = Jf(x) = (\frac{\partial f_i}{\partial x_j})_{1 \leq i \leq n, 1 \leq j \leq m} \in \realset^{m \times n }$
+\end{definition}
+
 \pagebreak
 
 \section{Gewöhnliche Differentialgleichungen}
+\begin{definition}[Differentialgleichungen mit separierbar rechter Hälfte]
+	
+	Gestalt: $\frac{d y}{d x} = y'(x) = f(x)g(y(x)), \function{f,g}{\realset}{\realset}$ stetig. Ansatz falls $g(y(x)) \neq 0$:
+	
+	\begin{equation*}
+		\int_{t_0}^{t} \frac{y'(x)}{g(y(x))} dx = \int_{t_0}^{t} f(x) dx \rightarrow \int_{y(t_0)}^{y(t)} \frac{1}{g(s)} ds = \int_{t_0}^{t} f(x) dx
+	\end{equation*}
+\end{definition}
+
+\begin{definition}[Lineare DGL erster Ordnung]
+	Die folgenden Lösungsverfahren gelten:
+	\begin{itemize}
+		\item Homogen $y'(x) + a(x)y(x) = 0$ Ansatz: bringe $a(x)y(x)$ auf die rechte Seite und löse diese DGL mit separierbarer rechter Hälfte
+		\item Inhomogen: $y'(x) + a(x)y(x) = f(x)$ 
+			\begin{enumerate} [noitemsep]
+				\item Löse $y'(x) +a(x)y(x) = 0 \rightarrow $ allgemeine Lösung der homogenen LDGL
+				\item Finde eine Lösung der inhomogenen LDGL. Ansatz: \emph{Variation der Konstanten}. Setze $y(x) = c(x) \cdot$ Ergebnis der homogenen LDGL
+				\item Summiere Ergebnisse aus 1) und 2)
+			\end{enumerate}
+	\end{itemize}
+\end{definition}
+
+\begin{definition}[Lineare DGL zweiter Ordnung mit konstanten Koeffizienten]
+	Die folgenden Lösungsverfahren gelten:
+	
+	\begin{itemize}
+		\item Homogen $y''(x) + a y'(x) + b y(x) = 0$. Ansatz: $e^{\lambda x} = y(x)$. Leite ab und löse die entstehende quadratische Gleichung.
+		\item Inhomogen $y''(x) + a y'(x) + b y(x) = f(x) $
+		\begin{enumerate} [noitemsep]
+			\item Löse $y''(x) + a y'(x) + b y(x) = 0$
+			\item Finde eine Lösung der inhomogenen LDGL 
+			\begin{itemize}
+				\item falls $f(x) = e^{\alpha t} (a_1 cos(\omega t) + a_2 sin(\omega t)) \rightarrow $ Ansatz: $y(x) = e^{\alpha x} (b_1 cos(\omega x + b_2 sin(\omega x)))$
+				\item falls $f(x)$ Polynom $\rightarrow$ Ansatz $y(x)$ ist generisches Polynom vom gleichen Grad. Löse das entsehende GLeichungssystem
+			\end{itemize}
+			\item Summiere Ergebnisse aus 1) und 2)
+		\end{enumerate}
+	\end{itemize}
+\end{definition}
+
+\begin{definition}[Anfangswertproblem]
+	Setze $y(0)$ und löse nach den verbleibenden Konstanten. Erstelle neue Lösung mit konkreten Werten der konstanten.
+\end{definition}
+
+\pagebreak
+
+

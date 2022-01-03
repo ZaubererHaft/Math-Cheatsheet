@@ -477,7 +477,7 @@ Für $\phi : V \rightarrow W$ linear, $dim(V) < \infty$, $dim(W) < \infty$ gilt:
 
 \section{Eigenwerte und Eigenvektoren}
 \begin{definition}	
-	Sei $A \in \fieldkntimesn; \lambda \in \fieldk $ heißt \emph{Eigenwert}, wenn es ein $v \neq 0 \in \fieldk^n$ gibt, sodass $Av = \lambda v$ gilt. $v$ heißt dann \emph{Eigenvektor} zum Eigenwert $\lambda$. Er ist ein Vektor, dessen Richtung durch $A$ (d.h. einer linearen Abbildung) nicht verändert wird. Lediglich seine Skalierung ändert sich.
+	Sei $A \in \fieldkntimesn; \lambda \in \fieldk $ heißt \emph{Eigenwert}, wenn es ein $v \neq 0 \in \fieldk^n$ gibt, sodass $Av = \lambda v$ gilt. $v$ heißt dann \emph{Eigenvektor} zum Eigenwert $\lambda$. Er ist ein Vektor, dessen Richtung durch $A$ (d.h. einer linearen Abbildung) nicht verändert wird.
 
 	Der Eigenraum zum Eigenwert $\lambda$ ist definiert als $E_\lambda := \{x \in \fieldk^n \medspace | \medspace Ax = \lambda x \}$, d.h. die Menge aller Eigenvektoren zum Eigenwert $\lambda \cup \{0\}$. 
 \end{definition}
@@ -501,7 +501,7 @@ Für $\phi : V \rightarrow W$ linear, $dim(V) < \infty$, $dim(W) < \infty$ gilt:
 	Sei $A \in \fieldkntimesn, \lambda \in \fieldk$ Eigenwert von $A$.
 	\begin{enumerate}[noitemsep]
 		\item Die algebraische Vielfachheit von $\lambda, m_a(\lambda),$ ist die Vielfachheit von $\lambda$ als Nullstelle von $\mathcal{X_A}$.
-		\item Die geometrische Vielfachheit von $\lambda, m_g(\lambda,)$ ist die Dimension des zugehörigen EIgenraums.
+		\item Die geometrische Vielfachheit von $\lambda, m_g(\lambda,)$ ist die Dimension des zugehörigen Eigenraums.
 	\end{enumerate}
 \end{definition}
 
@@ -518,7 +518,11 @@ Für $\phi : V \rightarrow W$ linear, $dim(V) < \infty$, $dim(W) < \infty$ gilt:
 	\lambda_1 & & 0 \\
 	& \ddots & \\
 	0 & & \lambda_n
-	\end{smallmatrix} \right)$.
+	\end{smallmatrix} \right) \leftrightarrow A = S\left(\begin{smallmatrix}
+	\lambda_1 & & 0 \\
+	& \ddots & \\
+	0 & & \lambda_n
+	\end{smallmatrix} \right) S^{-1} $ .
 \end{definition}
 
 \begin{satz}
@@ -527,6 +531,7 @@ Für $\phi : V \rightarrow W$ linear, $dim(V) < \infty$, $dim(W) < \infty$ gilt:
 		\item das charakteristische Polynom in Linearfaktoren zerfällt, $\mathcal{X_A}= \Pi_{i=1}^r (x - \lambda_i)^{l_i}$
 		\item Für alle Eigenwerte $\lambda_i$ gilt: $m_g(\lambda_i) = m_a(\lambda_i)$
 	\end{enumerate}	
+	Ist $A$ diagonalisierbar, gilt zusätzlich $det(A) = \prod_{i=1}^n \lambda_i$
 \end{satz}
 
 \begin{satz}
@@ -589,3 +594,56 @@ Für $\phi : V \rightarrow W$ linear, $dim(V) < \infty$, $dim(W) < \infty$ gilt:
 \end{definition}
 
 \section{Symmetrische Matrizen}
+\begin{definition}[Symmetrische Matrix]
+	Eine Matrix $A \in \fieldkntimesn$ heißt \emph{symmetrisch}, falls $A = A^T$.
+\end{definition}
+
+\begin{definition}[Hermite Matrix]
+	Eine Matrix $A \in \complexset^{n \times n}$ heißt \emph{hermitesch}, falls $A = A^T = A^H$.
+\end{definition}
+
+\begin{definition}[Unitäre Matrix]
+	Eine Matrix $A \in \complexset^{n \times n}$ heißt \emph{unitär}, falls $A = A^H = A^{-1} = I$.
+\end{definition}
+
+\begin{satz}
+	Sei $A \in \fieldkntimesn$ symmetrisch. 
+	
+	\begin{enumerate}[noitemsep]
+		\item Es gilt: $A$ ist diagonalisierbar
+		\item Seien $\lambda, \mu$ verschiedene Eigenwerte von $A$. Dann gilt $\forall v \in E_\lambda, w \in E_\mu : \langle v, w \rangle = 0 $
+	\end{enumerate}
+\end{satz}
+
+\begin{satz}[Spektralsatz]
+	 Sei $A \in \complexset^{n \times n}$ und $\bar{A}^T \cdot A = A \cdot \bar{A}^T$. Dann ist $A$ diagonalisierbar (für allgemeine $A$ gilt dies nicht!)
+\end{satz}
+
+\begin{definition}
+	Eine symmetrische Matrix $A \in \fieldkntimesn$ heißt
+	\begin{enumerate}[noitemsep]
+		\item \emph{positiv definit}, wenn alle Eigenwerte von $A$ positiv sind
+		\item \emph{positiv semi-definit}, wenn alle Eigenwerte von $A$ nicht negativ sind	
+		\item \emph{negativ definit}, wenn alle Eigenwerte von $A$ negativ sind
+		\item \emph{negativ semi-definit}, wenn alle Eigenwerte von $A$ nicht positiv sind	
+		\item \emph{indefinit}, wenn es positive und negative Eigenwerte von $A$ gibt
+	\end{enumerate}
+\end{definition}
+
+\begin{satz}
+	Eine symmetrische Matrix $A \in \fieldkntimesn$ ist genau dann positiv definit, wenn
+	\begin{enumerate}[noitemsep]
+		\item wenn gilt: $\forallin{v \neq 0}{\realset^n} : \langle v, Av \rangle > 0$
+		\item $A$ ist positiv semi-definit, wenn dies mit "$\geq 0$" gilt
+	\end{enumerate}
+\end{satz}
+
+\begin{satz}[Notwendiges Kriterium für positiv Definitheit]
+	Wenn eine symmetrische Matrix $A \in \fieldkntimesn$  positiv definit ist, so sind ihre diagonaleinträge positiv, d.h. $\forallin{i}{1,...,n} : a_{i,i} > 0$	
+\end{satz}
+
+
+
+
+
+

@@ -370,14 +370,14 @@ Sinus und Kosinus beschreiben die Länge der Ankathete bzw. Gegenkathete im Einh
 \end{multicols}
 
 \begin{definition}[Skalarprodukt in geometrischer Definition]
-	Das Skalarprodukt ordnet zwei Vektoren ein Skalar zu, das die Ähnlichkeit der Richtung beschreibt (, d.h. $0$ = identisch, $1$ = senkrecht).
+	Das Skalarprodukt ordnet zwei Vektoren $a,b$ ein Skalar zu, das die Ähnlichkeit der Richtung beschreibt (, d.h. $0$ = identisch, $1$ = senkrecht).
 	\begin{equation*}
 	\langle a, b \rangle = |a| \cdot |b| \cdot cos(\alpha) = a^2 + b^2
 	\end{equation*}
 \end{definition}
 
-\begin{definition}[Kreuzrprodukt in geometrischer Definition]
-	Das Skalarprodukt ordnet zwei Vektoren $a,b$ ein Vektor zu, der senkrecht auf beiden steht und als Länge den Flächeninhalt des durch $a,b$ aufgespannten Parallelogramms hat.
+\begin{definition}[Kreuzprodukt]
+	Das Kreuzprodukt ordnet zwei Vektoren $a,b$ ein Vektor zu, der senkrecht auf beiden steht und als Länge den Flächeninhalt des durch $a,b$ aufgespannten Parallelogramms hat.
 	
 	\begin{multicols}{2}
 			\begin{tikzpicture}[scale=0.75]
@@ -387,7 +387,7 @@ Sinus und Kosinus beschreiben die Länge der Ankathete bzw. Gegenkathete im Einh
 		\draw[ultra thick,-latex,blue](0,0)--(1,1)node[midway,above]{$b$};
 		\draw[ultra thick,-latex,purple!50!purple](0,0)--(0,3)node[pos=0.7,right]{$a\times b$};
 		\draw (0.6,0) arc [start angle=0,end angle=45,radius=0.6]
-		node[pos=0.7,right]{$\theta$};
+		node[pos=0.7,right]{$\alpha$};
 		\end{tikzpicture}
 		
 		\begin{equation*}
@@ -502,7 +502,7 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 \end{definition}
 
 \begin{definition}[Polardarstellung]
-	Anstelle in die Zahleneben $x,y$ einer komplexen Zahl zu verwenden, lässt sich alternativ die Länge $r$ der Zahl sowie der Winkel $\phi$ zur reellen Achse benutzen:
+	Anstelle die Zahleneben $x,y$ einer komplexen Zahl zu verwenden, lässt sich alternativ die Länge $c$ der Zahl sowie der Winkel $\phi$ zur reellen Achse benutzen:
 	
 	\begin{tikzpicture}
 	\begin{axis}[
@@ -514,16 +514,23 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 	ymax=1.25,
 	axis x line=center,
 	axis y line=center,
+	xlabel style={at={(axis description cs:0.5,-0.0)},anchor=north},
+	xlabel={$\realset$},
+	ylabel style={at={(axis description cs:-0.0,.5)},rotate=90,anchor=south},
+	ylabel={$\complexset$},
 	no markers]
 	
 	\addplot [red, domain=0:1]{x}  node[above,pos=1] {$z = x + iy$};
 	\addplot [blue, domain=0:1] coordinates {(1,0)(1,1)};	
-	\node[right] at (50, 5)  {$x = r cos(\phi)$} ;
-	\node[right] at (15, 50)  {$r = |z|$} ;
-	\node[right] at (100, 50)  {$y = r sin(\phi)$} ;
+	\node[right] at (40, 5)  {$a = c \cdot cos(\phi)$} ;
+	\node[right] at (15, 50)  {$c = |z|$} ;
+	\node[right] at (100, 50)  {$b = c \cdot sin(\phi)$} ;
 	\node[right] at (15, 10)  {$\phi$} ;
 	\end{axis}
 	\end{tikzpicture}
+	
+	$(c, \phi) $ bezeichnet man als Polarkoordinaten der komplexen Zahl
+	
 \end{definition}
 
 \begin{satz}[Euler'sche Formel]

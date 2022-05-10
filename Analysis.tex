@@ -783,7 +783,12 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 \end{definition}
 
 \begin{satz}[Taylor'sche Formel]
-	Sei $\epsilon > 0, \f{(a-\epsilon, a +\epsilon)}{\realset}$ n-mal stetig differenzierbar. $f(x+h) = \sum_{k = 0}^n \frac{f^{(k)}(x)}{k!} \cdot h^k + o(h^n)$ für $h \rightarrow 0$. $T_{n,x}f(h) = \sum_{k = 0}^n \frac{f^{(k)}(x)}{k!} \cdot h^k$ heißt Taylorpolynom von $f$ in $x$.
+	Sei $\epsilon > 0, \f{(a-\epsilon, a +\epsilon)}{\realset}$ n-mal stetig differenzierbar. $f(x+h) = \sum_{k = 0}^n \frac{f^{(k)}(x)}{k!} \cdot h^k + o(h^n)$ für $h \rightarrow 0$. $T_{n}f(x; h) = \sum_{k = 0}^n \frac{f^{(k)}(x)}{k!} \cdot h^k$ heißt Taylorpolynom von $f$ in $x$.
+\end{satz}
+
+\begin{satz}[Taylor'sche Formel mit Restglied] 
+	Eine weitere Darstellung der Taylor'schen Formel ist:
+	$T_{n}f(x; h) = \sum_{k = 0}^n \frac{f^{(k)}(h)}{k!} \cdot (x \pm h)^k + \frac{(x \pm h)^{(n + 1)}}{(n + 1)!} \cdot f^{n + 1}(\xi) $
 \end{satz}
 
 \begin{satz}
@@ -888,7 +893,7 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 \end{definition}
 
 \begin{definition}
-	Die Matrix $Hf(x) := (\partial_j \partial_i f(x))_{1 \leq i \leq j \leq n}$ heißt \emph{Hesse-Matrix}
+	Die Matrix $Hf(x) := (\partial_j \partial_i f(x))_{1 \leq i \leq j \leq n}$ heißt \emph{Hesse-Matrix}.
 \end{definition}
 
 \begin{satz}
@@ -904,6 +909,17 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 	Die Matrix $A$ heißt auch Jacobi Matrix. Man schreibt:
 	$A = Jf(x) = (\frac{\partial f_i}{\partial x_j})_{1 \leq i \leq n, 1 \leq j \leq m} \in \realset^{m \times n }$
 \end{definition}
+
+\begin{definition}[Multivariate Ableitungen]
+	Zusammenfassend gilt:
+	\begin{itemize}[noitemsep]
+		\item Skalar nach Vektor: $\f{\realset^n}{\realset} : \vec{x} \in \realset^n \mapsto f(\vec{x}) \in \realset \Rightarrow \nabla f(\vec{x}) = \nabla f = (\frac{\partial f}{\partial \vec{x}})^T = (\frac{\partial f(\vec{x})}{\partial x_1}, ..., \frac{\partial f(\vec{x})}{\partial x_n})^T$
+		\item Vektor nach Skalar: $\vec{f} : \realset \rightarrow \realset^n : x \in \realset \mapsto \vec{f}(x) \in \realset^n \Rightarrow \frac{\partial \vec{f}(x)}{\partial x} = (\frac{\partial f_1(x)}{\partial x}, ..., \frac{\partial f_n(x)}{\partial x})^T$  
+		\item Vektor nach Vektor:  $\vec{f} : \realset^n \rightarrow \realset^m : x^n \in \realset^n \mapsto \vec{f}(\vec{x}) \in \realset^n \Rightarrow J\vec{f} (\vec{x}) = (\frac{\partial f_{i}(\vec{x})}{\partial x_j})$
+		\item Skalar nach Matrix: $f : \mathbb{R}^{n \times m} \rightarrow \realset : A \in \realset^{m \times n} \mapsto f(A) \in \realset \Rightarrow \nabla f(A) = (\frac{\partial f(A)}{\partial A_{i, j}})$   
+	\end{itemize}
+\end{definition}
+
 
 \pagebreak
 

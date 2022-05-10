@@ -434,7 +434,7 @@ Für $\phi : V \rightarrow W$ linear, $dim(V) < \infty$, $dim(W) < \infty$ gilt:
 		\item Die Permanente von $A$ ist $perm(A) = \sum_{\sigma \in S_n}(\Pi_{i=1}^n a_ {i, \sigma(i)})$
 		\item Die Determinante von $A$ ist $det(A) = \sum_{\sigma \in S_n}(sgn(\sigma) \cdot \Pi_{i=1}^n a_ {i, \sigma(i)})$		
 	\end{enumerate}
-	Allgemein beschreibt die Determinante eine Funktion $A \mapsto det(A)$. Sie gibt an, wie sich das Volumen bei der durch die Matrix beschriebenen linearen Abbildung ändert.
+	Allgemein beschreibt die Determinante eine Funktion $A \mapsto det(A)$. Sie gibt an, wie sich das Volumen einer Region bei der durch die Matrix beschriebenen linearen Abbildung ändert. Eine Determinante von 0 reduziert dann z.B. ein Volumen zu einer Fläche bzw. eine Fläche zu einer Linie usw., wohingegen eine negative Determinante die Orientierung des Raums ändert.
 \end{definition}
 
 \begin{satz}
@@ -483,12 +483,10 @@ Für $\phi : V \rightarrow W$ linear, $dim(V) < \infty$, $dim(W) < \infty$ gilt:
 	Der Eigenraum zum Eigenwert $\lambda$ ist definiert als $E_\lambda := \{x \in \fieldk^n \medspace | \medspace Ax = \lambda x \}$, d.h. die Menge aller Eigenvektoren zum Eigenwert $\lambda \cup \{0\}$. 
 \end{definition}
 
-\begin{definition}[Charakteristisches Polynom]
+\begin{satz}[Charakteristisches Polynom]
 	Sei $A \in \fieldkntimesn$ quadratische Matrix. Dann heißt $\mathcal{X_A} = \mathcal{X}_A(x) := det(x \cdot I_n -A) \in \fieldk[X]$ \emph{charakteristisches Polynom} von $A$.
-\end{definition}
 
-\begin{satz}
-	Die Eigenwerte einer quadratischen Matrix $A \in \fieldkntimesn$ sind gleich der Nullstellen des charakteristischen Polynoms von $A$. 
+	Die Eigenwerte einer quadratischen Matrix $A \in \fieldkntimesn$ sind gleich der Nullstellen des charakteristischen Polynoms von $A$. Die Gleichung resultiert also in solche $\lambda$, bei denen die Abbildung $A$ das Volumen reduziert (und damit nur skaliert)
 \end{satz}
 
 \begin{definition}
@@ -515,7 +513,7 @@ Für $\phi : V \rightarrow W$ linear, $dim(V) < \infty$, $dim(W) < \infty$ gilt:
  ist also eindeutig bestimmt und nicht abhängig von der Wahl der Basis. \end{satz}
 
 \begin{definition}[Diagonalisierbarkeit]
-	Eine Matrix $A \in \fieldkntimesn$ heißt \emph{diagonalisierbar}, wenn es eine Basis des $\fieldk^n$ aus Eigenvektoren von $A$ gibt. Dazu äquivalent: $\exists S \in GL_n(\fieldk) : S^{-1} A S = \left( \begin{smallmatrix}
+	Eine Matrix $A \in \fieldkntimesn$ heißt \emph{diagonalisierbar}, wenn es eine Basis (Matrix $S$) des $\fieldk^n$ aus Eigenvektoren von $A$ gibt. Dazu äquivalent: $\exists S \in GL_n(\fieldk) : S^{-1} A S = \left( \begin{smallmatrix}
 	\lambda_1 & & 0 \\
 	& \ddots & \\
 	0 & & \lambda_n
@@ -523,7 +521,7 @@ Für $\phi : V \rightarrow W$ linear, $dim(V) < \infty$, $dim(W) < \infty$ gilt:
 	\lambda_1 & & 0 \\
 	& \ddots & \\
 	0 & & \lambda_n
-	\end{smallmatrix} \right) S^{-1} $ .
+	\end{smallmatrix} \right) S^{-1} $ 
 \end{definition}
 
 \begin{satz}

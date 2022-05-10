@@ -9,7 +9,7 @@
 			\item $B \in  A \rightarrow \bar{B} \in A$
 			\item $B_1, B_2, \dots \in A \rightarrow \bigcup_{i = 1}^\infty B_i \in A$
 		\end{enumerate}
-	\item $Pr$ Wahrscheinlichekeitsmaß über $\sigma$, d.h.
+	\item $Pr$ Wahrscheinlichkeitsmaß über $\sigma$, d.h.
 	\begin{enumerate}[noitemsep]
 		\item $\pr{\Omega} = 1$
 		\item $B_1, B_2$ paarweise disjunkt $\rightarrow \pr{\bigcup_{i = 1}^\infty B_i} = \sum_{i=1}^\infty \pr{B_i}$ (Additionssatz)
@@ -20,17 +20,47 @@
 		\item $\pr{\emptyset} = 0$
 		\item $\pr{B_i} \geq 0, \pr{B_i} \leq 1 $
 		\item $\pr{B_i} = 1 - \pr{\bar{B_i}}$
-		\item $C \subseteq B \rightarrow \pr{A} \leq \pr{B}$
+		\item $A \subseteq B \rightarrow \pr{A} \leq \pr{B}$
 	\end{itemize}
 \end{definition}
 
+\begin{satz}[Siebformel]
+	Für paarweise nicht-disjunkte Ereignisse $B_i$ gilt
+	\begin{align*}
+		Pr[\bigcup_{i=1}^m B_i] \sum_{k=1}^n ((-1)^{k + 1} \sum_{I \subseteq \{ 1, \dots, n \}, |I| = k } Pr[\bigcap_{i \in I} B_i])
+	\end{align*}
+	Für $n=3$ gilt z.B. der Speziallfall
+	\begin{align*}
+		Pr[B_2 \cup B_2 \cup B_3 ] = & Pr[B_1] + Pr[B_2] + Pr[B_2] - \\ & Pr[B_1 \cap B_2] - Pr[B_2 \cap B_3] - Pr[B_1 \cap B_3] + Pr[B_1 \cap B_2 \cap B_3]
+	\end{align*}
+\end{satz}
 
+\begin{satz}[Bedingte Wahrscheinlichkeit]
+	Für Ereignisse $A,B$ gilt:
+	\begin{align*}
+		Pr[A | B] = \frac{Pr[A \cap B]}{Pr[B]} \rightarrow Pr[A \cap B] = Pr [A | B] \cdot Pr[B]
+	\end{align*}
+\end{satz}
+
+\begin{satz}[Multiplikationssatz]
+	Für Ereignisse $A_1, \cdots, A_n$ gilt:
+
+\end{satz}
+
+
+\pagebreak
 	
 \section{Diskret}
 
+\pagebreak
+
 \section{Kontinuierlich}
 
+\pagebreak
+
 \section{Statistik}
+
+\pagebreak
 
 \section{Stochastik}
 

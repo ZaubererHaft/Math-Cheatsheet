@@ -1,3 +1,80 @@
+\section{Gaussian Elimination}
+
+\begin{definition}[Algorithm]
+	Let be $A \in \realset^{\mtimesn}, b \in \realset^n$ 
+	\begin{enumerate} [noitemsep]
+		\item Forward Elimination $A, b$ are transformed synchronously until $A$ is reduced to an upper triangular matrix $U$ by \begin{itemize}[noitemsep]
+			\item Multiplying the $i$-th row by a nonzero scalar
+			\item Add the $\alpha \in \realset$ - multiple of the $i$-th row to the $j$-th one
+			\item Swapping the position of the $i$-th and $j$-th row
+		\end{itemize}
+		\item Backward Substitution: Using the created row echolon form $Ux = c$ the structure is used to solve the system
+	\end{enumerate}
+	Details: Completion of the $j$-th row is called the $j$-th principal step. $a_{j,j} \neq 0$ is called the pivot element, swap rows if $a_{j,j} = 0$. Rank and determinant of $A$ is (almost) directly obtainable
+\end{definition}
+
+\begin{definition}[Elementary Transformation Matrices]
+	Assigning matrices to elementary operations for analyzing purposes
+	\begin{enumerate}[noitemsep]
+		\item \begin{multicols}{2}
+			\begin{equation*}
+				S(\alpha;i) := diag(\suboneton{d})
+			\end{equation*}
+			\begin{itemize}[noitemsep]
+				\item $S^{-1} := diag(\frac{1}{\alpha_1}, \dots, \frac{1}{\alpha_n})$
+				\item $S=S^T, S^TS = SS^t \rightarrow $ normal matrix
+				\item $det(S) = \alpha, S^{-1} \neq S^T$ (non-orthogonal)
+				\item Multiplying $A$ with $S$ scales a row/col with $\alpha$
+			\end{itemize}
+		\end{multicols}
+		\item \begin{multicols}{2}
+			$P(i, j)$ differs from $I_n$ in 4 elements \begin{align*}
+			P(i, j)_{i, i} &= 0, P(i, j)_{i, j} = 1 \\
+			P(i, j)_{j, i} &= 1, P(i, j)_{j, j} = 0 			
+			\end{align*}
+			\begin{itemize}[noitemsep]
+				\item $P^{-1} = P^T = P \rightarrow $ orthogonal
+				\item $det (P) = -1$
+				\item Multiplying $A$ with $P$ swaps rows/cols
+			\end{itemize}
+		\end{multicols}
+		\item \begin{multicols}{2}
+			$N(\alpha; i \rightarrow j)$ differs from $I_n$ in 1 elements \begin{align*}
+			N(\alpha; i \rightarrow j)_{j, i} = \alpha			
+			\end{align*}
+			\begin{itemize}[noitemsep]
+				\item $N(\alpha; i \rightarrow j)^{-1} = N(-\alpha; i \rightarrow j) \rightarrow N^{-1} \neq N^T $ non orthogonal
+				\item $det N = 1$
+				\item Multiplying $A$ with $N$ adds the $\alpha$-fold of row/col $i$ to row/col $j$
+			\end{itemize}
+		\end{multicols}
+	\end{enumerate}
+
+	\textcolor{red}{$S, N$ are not orthogonal $\rightarrow$ the condition number of the system changes}
+\end{definition}
+
+\begin{definition}[Summary - Classical Gauß]
+	$A$ is reshaped by non-singular matrices $Q$ that are multiplied from the left which only considers row operations:
+	\begin{align*}
+		Ax=b \leftrightarrow (QA)x = Qb \leftrightarrow (Q^{-1}QA)x = (Q^{-1}Q)b \leftrightarrow Ax = b \text{\; no loss of information} \\
+		det (QA) = det(Q) \cdot det(A) \text{\; determinant bypass of elementary transformation matrices}
+	\end{align*}
+\end{definition}
+
+\begin{definition}[Gauß with columns]
+	We can use the same transformations for column operations - however, they solve a different system:
+	\begin{align*}
+	Ax&=b \leftrightarrow A(Q^{-1}Q)x=b \leftrightarrow (AQ^{-1})(Qx)=b \leftrightarrow AQy = b \\
+	y &= Q^{-1}x  \leftrightarrow x = Qy \text{\; substitution at the end}
+	\end{align*}
+\end{definition}
+
+\begin{satz}[Gauß with Pivoting]
+	Gauß with pivoting preserves symmetry and positive definiteness in the residual matrix. I.e., for pos./neg. definitie matrices Gaussian elimination is possible without pivoting
+\end{satz}
+
+\pagebreak
+
 \section{ODEs}
 \begin{itemize}
 	\item linear, nonlinear, homogen, inhomogeneous

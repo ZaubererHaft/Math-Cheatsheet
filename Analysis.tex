@@ -237,6 +237,13 @@
 
 	Achtung: $\bar{x}, \underline{x}$ müssen nicht eindeutig sein.
 \end{satz}
+
+\begin{definition}[Lipschitz-Stetigkeit]
+	Anschaulich heißt Lipschitz-Stetigkeit, dass eine Funktion $\f{\realset}{\realset}$ nicht zu schnell steigt:
+	\begin{align*}
+		\forallin{x_1, x_2}{\realset} : |f(x_1) - f(x_2)| \leq L \cdot |x_1 - x_2|
+	\end{align*}
+\end{definition}
 	
 \section{Funktionen}
 
@@ -783,12 +790,37 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 \end{definition}
 
 \begin{satz}[Taylor'sche Formel]
-	Sei $\epsilon > 0, \f{(a-\epsilon, a +\epsilon)}{\realset}$ n-mal stetig differenzierbar. $f(x+h) = \sum_{k = 0}^n \frac{f^{(k)}(x)}{k!} \cdot h^k + o(h^n)$ für $h \rightarrow 0$. $T_{n}f(x; h) = \sum_{k = 0}^n \frac{f^{(k)}(x)}{k!} \cdot h^k$ heißt Taylorpolynom von $f$ in $x$.
+	Sei $\epsilon > 0, \f{(a-\epsilon, a +\epsilon)}{\realset}$ n-mal stetig differenzierbar. $f(x+h) = \sum_{k = 0}^n \frac{f^{(k)}(x)}{k!} \cdot h^k + o(h^n)$ für $h \rightarrow 0$. $T_{n}f(x; h) = \sum_{k = 0}^n \frac{f^{(k)}(x)}{k!} \cdot h^k$ heißt Taylorpolynom von $f$ in einer Umgebung um $x$. 
 \end{satz}
 
 \begin{satz}[Taylor'sche Formel mit Restglied] 
 	Eine weitere Darstellung der Taylor'schen Formel ist:
 	$T_{n}f(x; h) = \sum_{k = 0}^n \frac{f^{(k)}(h)}{k!} \cdot (x \pm h)^k + \frac{(x \pm h)^{(n + 1)}}{(n + 1)!} \cdot f^{n + 1}(\xi) $
+\end{satz}
+
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = left,
+    legend pos=south east,
+    width=10cm,height=8cm,
+      axis x line=center,
+    axis y line=center,
+	xlabel = \(x\),
+	ylabel = {\(f(x)\)}
+]
+\addplot[color=blue, samples=100, domain=-5:5]{cos(deg(x))};
+\addlegendentry{\(cos(x)\)}
+\addplot[domain=-5:5]{1};
+\addlegendentry{\(p(x) = 1\)}
+\addplot[color=orange,domain=-2:2]{1 - 0.5 * x^2};
+\addlegendentry{\(p(x) = 1 - 0.5 x^2\)}
+\addplot[color=green,domain=-2:2]{1 - 0.5 * x^2 + 1/24 * x^4};
+\addlegendentry{\(p(x) = 1 - 0.5  x^2 + 1/24  x^4\)}
+\end{axis}
+\end{tikzpicture}
+
+\begin{satz}[Taylor'sche Formel in 2D]
+	content...
 \end{satz}
 
 \begin{satz}
@@ -818,6 +850,8 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 		\end{description}
 	\end{enumerate}
 \end{satz}
+
+\pagebreak
 
 \section{Mehr über Integrale}
 \begin{definition}
@@ -919,6 +953,62 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 		\item Skalar nach Matrix: $f : \mathbb{R}^{n \times m} \rightarrow \realset : A \in \realset^{m \times n} \mapsto f(A) \in \realset \Rightarrow \nabla f(A) = (\frac{\partial f(A)}{\partial A_{i, j}})$   
 	\end{itemize}
 \end{definition}
+
+\pagebreak
+
+\begin{definition}[Totale Ableitung/Materialableitung]
+	Das Totale Differential beschreibt die Änderung in einer kleinen Umgebung eines Punktes $p$. Sei $\f{\realset^n}{\realset}$ total differenzierbar:
+	
+	\begin{align*}
+		\frac{d f (\vec{x}) }{d \vec{x}} = d f(\vec{x}) = \sum_{i = 1}^{n} \frac{\partial f (\vec{x}) }{\partial x_i}
+	\end{align*}
+	
+	In der Physik wird dies auch als \textbf{Materialableitung} bezeichnet. Ist $f$ von anderen Funktionen abhängig, z.B. $f(t, u(t))$, so ist die Kettenregel zu verwenden:
+	
+	\begin{align*}
+		d f(t, u(t))  = \frac{\partial f (t, u(t))}{\partial t} + \frac{\partial f (t, u(t))}{\partial u(t)} \cdot \frac{\partial u (t)}{\partial t}
+	\end{align*}
+	
+		
+\end{definition}
+
+\begin{definition}[Divergenz]
+	Die Divergenz eines Vektorfeld beschreibt den Zu - order Abfluss einer Größe. Sei $\vec{f} : \realset^n \rightarrow \realset^n$:
+
+	\begin{align*}
+	 div(f) = \nabla \cdot \vec{f}(\vec{x}) = \sum_{i = 1}^{n} \frac{\partial f_i (\vec{x}) }{\partial x_i}
+	\end{align*}
+	
+\end{definition}
+
+
+\begin{definition}[Richtungsableitung]
+	Ähnlich wie die partielle Ableitung beschreibt die Richtungsableitung die lokale Änderungsrate, allerdings in einer vorgegebenen Richtung eines normierten Vektors $\vec{v}$ und nicht entlang der Einheitsvektoren:
+	
+	\begin{align*}
+	  D_v f(x_0) = \frac{\partial f(x_0)}{\partial \vec{v}} = \lim_{h \rightarrow 0} \frac{f(x_0  + h \cdot \vec{v}) - f(x_0)}{h}
+	\end{align*}
+
+\end{definition}
+
+\begin{definition}[Rotation]
+	Die Rotation erzeugt das Wirbelfeld zu einem Vektorfeld:
+	
+	\begin{align*}
+		curl(v(t, \vec{x})) = \nabla \times v(t,\vec{x}) = \begin{pmatrix} \frac{\partial}{\partial y} v_z(t, \vec{x}) - \frac{\partial}{\partial z} v_y(t, \vec{x}) \\
+		\frac{\partial}{\partial z} v_x(t, \vec{x}) - \frac{\partial}{\partial x} v_z(t, \vec{x}) \\ \frac{\partial}{\partial x} v_y(t, \vec{x}) - \frac{\partial}{\partial y} v_x(t, \vec{x})
+		\end{pmatrix} 
+	\end{align*}
+\end{definition}
+
+\begin{satz}[Berechnung der Richtungsableitung]
+	Für $f$ stetig differenzierbar lässt sich die Richtungsableitung mithilfe des Skalarprodukts wie folgt berechnen:
+	
+	\begin{align*}
+		D_v f(x_0) = \langle \nabla f(x_0), v \rangle
+	\end{align*}
+\end{satz}
+
 
 
 \pagebreak

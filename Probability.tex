@@ -43,10 +43,23 @@
 \end{satz}
 
 \begin{satz}[Multiplikationssatz]
-	Für Ereignisse $A_1, \cdots, A_n$ gilt:
-
+	Für Ereignisse $A_1, \dots, A_n, Pr[A_1 \cap, \dots ,\cap A_n] > 0$ gilt:
+	\begin{align*}
+		Pr[A_1 \cap, \dots ,\cap A_n] = Pr[A_1]  \cdot Pr[A_2 | A_1] \cdot Pr[A_2|A_1] \cdot Pr[A_3 | A_1 \cap A_2] \cdot  \dots \cdot Pr[A_n | A_1 \cap \dots A_n] 
+	\end{align*}
 \end{satz}
 
+\begin{satz}[Satz der totalen Wahrscheinlichkeit]
+	Seien $A_1,\dots,A_n$ paarweise disjunkt, $Pr[A_i] > 0, \forall i$. Sei $B \subseteq A_1 \cup \dots \cup A_n$. Dann gilt:
+	\begin{align*}
+	Pr[B] = \sum_{i=1}^{n} Pr[A_i \cap B] = \sum_{i=1}^n Pr[B | A_i] \cdot A_i
+	\end{align*}
+	Gilt zusätzlich $Pr[B] > 0$ (\textbf{Satz von Bayes}):
+	\begin{align*}
+		Pr[A_i | B] = \frac{Pr[A_i \cap B]}{Pr[B]} = \frac{Pr[B | A_i] \cdot Pr[A_i]}{\sum_{j=1}^n Pr[B | A_j] \cdot Pr[A_j]}
+	\end{align*}
+	
+\end{satz}
 
 \pagebreak
 	

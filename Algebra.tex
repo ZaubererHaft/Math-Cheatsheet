@@ -481,12 +481,19 @@ Für $\phi : V \rightarrow W$ linear, $dim(V) < \infty$, $dim(W) < \infty$ gilt:
 	Sei $A \in \fieldkntimesn; \lambda \in \fieldk $ heißt \emph{Eigenwert}, wenn es ein $v \neq 0 \in \fieldk^n$ gibt, sodass $Av = \lambda v$ gilt. $v$ heißt dann \emph{Eigenvektor} zum Eigenwert $\lambda$. Er ist ein Vektor, dessen Richtung durch $A$ (d.h. einer linearen Abbildung) nicht verändert wird.
 
 	Der Eigenraum zum Eigenwert $\lambda$ ist definiert als $E_\lambda := \{x \in \fieldk^n \medspace | \medspace Ax = \lambda x \}$, d.h. die Menge aller Eigenvektoren zum Eigenwert $\lambda \cup \{0\}$. 
+	
+	\textcolor{red}{Das Eigenwert/Eigenvektorproblem ist nicht mittels Gauß Elimination lösbar, denn letzteres ändert die Eigenwerte: $Ax = \lambda x \leftrightarrow B^{-1}A = B^{-1}(\lambda x) =: \lambda y, y \neq x$}
 \end{definition}
 
 \begin{satz}[Charakteristisches Polynom]
 	Sei $A \in \fieldkntimesn$ quadratische Matrix. Dann heißt $\mathcal{X_A} = \mathcal{X}_A(x) := det(x \cdot I_n -A) \in \fieldk[X]$ \emph{charakteristisches Polynom} von $A$.
 
 	Die Eigenwerte einer quadratischen Matrix $A \in \fieldkntimesn$ sind gleich der Nullstellen des charakteristischen Polynoms von $A$. Die Gleichung resultiert also in solche $\lambda$, bei denen die Abbildung $A$ das Volumen reduziert (und damit nur skaliert)
+\end{satz}
+
+\begin{satz}[Abel-Raffini]
+	Fast alle polynome vom Grad fünf oder höher können nicht mit Radikalen/Wurzeln gelöst werden; Eine exakte Lösung ist daher im Allgemeinen nicht möglich. 
+	$\leftrightarrow$ Numerische Berechnung sind nötig
 \end{satz}
 
 \begin{definition}
@@ -541,56 +548,49 @@ Für $\phi : V \rightarrow W$ linear, $dim(V) < \infty$, $dim(W) < \infty$ gilt:
 	\end{smallmatrix} \right)$. $A$ heißt dann \emph{triagonalisierbar}.
 \end{satz}
 
-\section{Skalarprodukt}
-	\begin{definition}[Standardskalarprodukt]
-		Sei $\fieldk$ ein Körper (idr. $\fieldk = \realset$). Sei $v = (x_1 \dots x_n)^T, w = (y_1 \dots y_n)^T \in \fieldk^n$. $\langle v, w \rangle := x_1y_1 + \dots + x_ny_n = v^T \cdot w \in \fieldk$ heißt \emph{Standardskalarprodukt} von $v,w$.	Zwei Vekoren heißen \emph{senkrecht} (\emph{orthogonal}) zueinander, falls $\langle v, w \rangle = 0$. 
-		
-		Ist $U \subseteq \fieldk^n$ Unterraum, so heißt $U^{\perp} := \{ v \in \fieldk^n \medspace | \medspace \forallin{x}{U} : \langle v, x \rangle = 0 \}$ das orthogonale Komplement, Senkrect-Raum von $U$ in $\fieldk$.
-	\end{definition}
+\begin{satz}[Satz von Gershgorin]
+	Sei $A \in \complexset^{n \times n}$. Definiere Kreise um $a_{i,i}$ mit Radius $r_i := \sum_{j = 1, j \neq i}^n |a_i|$. Die Gershgorin-Scheibe sei definiert als $R_i := \{z \in \complexset \medspace | \medspace |z -a_{i,i}| \leq r_i\}$. Es gilt:\begin{itemize}[noitemsep]
+		\item Alle Eigenwerte $\lambda_i \in \complexset $ von $A$ liegen mindestens in einer Scheibe
+		\item Die Eigenwerte können auch in einer Scheibe definiert anhand der Spalten liegen
+		\item Falls die Vereinigung von $k$ Scheiben disjunkt von den anderen $n-k$ Scheiben ist, enthält diese vereinigte Scheiben genau $k$ Eigenwerte
+	\end{itemize}
 
-\begin{definition}[Vektornorm]
-	Sei $v \in \fieldk^n. |v| = ||v||_2 := \sqrt{\langle v, v \rangle} \in \realset_{\geq 0}$ heißt euklidische Länge von $v$. Allgemein definieren wir für eine Vektornorm:
-	\begin{equation*}
-		||v||_p := (\sum_{i=1}^{n} |x_i|^p)^{\frac{1}{p}}
-	\end{equation*}
-	wobei $||v||_1 = \sum_{i=1}^{n}|x_i|$ Manhattan Norm und $||v_i||_\infty := \max_{1 \leq i \leq n} |x_i|$ Maximum Norm heißt.
-\end{definition}
-
-\begin{satz}
-	Seien $v, w \in \realset^n, a \in \realset$. Es gilt:
-	
-	\begin{enumerate}[noitemsep]
-		\item $|v + w| \leq |v| + |w|, |a \cdot v| = |a| \cdot |v|$
-		\item $v \neq 0 \rightarrow |v| \neq 0$
-		\item $|\langle v, v \rangle| \leq |v| \cdot |w| $ 
-	\end{enumerate}
+	Anmerkung: $(x,y)$ liegen in der Scheibe beschrieben durch $(x - Re(a_{i,i}))^2 + (y - Im(a_{i,i}))^2 \leq r_i$
 \end{satz}
 
-\begin{definition}[Orthonormalsystem]
-	Eine Menge $S = \{ v_1, \dots, v_k \} $ heißt Orthonormalsystem, wenn $\langle v_i, v_j \rangle = \begin{cases}
-		1, & i = j \\
-		0, & i \neq j, \forallin{i,j}{\{1, \dots, k\}}
-	\end{cases}$
+  \begin{tikzpicture}
+\begin{scope}[thick,font=\scriptsize][set layers]
+\draw [->] (0,0) -- (7,0) node [above left]  {$Re\{z\}$};
+\draw [->] (0,-2) -- (0,2) node [below right] {$Im\{z\}$};
+\iffalse % Single
+\else% Multiple
+\foreach \n in {0,1,2,3,4,5,6,7}{%
+	\draw (\n,-3pt) -- (\n,3pt)   node [above] {$\n$};
+}
+\fi
+\end{scope}
+\draw[solid, purple] (3,0) circle (1);
+\draw[solid, blue] (5,0) circle (1);
+\draw[solid, orange] (4,0) circle (2);
+\node [below right,black] at (7.5,0.8) {\color{purple} $R_3 =\{z\in\mathbb{C} \medspace | \medspace |z-5|\leq 1\}$};
+\node [below right,black] at (7.5,1.2) {\color{blue} $R_2=\{z\in\mathbb{C} \medspace | \medspace |z-4|\leq 2\}$};
+\node [below right,black] at (7.5,1.6) {\color{orange} $R_1=\{z\in\mathbb{C} \medspace | \medspace |z-3|\leq 1\}$};
+\node [below right,black] at (7.5,0.2) {$A = \begin{pmatrix}
+	3 & 1 & 0 \\
+	1 & 4 & 1 \\
+	0 & 1 & 5
+	\end{pmatrix}$};
+\end{tikzpicture}
+
+\begin{definition}[Ähnlichkeitsabbildung]
+	content...
 \end{definition}
 
-\begin{satz}
-	Jedes Orthonormalsystem im $\realset^n$ ist linear unabhängig. 
-	Sei $U \subseteq \realset^n$ Unterraum, $k = dim(U), S = \{v_1,\dotsm v_k\}$ Orthonormalsystem in $U$. Dann ist $S$ Basis von $U$, genannt Orthonormalbasis von $U$. Jeder Unterraum besitzt dabei eine Orthonormalbasis (Gram-Schmidt-Verfahren)
+\begin{satz}[Erhaltung der Eigenwerte]
+	content...
 \end{satz}
 
-\begin{definition}[Orthogonale Matrizen]
-	Eine quadratische Matrix $A \in \fieldkntimesn$ heißt \emph{orthogonal}, wenn $A^T \cdot A = I_n$ bzw. $A^T = A^{-1}$. Das bedeutet, dass alle Zeilen - und Spaltenvektoren orthogonal zueinander sind. Gilt zusätzlich $||v_i||_2 = 1$ für alle $v_i$, so ist die Matrix \emph{orthonormal}.
-\end{definition}
-
-\begin{definition}[Matrixnorm]
-	Für eine Matrix $A$ definieren wir die folgenden Normen:
-	\begin{enumerate}[noitemsep]
-		\item $||A|| := \max_{||x||_2 = 1} ||Ax|| = \max_{x \in \{x \in \realset^n \medspace | \medspace ||x|| = 1\}} ||Ax||$ (max. Deformation der Normsphäre)
-		\item $||A||_2 = sup_{x \neq 0} \frac{||Ax||_2}{||x||_2}$ (Spektralnorm)
-		\item $A$ diagonal $\rightarrow ||A||_2 = \max_{1,\dots, n} |a_{i,i}|$ 
-		\item $A$ orthogonal $\rightarrow ||A||_2 = 1, det(A) = \pm 1$
-	\end{enumerate}
-\end{definition}
+\pagebreak
 
 \section{Symmetrische Matrizen}
 \begin{definition}[Symmetrische Matrix]
@@ -599,10 +599,6 @@ Für $\phi : V \rightarrow W$ linear, $dim(V) < \infty$, $dim(W) < \infty$ gilt:
 
 \begin{definition}[Hermite Matrix]
 	Eine Matrix $A \in \complexset^{n \times n}$ heißt \emph{hermitesch}, falls $A = A^T = A^H$.
-\end{definition}
-
-\begin{definition}[Unitäre Matrix]
-	Eine Matrix $A \in \complexset^{n \times n}$ heißt \emph{unitär}, falls $A = A^H = A^{-1} = I$.
 \end{definition}
 
 \begin{satz}
@@ -615,7 +611,7 @@ Für $\phi : V \rightarrow W$ linear, $dim(V) < \infty$, $dim(W) < \infty$ gilt:
 \end{satz}
 
 \begin{satz}[Spektralsatz]
-	 Sei $A \in \complexset^{n \times n}$ und $\bar{A}^T \cdot A = A \cdot \bar{A}^T$. Dann ist $A$ diagonalisierbar (für allgemeine $A$ gilt dies nicht!)
+	Sei $A \in \complexset^{n \times n}$ und $\bar{A}^T \cdot A = A \cdot \bar{A}^T$. Dann ist $A$ diagonalisierbar (für allgemeine $A$ gilt dies nicht!)
 \end{satz}
 
 \begin{definition}
@@ -641,8 +637,138 @@ Für $\phi : V \rightarrow W$ linear, $dim(V) < \infty$, $dim(W) < \infty$ gilt:
 	Wenn eine symmetrische Matrix $A \in \fieldkntimesn$  positiv definit ist, so sind ihre diagonaleinträge positiv, d.h. $\forallin{i}{1,...,n} : a_{i,i} > 0$	
 \end{satz}
 
+\begin{definition}[Minor]
+	content...
+\end{definition}
+
+\begin{satz}[Positiv Definiertheit und Minore]
+	content...
+\end{satz}
+
+\pagebreak
+
+\section{Vektor - und Matrixnormen}
+
+\begin{definition}[Vektornorm]
+	Seien $x, y \in \complexset^n, \alpha \in \complexset$. Eine Abbildung $||\cdot|| : \complexset^n \rightarrow \complexset$ heißt Vektornorm, falls:
+	
+	\begin{itemize}[noitemsep]
+		\item Positivität: $\forall x \neq 0 : ||x|| > 0, ||x|| = 0 \leftrightarrow x = 0 $
+		\item Absolute Homogenität: $||\alpha x|| = |\alpha| ||x||$
+		\item Dreiecksungleichung: $||x + y|| \leq ||x|| + ||y||$
+	\end{itemize}
+
+	Allgemein beschreibt eine Norm eine Funktion, die einem mathematischen Objekt eine Größe oder Länge zuordnet
+\end{definition}
+
+\begin{definition}[Gebräuchliche Vektornormen]
+	Übliche Vektornormen sind:
+	\begin{enumerate}[noitemsep]
+		\item Euklid'sche Norm: $||x||_2 := \sqrt{\sum_{i=1}^{n}|x_i|^2}$ (Betrag bei $x \in \complexset$ wichtig)
+		\item Maximumsnorm: $||x||_\infty := max_{i \in \{1,...,n\}} |x_i|$
+		\item 1-Norm/Manhattan-Norm: $||x||_1 := \sum_{i=1}^{n} |x_i|$
+		\item p-Norm: $||v||_p := (\sum_{i=1}^{n} |x_i|^p)^{\frac{1}{p}}$
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}[Äquivalente Normen]
+	Zwei Normen $\norm{\cdot}_a, \norm{\cdot}_b $ heißen äquivalent, falls: $\exists c, C \in \complexset : c \norm{x}_a \leq \norm{x}_b \leq C \norm{x}_a$. Anschaulich induzieren zwei äquivalente Normen die gleiche Topologie
+\end{definition}
+
+\begin{satz}[Norm-Äquivalenz]
+	Alle auf endlichdimensionalen Vektorräumen defnierte Normen sind äquivalent.
+\end{satz}
+
+\begin{definition}[Matrixnorm]
+	Seien $X, Y \in \complexset^{n \times m}, \alpha \in \complexset$. Eine Abbildung $||\cdot|| : \complexset^{n \times m} \rightarrow \complexset$ heißt Matrixnorm, falls:
+	
+	\begin{itemize}[noitemsep]
+		\item Positivität: $\forall X \neq 0 : ||X|| > 0, ||X|| = 0 \leftrightarrow X = 0 $
+		\item Absolute Homogenität: $||\alpha X|| = |\alpha| \cdot ||X||$
+		\item Dreiecksungleichung: $||X + Y|| \leq ||X|| + ||Y||$
+	\end{itemize}
+	Zusätzlich nennt man eine Matrixnorm
+	\begin{itemize}[noitemsep]
+		\item Sub-Multiplikativ, falls $\norm{X \cdot Y} \leq \norm{X} \cdot \norm{Y}$
+		\item konsistent mit Vektornorm $\norm{\cdot}_p$, falls $\norm{X v}_p \leq \norm{X} \cdot \norm{p}_p$		
+	\end{itemize}
+\end{definition}
+
+\begin{definition}[Induzierte Matrixnorm]
+	Eine Matrixnorm induziert durch die Vektornorm $\norm{\cdot}_p$ ist definiert als $\norm{A}_p := sup_{\norm{x} = 1}\norm{Ax}_p$. Beispiele sind:
+	\begin{itemize}[noitemsep]
+		\item $\norm{x}_1 \rightarrow \norm{A}_1 = max_{j=1,...,m} \sum_{i = 1}^n |a_{i,j}|$ (Größte Spaltensumme)
+		\item $\norm{x}_2 \rightarrow \norm{A}_2 = max_{\norm{x}=1} \norm{Ax}_2 = \sqrt{\lambda_{max}(A^HA)} \overset{A^H = A}{=} \norm{A}_2 = \rho(A) = max_{1 \leq i \leq n}|\lambda_i|$ (Spektralnorm)	
+		\item $\norm{x}_\infty \rightarrow \norm{A}_\infty = max_{i=1,...,m} \sum_{i = 1}^n |a_{i,j}|$ (Größte Reihensumme)
+		\item Beispiel für nicht-induzierte Norm, aber sub-multiplikativ: \\ $\norm{A}_F = \sqrt{\sum_{i = 1}^n, \sum_{j = 1}^m |a_{i,j}|}$ (Frobenius Norm)
+	\end{itemize}
+\end{definition}
+
+\pagebreak
+
+\section{Skalarprodukt}
+
+\begin{definition}[Skalarprodukt]
+	Sei $X = \fieldk^n$ ein Vektorraum. Eine Abbildung $\inner{\cdot}{\cdot}$ heißt Skalarprodukt über $X$, falls $\forallin{x,y,z}{X}, \forallin{\alpha}{\fieldk}$ gilt:
+	
+	\begin{enumerate}[noitemsep]
+		\item Positivität: $\inner{x}{x} \leq 0, \inner{x}{x} = 0 \leftrightarrow x = 0$
+		\item Linearität: $\inner{x + \alpha y}{z} = \inner{x}{z} + \alpha \inner{y}{z}$
+		\item  Symmetrie: $\inner{x}{y} = \bar{\inner{y}{x}}$
+	\end{enumerate}
+\end{definition}
 
 
+\begin{definition}[Standardskalarprodukt]
+	Sei $\fieldk$ ein Körper (idr. $\fieldk = \realset$). Sei $v = (x_1 \dots x_n)^T, w = (y_1 \dots y_n)^T \in \fieldk^n$. $\langle v, w \rangle := x_1y_1 + \dots + x_ny_n = v^T \cdot w \in \fieldk$ heißt \emph{Standardskalarprodukt} von $v,w$.	Zwei Vekoren heißen \emph{senkrecht} (\emph{orthogonal}) zueinander, falls $\langle v, w \rangle = 0$. 
+	
+	Ist $U \subseteq \fieldk^n$ Unterraum, so heißt $U^{\perp} := \{ v \in \fieldk^n \medspace | \medspace \forallin{x}{U} : \langle v, x \rangle = 0 \}$ das orthogonale Komplement, Senkrect-Raum von $U$ in $\fieldk$.
+\end{definition}
 
+
+\begin{definition}[Orthonormalsystem]
+	Eine Menge $S = \{ v_1, \dots, v_k \} $ heißt Orthonormalsystem, wenn $\langle v_i, v_j \rangle = \begin{cases}
+		1, & i = j \\
+		0, & i \neq j, \forallin{i,j}{\{1, \dots, k\}}
+	\end{cases}$
+\end{definition}
+
+\begin{satz}
+	Jedes Orthonormalsystem im $\realset^n$ ist linear unabhängig. 
+	Sei $U \subseteq \realset^n$ Unterraum, $k = dim(U), S = \{v_1,\dotsm v_k\}$ Orthonormalsystem in $U$. Dann ist $S$ Basis von $U$, genannt Orthonormalbasis von $U$. Jeder Unterraum besitzt dabei eine Orthonormalbasis (Gram-Schmidt-Verfahren)
+\end{satz}
+
+\begin{definition}[Orthogonale Matrizen]
+	Eine quadratische Matrix $A \in \fieldkntimesn$ heißt \emph{orthogonal}, wenn $A^T \cdot A = I_n$ bzw. $A^T = A^{-1}$. Das bedeutet, dass alle Zeilen - und Spaltenvektoren orthogonal zueinander sind. Gilt zusätzlich $||v_i||_2 = 1$ für alle $v_i$, so ist die Matrix \emph{orthonormal}.
+\end{definition}
+
+
+\begin{definition}[Unitäre Matrix]
+	Eine komplexe quadratische Matrix $A \in \complexset^{n \times n}$ heißt \emph{unitär}, falls $A = A^H = A^{-1} = I$. Bemerkung: Alle reellen orthogonalen Matrizen sind unitär.
+\end{definition}
+
+\begin{definition}[Normale Matrix]
+	Eine Matrix $A \in \complexset^{n \times n}$ heißt normal genau dann wenn $AA^H = A^HA$. Alle unitären Matrizen sind normal.
+\end{definition}
+
+\pagebreak
+
+\section{Besondere Vektorräume}
+
+\begin{definition}[Banach-Raum]
+	Ein Vektorraum $X$ zusammen mit einer Norm $\norm{\cdot}$ heißt Banach-Raum, falls:
+	\begin{itemize}
+		\item ...
+	\end{itemize}
+\end{definition}
+
+
+\begin{definition}[Pre-Hilbert-Raum]
+	content...
+\end{definition}
+
+\begin{definition}[Hilbert-Raum]
+	content...
+\end{definition}
 
 

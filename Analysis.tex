@@ -496,6 +496,10 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 	\end{multicols}
 \end{definition}
 
+\begin{definition}[Hyperbolische Funktionen]
+	content...
+\end{definition}
+
 \section{Komplexe Zahlen}
 
 \begin{definition}
@@ -794,8 +798,8 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 \end{satz}
 
 \begin{satz}[Taylor'sche Formel mit Restglied] 
-	Eine weitere Darstellung der Taylor'schen Formel ist:
-	$T_{n}f(x; h) = \sum_{k = 0}^n \frac{f^{(k)}(h)}{k!} \cdot (x \pm h)^k + \frac{(x \pm h)^{(n + 1)}}{(n + 1)!} \cdot f^{n + 1}(\xi) $
+	Eine weitere Darstellung der Taylor'schen Formel an der Stelle $h$ ist:
+	$T_{n}f(x; h) = \sum_{k = 0}^n \frac{f^{(k)}(h)}{k!} \cdot (x - h)^k + \frac{(x - h)^{(n + 1)}}{(n + 1)!} \cdot f^{n + 1}(\xi) $ 
 \end{satz}
 
 \begin{tikzpicture}
@@ -923,8 +927,12 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 \end{definition}
 
 \begin{definition}[partielle Ableitung]
-	Betrachte $\function{f}{\realset^n}{\realset} : (\suboneton{x}) \mapsto f(\suboneton{x}) \in \realset$. Ist die Funktion $\function{f}{\realset}{\realset} : \xi \mapsto f(x_1, \dots, x_{k-1}, \xi, x_{k+1}, \dots, x_n)$ differenzierbar, heißt ihre Ableitung an der Stelle $x_k$ partielle Ableitung. Wir schreiben $\frac{\partial f}{\partial x_k}$ bzw. $\partial_k f(x)$. Der Vektor $\nabla f(x) = grad(f(x)) = (\partial_1 f(x) \dots \partial_n f(x))^T$ heißt Gradient.
+	Betrachte $\function{f}{\realset^n}{\realset} : (\suboneton{x}) \mapsto f(\suboneton{x}) \in \realset$. Ist die Funktion $\function{f}{\realset}{\realset} : \xi \mapsto f(x_1, \dots, x_{k-1}, \xi, x_{k+1}, \dots, x_n)$ differenzierbar, heißt ihre Ableitung an der Stelle $x_k$ partielle Ableitung. Wir schreiben $\frac{\partial f}{\partial x_k}$ bzw. $\partial_k f(x)$. Alternative Notationen sind: $f_{x_1}(x) := \partialf{f(x)}{x_1}$ oder $f_{x_1x_2}(x) := \partialf{^2 f(x)}{x_1 \partial x_2} = \frac{\partial}{\partial x_1}(\partialf{f(x)}{x_2})$ Der Vektor $\nabla f(x) = grad(f(x)) = (\partial_1 f(x) \dots \partial_n f(x))^T$ heißt Gradient.
 \end{definition}
+
+\begin{satz}[Satz von Schwarz]
+	Für zweimal stetig differenzierbare Functionen $f \in C^2$ gilt: $\partialf{^2f}{x \partial y} = \partialf{^2f}{y \partial x}$
+\end{satz}
 
 \begin{definition}
 	Die Matrix $Hf(x) := (\partial_j \partial_i f(x))_{1 \leq i \leq j \leq n}$ heißt \emph{Hesse-Matrix}.
@@ -953,8 +961,6 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 		\item Skalar nach Matrix: $f : \mathbb{R}^{n \times m} \rightarrow \realset : A \in \realset^{m \times n} \mapsto f(A) \in \realset \Rightarrow \nabla f(A) = (\frac{\partial f(A)}{\partial A_{i, j}})$   
 	\end{itemize}
 \end{definition}
-
-\pagebreak
 
 \begin{definition}[Totale Ableitung/Materialableitung]
 	Das Totale Differential beschreibt die Änderung in einer kleinen Umgebung eines Punktes $p$. Sei $\f{\realset^n}{\realset}$ total differenzierbar:
@@ -1009,7 +1015,7 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 	\end{align*}
 \end{satz}
 
-
+\section{Integralrechnung mehrere Veränderlicher}
 
 \pagebreak
 
@@ -1057,6 +1063,8 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 \begin{definition}[Anfangswertproblem]
 	Setze $y(0)$ und löse nach den verbleibenden Konstanten. Erstelle neue Lösung mit konkreten Werten der konstanten.
 \end{definition}
+
+\section{Partielle Differentialgleichungen}
 
 \pagebreak
 

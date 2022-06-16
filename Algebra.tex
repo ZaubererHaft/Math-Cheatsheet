@@ -549,7 +549,7 @@ Für $\phi : V \rightarrow W$ linear, $dim(V) < \infty$, $dim(W) < \infty$ gilt:
 \end{satz}
 
 \begin{satz}[Satz von Gershgorin]
-	Sei $A \in \complexset^{n \times n}$. Definiere Kreise um $a_{i,i}$ mit Radius $r_i := \sum_{j = 1, j \neq i}^n |a_i|$. Die Gershgorin-Scheibe sei definiert als $R_i := \{z \in \complexset \medspace | \medspace |z -a_{i,i}| \leq r_i\}$. Es gilt:\begin{itemize}[noitemsep]
+	Sei $A \in \complexset^{n \times n}$. Definiere Kreise um $a_{i,i}$ mit Radius $r_i := \sum_{j = 1, j \neq i}^n |a_{i, j}|$. Die Gershgorin-Scheibe sei definiert als $R_i := \{z \in \complexset \medspace | \medspace |z -a_{i,i}| \leq r_i\}$. Es gilt:\begin{itemize}[noitemsep]
 		\item Alle Eigenwerte $\lambda_i \in \complexset $ von $A$ liegen mindestens in einer Scheibe
 		\item Die Eigenwerte können auch in einer Scheibe definiert anhand der Spalten liegen
 		\item Falls die Vereinigung von $k$ Scheiben disjunkt von den anderen $n-k$ Scheiben ist, enthält diese vereinigte Scheiben genau $k$ Eigenwerte
@@ -558,9 +558,9 @@ Für $\phi : V \rightarrow W$ linear, $dim(V) < \infty$, $dim(W) < \infty$ gilt:
 	Anmerkung: $(x,y)$ liegen in der Scheibe beschrieben durch $(x - Re(a_{i,i}))^2 + (y - Im(a_{i,i}))^2 \leq r_i$
 \end{satz}
 
-  \begin{tikzpicture}
+  \begin{tikzpicture}[scale=0.85]
 \begin{scope}[thick,font=\scriptsize][set layers]
-\draw [->] (0,0) -- (7,0) node [above left]  {$Re\{z\}$};
+\draw [->] (0,0) -- (7,0) node [above left]  {$\medspace \medspace Re\{z\}$};
 \draw [->] (0,-2) -- (0,2) node [below right] {$Im\{z\}$};
 \iffalse % Single
 \else% Multiple

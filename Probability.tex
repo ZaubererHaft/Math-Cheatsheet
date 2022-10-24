@@ -45,7 +45,7 @@
 \begin{satz}[Multiplikationssatz]
 	Für Ereignisse $A_1, \dots, A_n, Pr[A_1 \cap, \dots ,\cap A_n] > 0$ gilt:
 	\begin{align*}
-		Pr[A_1 \cap, \dots ,\cap A_n] = Pr[A_1]  \cdot Pr[A_2 | A_1] \cdot Pr[A_2|A_1] \cdot Pr[A_3 | A_1 \cap A_2] \cdot  \dots \cdot Pr[A_n | A_1 \cap \dots A_n] 
+		Pr[A_1 \cap, \dots ,\cap A_n] = Pr[A_1]  \cdot Pr[A_2 | A_1] \cdot Pr[A_2|A_1] \cdot Pr[A_3 | A_1 \cap A_2] \cdot  ... \\ \cdot Pr[A_n | A_1 \cap \dots A_n] 
 	\end{align*}
 \end{satz}
 
@@ -58,20 +58,221 @@
 	\begin{align*}
 		Pr[A_i | B] = \frac{Pr[A_i \cap B]}{Pr[B]} = \frac{Pr[B | A_i] \cdot Pr[A_i]}{\sum_{j=1}^n Pr[B | A_j] \cdot Pr[A_j]}
 	\end{align*}
-	
 \end{satz}
+
+\begin{definition}[Unabhängigkeit von Ereignissen]
+	Ereignisse $A, B$ heißen unabhjängig wenn $\prob{A \cap B} = \prob{A} \cdot \prob{B}$
+\end{definition}
+
+\begin{definition}[Zufallsvariable]
+	Eine Zufallsvariable ist eine Abbildung $\function{X}{\Omega}{\realset}$. $W_X := X(\Omega)$ ist die Bildmenge oder Wertemenge. Zufallsvariablen sind also im Wesentlichen eine Kurzschreibweise für bestimmte Ereignisse.
+	\begin{itemize}[noitemsep]
+		\item Wir schreiben $\prob{X = x_i}$ für das Ereignis $\prob{\inv{X}(x_i)} = \prob{\{A \medspace | \medspace X(A) = x_i\}}$
+		\item $f_X(x) := \prob{X = x}$ heißt Dichtefunktion
+		\item $F_X(x_i) := \prob{X \leq x_i} = \sum_{x \in W_X, x \leq x_i} \prob{X = x}$ heißt Verteilungsfunktion
+	\end{itemize} 
+\end{definition}
+
+\begin{definition}[Unabhängigkeit von Zufallsvariablen]
+	Zwei Zufallsvariablen $X,Y$ heißen unabhängig, wenn $f_{X,Y}(x,y) = f_X(x) \cdot f_Y(y) \leftrightarrow F_{X,Y}(x,y) = F_X(x) \cdot F_Y(y)$
+\end{definition}
+
+\begin{definition}[Randdichte zweier Zufallsvariablen]
+	Seien $X,Y$ Zufallsvariablen.
+	$f_X(x) = \sum_{y \in W_Y} f_{X,Y}(x,y)$
+\end{definition}
+
+\begin{definition}[Randverteilung zweier Zufallsvariablen]
+	Seien $X,Y$ Zufallsvariablen.
+	$F_X(x) = \sum_{x' \leq X} f_X(x') = \sum_{x' \leq X} \sum_{y \in W_Y} f_{X,Y}(x',y)$
+	wobei
+	\begin{itemize}[noitemsep]
+		\item $f_{X,Y}(x,y) = \pr{X = x, Y = y}$ gemeinsame Dichte
+		\item $F_{X,Y}(x,y) = \pr{X \leq x, Y \leq y}$ gemeinsame Verteilung
+	\end{itemize}
+\end{definition}
+
+\begin{definition}[Faltung (zusammengesetzte Zufallsvariablen)]
+	Seien $Z = X + Y$, $X,Y$ unabhängig.
+	$f_Z(z) = \sum_{x \in W_X} f_X(x)f_Y(z-x)$
+\end{definition}
+
+
+\begin{definition}[Abschätzen von Erwartungswert und Varianz]
+	Für kontinuierliche bzw. diskrete Erwartungswerte und Varianz gilt
+	$\expec{Z^2} = \var{Z} + \expec{Z}^2 \geq \expec{Z}^2$
+\end{definition}
 
 \pagebreak
 	
 \section{Diskret}
 
+\begin{definition}[Erwartungswert]
+	Der Erwartungswert ist der Mittelwert, wenn  ein Zufallsexperiment unendlich oft wiederholt wird. Er gibt an, mit welchem Wert man auf lange Sicht bei einem Zufallsexperiment rechnen kann.
+	Der diskreter Erwartungswert ist definiert als
+	\begin{align*}
+		\expec{X} = \mu := \sum_{x \in W_X} x \cdot \pr{X = x}
+	\end{align*}
+	Eigenschaften:
+	\begin{itemize}[noitemsep]
+		\item $\sum_{x \in W_X} |x| \cdot \pr{X = x}$ konvergiert
+		\item Linearität: $\expec{a_1x_1 + ... + a_nx_n} = a_1\expec{x_1} + ... + a_n \expec{x_n}$
+		\item Multiplikativität: $\suboneton{X}$ unabhängig $\rightarrow \expec{X_1 \cdot ... \cdot X_n} = \expec{X_1} \cdot ... \cdot \expec{X_n} $ 
+		\item Monotonie: $\forallin{\omega}{\Omega} : X(\omega) \leq Y(\omega) \rightarrow \expec{X} \leq \expec{Y}$
+		\item Totalität: $A_i$ paarweise disjunkt mit $A_1 \cup ... \cup A_n = \Omega, \pr{A_i} > 0$. $\rightarrow \expec{X} = \sum_{i = 1}^n \expec{X | A_i} \cdot \pr{A_i}$
+	\end{itemize}
+\end{definition}
+
+
+\begin{definition}[Varianz und Standardabweichung]
+	Die Varianz ist ein Streuungsparameter und bezeichnet die mittlere quadratische Abweichung vom \\ Erwartungswert. Die diskrete Varianz ist definiert als
+	\begin{align*}
+	\var{X} = \sigma^2 := \expec{(X - \mu)^2} = \sum_{x \in W_x} (x - \mu )^2 \cdot \pr{X = x}
+	\end{align*}.
+	Die Größe $\sigma = \sqrt{\var{X}}$ heißt Standardabweichung von $X$.
+	
+	Eigenschaften:
+	\begin{itemize}[noitemsep]
+		\item Additivität: $X_1, ..., X_n$ unabhängig $\rightarrow \var{X_1 + ... + X_n} = \var{X_1} + ... + \var{X_n}$
+		\item Linearität: $\var{aX + b} = a^2 \cdot \var{X}$
+	\end{itemize}
+\end{definition}
+
+\begin{definition}[Bernoulli Verteilung]
+	Sei $X$ eine Zufallsvariable mit $W_X = \{0, 1\}$.
+	\begin{align*}
+		f_X(x) = \begin{cases} p &, x = 1 \\ 1 - p &, x = 0\end{cases}, \medspace \expec{X} = p, \medspace \var{X} = p \cdot (1 - p)
+	\end{align*}
+\end{definition}
+
+\begin{definition}[Binomial Verteilung]
+	Sei $X$ eine Zufallsvariable mit $X=X_1 + ... + X_n$ Summe $n$ unabhängiger Bernoulli verteilten Zufallsvariablen.
+	\begin{align*}
+	f_X(x) = \binom{n}{x} p^x (1-p)^{n-x}, \medspace \expec{X} = np, \medspace \var{X} = np(1-p)
+	\end{align*}
+	Wir schreiben $X \sim Bin(n,p)$. Für $Z = X + Y, X \sim Bin(nx, p), Y \sim Bin(ny, p)$ gilt $Z \sim Bin(nx + ny, p)$ 
+\end{definition}
+
+\begin{definition}[Geometrische Verteilung]
+	Die geometrische Verteilung drückt die Wahrscheinlichkeit aus, dass $i$ Bernoulli erfolglos sind, aber der $i+1$ erfolgreich ist. 
+	\begin{align*}
+	f_X(i) &= p(1-p)^i, i \in \naturalset, \expec{X} = \frac{1}{p}, \var{X} = \frac{1 - p}{p^2} \\
+	&\rightarrow \pr{X > i} = (1-p)^i \\
+	&\rightarrow \expec{X - i | X > i} = \expec{X} \\
+	&\rightarrow \pr{X > y + x | X > x} = \pr{X > y}
+	\end{align*}
+\end{definition}
+
+\begin{definition}[Poisson Verteilung]
+	Bei der Poisson Verteilung ist bekannt, dass im Mittel $\lambda$ viele auftreten. Wie hoch ist die Wahrscheinlichkeit, dass $i$ auftreten? Wir schreiben $X \sim Po(\lambda)$.
+	\begin{align*}
+		f_X(i) = \frac{e^{-\lambda \cdot \lambda^i}}{i!}, \medspace \expec{X} = \lambda, \medspace \var{X} = \lambda
+	\end{align*}
+	Es gilt: $X \sim Bin(n,p) \overset{n \rightarrow \infty}{\rightarrow} Po(\lambda)$
+\end{definition}
+
+\begin{satz}[Abschätzen von Wahrscheinlichkeiten]
+	Zum Abschätzen von \\ Wahrscheinlichkeiten gelten die folgenden Ungleichungen
+	\begin{itemize}[noitemsep]
+		\item Markov: $\pr{X \geq t} \leq \frac{\expec{X}}{t}$
+		\item Chebychev: $\pr{|X - \expec{X}| \geq t} \leq \frac{\var{X}}{t^2}$
+		\item Chernoff: $X \sim Bin, \mu := \expec{X}, \delta > 0$.
+			\begin{align*}
+				&\rightarrow \pr{X \geq (1 + \delta) \mu} \leq (\frac{e^\sigma}{(1+\delta)^{1+\delta}})^\mu \\
+				&\rightarrow \pr{X \leq (1 + \delta) \mu} \leq (\frac{e^\sigma}{(1-\delta)^{1-\delta}})^\mu, \delta \in (0,1)
+			\end{align*}
+	\end{itemize}
+\end{satz}
+
+\begin{definition}[Wahrscheinlichkeitserzeugende Funktion]
+	Die Wahrscheinlichkeitserzeugende Funktion zu einer Zufallsvariable $X$ mit $W_X \subseteq \naturalset_0$ berechnet die Momente einer Zufallsvariable 
+	
+	\begin{align*}
+		G_X(s) &= \sum_{x \in W_X} \pr{X = k} \cdot x \overset{W_X \subseteq \naturalset_0}{=} \sum_{k=0}^{\infty}\pr{X = k} \cdot s^k =: \expec{s^X} \\
+		\text{Folgerungen:} \\
+	    \rightarrow G_X(1) &= 1, \rightarrow G'_X(1) = \expec{X} \\
+	    \rightarrow G''_X(1) &+ G'_X(1) - G'_X(1)^2 = \var{X}
+	\end{align*}
+\end{definition}
+
+\begin{definition}[Momenterzeugende Funktion]
+	Momenterzeugende Funktionen sind definiert als
+	\begin{align*}
+		M_X(s) := \expec{e^{Xs}} = G_X(e^s)
+	\end{align*}
+\end{definition}
+
 \pagebreak
+
+\begin{satz}[Wichtige wahrscheinlichkeitserzeugende Funktionen]
+	Zu bekannten Verteilungen lassen sich die folgenden wahrscheinlichkeitserzeugende Funktionen finden:
+	\begin{itemize}[noitemsep]
+		\item Bernoulli: $G_X(s) = 1 - p + ps$		
+		\item Binomial:  $G_X(s) = (1 - p + ps)^n$
+		\item Geometrisch: $G_X(s) = \frac{ps}{1 - (1 - p)^s}$
+		\item Poisson: $G_X(s) = e^{\lambda(s - 1)}$
+	\end{itemize}
+\end{satz}
+
+\begin{satz}[Erzeugende Funktion einer Summe]
+	Seien $\suboneton{X}$ unabhängig, $Z := X_1 + ... + X_n$. Dann gilt:
+	\begin{align*}
+		G_Z(s) &= G_{X_1}(s) \cdot ... \cdot G_{X_n}(s) \\		
+		M_Z(s) &= M_{X_1}(s) \cdot ... \cdot M_{X_n}(s) \\
+	\end{align*}
+\end{satz}
+
+\begin{definition} [Hypergeometrische Verteilung]
+	Sei $a+b$ die Grundgesamtheit, $b$ die für das Ergebnis günstigen. Sei $r$ die Größe der entnommenen Stichprobe, $x$ die Anzahl der Elemente in $b$. Dann gilt
+	
+	\begin{align*}
+	 \pr{X = x} =	\frac{\binom{b}{x} \binom{a}{r-x} }{\binom{a + b}{r}}
+	\end{align*}
+	
+\end{definition}
 
 \section{Kontinuierlich}
 
+\begin{definition}[Kontinuierliche Zufallsvariable]
+	$X$ ist eine kontinuierliche Zufallsvariable mit Dichte $f_X$, falls $\int_{- \infty}^{+ \infty} f_X(x) dx = 1$.
+    Ein Ereignis $A$ tritt dabei ein, wenn $X$ einen Wert aus $A$ annimmt:
+    $\pr{A} = \int_A f_X(x) dx$
+\end{definition}
+
+\begin{definition}[Zusammenhan Dichte und Verteilung]
+	Für die kontinuierliche Verteilungsfunktion gilt: $F_X(x) = \int_{- \infty}^x f_X(t)dt$. Sie muss:
+	\begin{itemize} [noitemsep]
+		\item monoton und stetig sein sowie
+		\item $\lim_{x \rightarrow -\infty}F_X(x) = 0, \lim_{x \rightarrow \infty}F_X(x) = 1$
+	\end{itemize}
+	Dann ist $f_X(x) = F'_X(x)$
+\end{definition}
+
+\begin{definition}[Kontinuierlicher Erwartungswert]
+	Der kontinuierliche Erwartungswert ist definiert als 
+	\begin{align*}
+		\expec{X} := \int_{- \infty}^{+ \infty} t \cdot f_X(t) dt
+	\end{align*}
+	Er existiert dabei, falls $ \int_{- \infty}^{+ \infty} |t| \cdot f_X(t) dt$ konvergiert. Es gelten die gleichen Regeln wie für den diskreten Erwartungswert.
+\end{definition}
+
+\begin{definition}[Kontinuierliche Varianz]
+	Die kontinuierliche Varianz ist definiert als 
+	\begin{align*}
+	\var{X}:= \int_{- \infty}^{+ \infty} (t - \expec{X}) \cdot f_X(t) dt = \expec{X^2} - \expec{X}^2 = \expec{(X - \expec{X})^2}
+	\end{align*}
+	Es gelten die gleichen Regeln wie für die diskrete Varianz.
+\end{definition}	
+
+\begin{definition}[Gemeinsame Dichte/Verteilung]
+	content...
+\end{definition}
+
 \pagebreak
 
-\section{Statistik}
+\section{Deskriptive Statistik}
+
+\section{Induktive Statistik}
 
 \pagebreak
 

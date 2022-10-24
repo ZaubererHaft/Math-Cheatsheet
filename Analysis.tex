@@ -377,7 +377,7 @@ Sinus und Kosinus beschreiben die Länge der Ankathete bzw. Gegenkathete im Einh
 \end{multicols}
 
 \begin{definition}[Skalarprodukt in geometrischer Definition]
-	Das Skalarprodukt ordnet zwei Vektoren $a,b$ ein Skalar zu, das die Ähnlichkeit der Richtung beschreibt (, d.h. $0$ = identisch, $1$ = senkrecht).
+	Das Skalarprodukt ordnet zwei Vektoren $a,b$ ein Skalar zu, das die Ähnlichkeit der Richtung beschreibt (, d.h. $1$ = identisch, $0$ = senkrecht).
 	\begin{equation*}
 	\langle a, b \rangle = |a| \cdot |b| \cdot cos(\alpha) = a^2 + b^2
 	\end{equation*}
@@ -488,16 +488,45 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 			\addlegendentry{$arctan (x)$}
 			\end{axis}
 		\end{tikzpicture}
-			\begin{description}[noitemsep]
-				\item $arcsin : [-1,1] \rightarrow [0, \pi] : x \mapsto sin^{-1}(x) $
-				\item $arccos : [-1,1] \rightarrow [-\frac{\pi}{2},\frac{\pi}{2}] : x \mapsto cos^{-1}(x) $
-				\item $arctan : \realset \rightarrow [-\frac{\pi}{2},\frac{\pi}{2}] : x \mapsto tan^{-1} $
-			\end{description}
+		\begin{description}[noitemsep]
+			\item $arcsin : [-1,1] \rightarrow [0, \pi] : x \mapsto sin^{-1}(x) $
+			\item $arccos : [-1,1] \rightarrow [-\frac{\pi}{2},\frac{\pi}{2}] : x \mapsto cos^{-1}(x) $
+			\item $arctan : \realset \rightarrow [-\frac{\pi}{2},\frac{\pi}{2}] : x \mapsto tan^{-1} $
+		\end{description}
 	\end{multicols}
 \end{definition}
 
 \begin{definition}[Hyperbolische Funktionen]
-	content...
+	
+	Der hyperbolische Sinus, Kosinus und Tangens kann definiert werden als:
+\begin{multicols}{2}	
+	\begin{tikzpicture}[scale=0.9]
+		\begin{axis}[
+		xmin=-6, xmax=6,
+		ymin=-6, ymax=6,
+		axis lines=center,
+		axis on top=true,
+		domain=-6:6,
+		ylabel=$y$,
+		xlabel=$x$,
+		scale=0.8,
+		grid=both,
+		legend pos=south east
+		]
+		\addplot [mark=none,draw=blue] {sinh(\x)};
+		\addlegendentry{$sinh (x)$}
+		\addplot [mark=none,draw=red] {cosh(\x)};
+		\addlegendentry{$cosh (x)$}
+		\addplot [mark=none,draw=magenta] {tanh(\x)};
+		\addlegendentry{$tanh (x)$}
+		\end{axis}
+	\end{tikzpicture}
+		\begin{description}[noitemsep]
+		\item $sinh : \realset \rightarrow \realset : x \mapsto \frac{e^x - e^{-x}}{2} $
+		\item $cosh : \realset \rightarrow [1,\infty) : x \mapsto \frac{e^x + e^{-x}}{2} $
+		\item $tanh : \realset \rightarrow [-1, 1] : x \mapsto \frac{sinh(x)}{cosh(x)} = \frac{e^x- e^{-x}}{e^x + e^{-x}} $
+		\end{description}
+\end{multicols}
 \end{definition}
 
 \section{Komplexe Zahlen}
@@ -620,6 +649,8 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 \begin{satz}[Ableitung der Umkehrfunktion]
 	Sei $\f{I \subseteq \realset}{J \subseteq \realset} $ bijektiv und differenzierbar in $y_0$. Dann ist $f^{-1} : J \rightarrow I$ differenzierbar in $y_0$ und $(f^{-1})'=\frac{1}{f'(f^{-1}(y_0))}$
 \end{satz}
+
+
 
 \begin{satz}[Elementare Ableitungen]
 	Es gelten folgende Ableitungen:
@@ -793,13 +824,24 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 	Funktionsdarstellungen der Form $f(x) = \serieskzeroinfty{a}x^k, |x| < r$ nennt man Entwicklung von $f$ in eine Potenzreihe. Die größtmögliche Gültigkeitsschranke für Konvergenz nennt man Konvergenzradius der Potenzreihe.
 \end{definition}
 
-\begin{satz}[Taylor'sche Formel]
-	Sei $\epsilon > 0, \f{(a-\epsilon, a +\epsilon)}{\realset}$ n-mal stetig differenzierbar. $f(x+h) = \sum_{k = 0}^n \frac{f^{(k)}(x)}{k!} \cdot h^k + o(h^n)$ für $h \rightarrow 0$. $T_{n}f(x; h) = \sum_{k = 0}^n \frac{f^{(k)}(x)}{k!} \cdot h^k$ heißt Taylorpolynom von $f$ in einer Umgebung um $x$. 
-\end{satz}
+\begin{satz}[Taylor'sche Formel]	
+	Sei $f $ n+1-mal stetig differenzierbar. Wir definieren die folgenden Taylorentwicklungen um den Punkt $a \in \realset$:
+	
+	\begin{itemize}[noitemsep]
+		\item $f(x) =  \sum_{k = 0}^n \frac{f^{(k)}(a)}{k!} \cdot (x - a)^k + R_{n+1}$
+		\item $f(x + a) = \sum_{k = 0}^n \frac{f^{(k)}(x)}{k!} \cdot a^k + R_{n+1}$
+		\item $f(x - a) = \sum_{k = 0}^n \frac{f^{(k)}(x)}{k!} \cdot (-a)^k + R_{n+1}$
+	\end{itemize}
 
-\begin{satz}[Taylor'sche Formel mit Restglied] 
-	Eine weitere Darstellung der Taylor'schen Formel an der Stelle $h$ ist:
-	$T_{n}f(x; h) = \sum_{k = 0}^n \frac{f^{(k)}(h)}{k!} \cdot (x - h)^k + \frac{(x - h)^{(n + 1)}}{(n + 1)!} \cdot f^{n + 1}(\xi) $ 
+	$R_n$ bezeichnet dabei den Fehler bzw. das Restglied in de Entwicklung. Es kann angegeben werden mit:
+	
+	\begin{itemize}[noitemsep]
+		\item $R_{n+1} := \frac{(x - a)^{(n + 1)}}{(n + 1)!} \cdot f^{(n + 1)}(\xi)$ (Lagrange Restglied)
+		\item $R_{n+1} := \frac{1}{n!} \int_{a}^{x} (x - t)^nf^{(n+1)}(t)dt$ (Cauchy Restglied)
+	\end{itemize}
+
+	Gleichzeitig gilt: $R_{n+1} \in \BigO{a^{n+1}}$
+
 \end{satz}
 
 \begin{tikzpicture}
@@ -914,25 +956,163 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 		\end{cases}$
 \end{satz}
 
+\begin{definition}[Lebesgue-Integral]
+	content...
+\end{definition}
+
+\pagebreak
+
+\section{Verallgemeinerungen für mehrere Veränderliche}
+
+\begin{definition}[Punktmenge]
+	Teilmengen der reellen Zahlen $X \subseteq \realset^n$ werden Punktmengen genannt. Elemente von $x \in X$ heißen auch Punkte
+
+	Für eine reele Zahl $\epsilon \in \realset$ und einen Punkt $x \in \realset^n$ heißt die Menge $U(x)_\epsilon := \{ y \in \realset^n | \norm{x - y} \leq \epsilon \}$ $\epsilon$ - Umgebung von $x$ bzgl. der Norm.
+\end{definition}
+
+\begin{definition}[Beschränktheit]
+	Eine Menge $M \subseteq \realset^n$ heißt beschränkt, falls es eine $\epsilon$ - Umgebung um $0$ gibt, die $M$ enthält: $M \subseteq U_\epsilon(0)$. Dies ist äquivalent dazu, dass der Abstand zweier beliebiger Punkte in $M$ beschränkt ist: $\forallin{x,y}{M} : \norm{x - y} < \epsilon$
+\end{definition}
+
+\begin{definition}[Punktfolge]
+	Eine Abbildung $\function{\phi}{\naturalset}{\realset^n}$ heißt auch Punktfolge. Man schreibt für die Glieder der Punktfolge hochgestellte Indices: $x^k = (x_1^k, ..., x_n^k)$, für die Folge selbst schreibt man $(x^k)$. Eine Punktfolge heißt beschränkt, wenn ihre Wertemenge $\{ x^k | k \in \naturalset \}$ beschränkt ist.
+\end{definition}
+
+
+\begin{definition}[Grenzwerte]
+	$a \in \realset^n$ heißt Grenzwert der Folge $(x^k)$, falls \\ $\lim_{k \rightarrow \infty} \norm{x^k - a} = 0$. Die Folge heißt dann auch konvergent. Besitzt eine Punktfolge keinen endlichen Grenzwert, so heißt sie divergent.
+	Bei konvergenten Folgen liegen in jeder $\epsilon$ Umgebung von $g$ fast alle Folgenglieder und nur endlich viele außerhalb. Eine Punktfolge konvergiert nur dann, wenn sie kompontenweise konvergiert.
+\end{definition}
+
+\begin{definition}[Funktion mehrerer Veränderlicher]
+	Bei Funktionen mehrerer Veränderlicher ist der Definitionsbereich $D$ eine Teilmenge des $\realset^n$. Sie ordnet 
+	jedem Punkt $x \in D \subseteq \realset^n$ eine relle Zahl zu: $\f{D \subseteq \realset^n}{\realset}$. Man nennt solche Funktionen auch skalares Feld (jeden Punkt in einem Raum wird ein skalar zugeordnet). 
+	
+	Ein skalares Feld $f$ heißt auf $E \subseteq D$ nach oben (unten) beschränkt, falls $f(E) = \{f(x) | x \in E\} \subseteq \realset$  nach oben (unten) beschränkt ist.´ 
+\end{definition}
+
+\begin{definition}[Grenzwert von skalarer Feldern]
+	Eine Funktion $\f{D \subseteq \realset^n}{\realset}$ sei in der Umgebung von $x_0 = (x_1, ..., x_n) \in D$ definiert (aber nicht zwansweise an $x^0 $selbst. $f$ hat an der Stelle  $x^0$ den Grenzwert $a$, $a = \lim_{x \rightarrow x_0} f(x)$ genau dann wenn für jede Folge $(x^k)$ aus $D$ mit $x_0 \neq x^k$ und $\lim_{k \rightarrow \infty} x^k = x_0$ gilt: $\lim_{k \rightarrow \infty} f(x^k) = a$
+\end{definition}
+
+\begin{definition}[Stetigkeit]
+		Eine Funktion $\f{D \subseteq \realset^n}{\realset}$  heißt stetig im Punkt $x_0 = (x_1, ..., x_n) \in D$ wenn der Grenzwert $\lim_{x \rightarrow x_0} f(x)$ existiert und $\lim_{x \rightarrow x_0} f(x) = f(x_0)$ . $f$ heißt stetig auf derr Menge $M \subseteq D$, falls $f$ in jedem Punkt $x_0 \in M$ stetig ist.
+\end{definition}
+
 \pagebreak
 
 \section{Differentialrechnung mehrerer Veränderlicher}
 
-\begin{definition}[Parametrisierbare Kurve]
-	Eine parametrisierbare Kurve ist eine Abbildung $\function{\gamma}{[a, b]}{\realset^n} : t \mapsto (\gamma_1(t), \dots, \gamma_n(t))$, deren Komponenten $\gamma_i$ stetig sind. $\gamma$ heißt differenzierbar, wenn all $\gamma_i$ differenzierbar sind. Die Menge $\gamma([a,b]) ) \{\gamma(t) \medspace | \medspace t \in [a,b] \}$ heißt Spur von $\gamma$.
-\end{definition}
-
-\begin{definition}[Tangentialvektor]
-	Eine Kurve $\function{\gamma}{[a,b]}{\realset^n}$ sei differenzierbar. $\gamma'(t) := (\suboneton{\gamma'})$ heißt \emph{Tangentialvektor} an der Stelle $t$. Falls $\gamma'(t) \neq 0$, so heißt $T_\gamma = \frac{\gamma'(t)}{||\gamma'(t)||}$ \emph{Tangentialeinheitsvektor}.
-\end{definition}
-
 \begin{definition}[partielle Ableitung]
-	Betrachte $\function{f}{\realset^n}{\realset} : (\suboneton{x}) \mapsto f(\suboneton{x}) \in \realset$. Ist die Funktion $\function{f}{\realset}{\realset} : \xi \mapsto f(x_1, \dots, x_{k-1}, \xi, x_{k+1}, \dots, x_n)$ differenzierbar, heißt ihre Ableitung an der Stelle $x_k$ partielle Ableitung. Wir schreiben $\frac{\partial f}{\partial x_k}$ bzw. $\partial_k f(x)$. Alternative Notationen sind: $f_{x_1}(x) := \partialf{f(x)}{x_1}$ oder $f_{x_1x_2}(x) := \partialf{^2 f(x)}{x_1 \partial x_2} = \frac{\partial}{\partial x_1}(\partialf{f(x)}{x_2})$ Der Vektor $\nabla f(x) = grad(f(x)) = (\partial_1 f(x) \dots \partial_n f(x))^T$ heißt Gradient.
+	Betrachte $\function{f}{\realset^n}{\realset} : (\suboneton{x}) \mapsto f(\suboneton{x}) \in \realset$. Ist die Funktion $\function{f}{\realset}{\realset} : \xi \mapsto f(x_1, \dots, x_{k-1}, \xi, x_{k+1}, \dots, x_n)$ differenzierbar, heißt ihre Ableitung an der Stelle $x_k$ partielle Ableitung. Wir schreiben $\frac{\partial f}{\partial x_k}$ bzw. $\partial_k f(x)$. Alternative Notationen sind: $f_{x_1}(x) := \partialf{f(x)}{x_1}$ oder $f_{x_1x_2}(x) := \partialf{^2 f(x)}{x_1 \partial x_2} = \frac{\partial}{\partial x_1}(\partialf{f(x)}{x_2})$
 \end{definition}
 
 \begin{satz}[Satz von Schwarz]
 	Für zweimal stetig differenzierbare Functionen $f \in C^2$ gilt: $\partialf{^2f}{x \partial y} = \partialf{^2f}{y \partial x}$
 \end{satz}
+
+
+\begin{definition}[Richtungsableitung]
+	Wie die partielle Ableitung beschreibt die Richtungsableitung die lokale Änderungsrate, allerdings in einer vorgegebenen Richtung eines normierten Vektors $\vec{v}$ und nicht entlang der Einheitsvektoren:
+	
+	\begin{align*}
+	D_v f(x_0) = \frac{\partial f(x_0)}{\partial \vec{v}} = \lim_{h \rightarrow 0} \frac{f(x_0  + h \cdot \vec{v}) - f(x_0)}{h}
+	\end{align*}
+\end{definition}
+
+
+\begin{definition}[Gradient]
+	 Betrachte $\function{f}{\realset^n}{\realset}$, deren sämtliche partiellen Ableitungen existieren. 
+	 Der Vektor $\nabla f(x) = grad(f(x)) = (\partial_1 f(x) \dots \partial_n f(x))^T$ heißt Gradient.
+\end{definition}
+
+\begin{definition}[Totale Differenzierbarkeit]
+	Sei $\function{f}{\realset^n}{\realset}$ eine Funktion. $f$ ist an der Stelle $a$ total differenzierbar, falls ein $c = (c_1, ..., c_n)^T \in \realset^n$ existiert, sodass
+	\begin{align*}
+		\lim_{h \rightarrow 0} \frac{f(a + h) - f(x) - c \cdot h}{\norm{h}} = 0
+	\end{align*}
+	Wir schreiben $f'(a) = (c_1, ..., c_n)^T$ analog dem eindimensionalen Fall und nennen $f'(a)$ totale Ableitung. 	
+\end{definition}
+
+\begin{definition}[Totales Differential/Totale Ableitung]
+	Sei $\f{\realset^n}{\realset}$ total differenzierbar. Das Totale Differential beschreibt die Änderung in einer kleinen Umgebung eines Punktes $a$ und ist gegeben durch
+	
+	\begin{align*}
+	\frac{d f (\vec{x}) }{d \vec{x}} = d f(\vec{x}) = \sum_{i = 1}^{n} \frac{\partial f (\vec{x}) }{\partial x_i}
+	\end{align*}
+	
+	In der Physik wird dies auch als \textbf{Materialableitung} bezeichnet. Ist $f$ von anderen Funktionen abhängig, z.B. $f(t, u(t))$, so ist die Kettenregel zu verwenden:
+	
+	\begin{align*}
+	d f(t, u(t))  = \frac{\partial f (t, u(t))}{\partial t} + \frac{\partial f (t, u(t))}{\partial u(t)} \cdot \frac{\partial u (t)}{\partial t}
+	\end{align*}
+	
+\end{definition}
+
+\begin{satz}[Gradient und totale Ableitung]
+	Sei $\f{\realset^n}{\realset}$ in $a$ total differenzierbar, d.h. $f'(a) = (c_1,...,c_n)^T$. Dann ist $f$ partielle differenzierbar und es gilt: $\partialf{f}{x_k}(a) = c_k$
+\end{satz}
+
+
+\begin{satz}[Berechnung der Richtungsableitung]
+	Für $f$ stetig differenzierbar lässt sich die Richtungsableitung mithilfe des Skalarprodukts wie folgt berechnen:
+	
+	\begin{align*}
+	D_v f(x_0) = \langle \nabla f(x_0), v \rangle 
+	\end{align*}
+\end{satz}
+
+\begin{satz}[Eigenschaften des Gradienten]
+	Sei $f : D \subset \realset^n \rightarrow \realset, x \in D$ total differenzierbar. Es gilt: $\nabla f = 0$, so verschwinden alle Richtungsableitungen.	Gilt $\nabla f \neq 0$, so gibt es unter allen Richtungsableitungen $\partialf{f}{h}$ mit $\norm{h}_2 = 1$ eine größte, nämlich die des Gradienten
+\end{satz}
+
+\begin{tikzpicture}[bullet/.style={circle,fill,inner sep=1pt},
+declare function={f(\x,\y)=2-0.5*pow(\x-1.25,2)-0.5*pow(\y-1,2);}]
+\begin{axis}[view={150}{45},colormap/blackwhite,axis lines=middle,%
+zmax=2.2,zmin=0,xmin=-0.2,xmax=2.4,ymin=-0.2,ymax=2,%
+xlabel=$x$,ylabel=$y$,zlabel=$z$,
+xtick=\empty,ytick=\empty,ztick=\empty]
+\addplot3[surf,shader=interp,domain=0.6:2,domain y=0.5:1.2,opacity=0.7] 
+{f(x,y)};
+\addplot3[thick,domain=0.6:2,samples y=1]  ({x},1.2,{f(x,1.2)}); 
+\draw[dashed] (1.75,0,0) node[above left]{$x_0$} -- (1.75,1.2,0)
+node[bullet] (b1) {}  -- (0,1.2,0) node[above right]{$y_0$}
+(1.75,1.2,0) -- (1.75,1.2,{f(1.75,1.2)})node[bullet] {};
+\draw (1.75,1.2,{f(1.75,1.2)}) -- (0.75,1.2,{f(1.75,1.2)+0.5})
+coordinate[pos=0.5] (aux1);
+\draw[opacity=0.5,upper left=gray!80!black,upper right=gray!60,
+lower left=gray!60,lower right=gray!80!black] (2,1.2,0) -- (0.6,1.2,0)
+-- (0.6,1.2,2.2) -- (2,1.2,2.2) -- cycle;
+\addplot3[surf,shader=interp,domain=0.6:2,domain y=1.2:1.9,opacity=0.7] 
+{f(x,y)};
+\end{axis}
+\draw (aux1) -- ++ (-1,1) node[above,align=center]{Steigung in $x$ Richtung\\
+	$\partial_xf(x,y)|_{x=x_0,y=y_0}$};
+\node[anchor=north west] at (b1) {$(x_0,y_0)$}; 
+%
+\begin{axis}[xshift=6.5cm,view={150}{45},colormap/blackwhite,axis lines=middle,%
+zmax=2.2,zmin=0,xmin=-0.2,xmax=2.4,ymin=-0.2,ymax=2,%
+xlabel=$x$,ylabel=$y$,zlabel=$z$,
+xtick=\empty,ytick=\empty,ztick=\empty]
+\addplot3[surf,shader=interp,domain=0.6:1.75,domain y=0.5:1.9,opacity=0.7] 
+{f(x,y)};
+\addplot3[thick,domain=0.5:1.9,samples y=1]  (1.75,{x},{f(1.75,x)}); 
+\draw[dashed] (1.75,0,0) node[above left]{$x_0$} -- (1.75,1.2,0)
+node[bullet] (b2){}
+-- (0,1.2,0) node[above right]{$y_0$}
+(1.75,1.2,0) -- (1.75,1.2,{f(1.75,1.2)})node[bullet] {};
+\draw (1.75,1.2,{f(1.75,1.2)}) -- (1.75,0.2,{f(1.75,1.2)+0.2})
+coordinate[pos=0.5] (aux2);
+\draw[opacity=0.5,upper left=gray!80!black,upper right=gray!60,
+lower left=gray!60,lower right=gray!80!black] (1.75,0.5,0) -- (1.75,1.9,0)
+-- (1.75,1.9,2.2) -- (1.75,0.5,2.2) -- cycle;
+\addplot3[surf,shader=interp,domain=1.75:2,domain y=0.5:1.9,opacity=0.7] 
+{f(x,y)};
+\end{axis}
+\draw (aux2) -- ++ (0.3,1) node[above,align=center]{Steigung in $y$ Richtung\\
+	$\partial_yf(x,y)|_{x=x_0,y=y_0}$};
+\node[anchor=north east] at (b2) {$(x_0,y_0)$};
+\end{tikzpicture}
 
 \begin{definition}
 	Die Matrix $Hf(x) := (\partial_j \partial_i f(x))_{1 \leq i \leq j \leq n}$ heißt \emph{Hesse-Matrix}.
@@ -962,21 +1142,7 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 	\end{itemize}
 \end{definition}
 
-\begin{definition}[Totale Ableitung/Materialableitung]
-	Das Totale Differential beschreibt die Änderung in einer kleinen Umgebung eines Punktes $p$. Sei $\f{\realset^n}{\realset}$ total differenzierbar:
-	
-	\begin{align*}
-		\frac{d f (\vec{x}) }{d \vec{x}} = d f(\vec{x}) = \sum_{i = 1}^{n} \frac{\partial f (\vec{x}) }{\partial x_i}
-	\end{align*}
-	
-	In der Physik wird dies auch als \textbf{Materialableitung} bezeichnet. Ist $f$ von anderen Funktionen abhängig, z.B. $f(t, u(t))$, so ist die Kettenregel zu verwenden:
-	
-	\begin{align*}
-		d f(t, u(t))  = \frac{\partial f (t, u(t))}{\partial t} + \frac{\partial f (t, u(t))}{\partial u(t)} \cdot \frac{\partial u (t)}{\partial t}
-	\end{align*}
-	
-		
-\end{definition}
+
 
 \begin{definition}[Divergenz]
 	Die Divergenz eines Vektorfeld beschreibt den Zu - order Abfluss einer Größe. Sei $\vec{f} : \realset^n \rightarrow \realset^n$:
@@ -988,15 +1154,6 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 \end{definition}
 
 
-\begin{definition}[Richtungsableitung]
-	Ähnlich wie die partielle Ableitung beschreibt die Richtungsableitung die lokale Änderungsrate, allerdings in einer vorgegebenen Richtung eines normierten Vektors $\vec{v}$ und nicht entlang der Einheitsvektoren:
-	
-	\begin{align*}
-	  D_v f(x_0) = \frac{\partial f(x_0)}{\partial \vec{v}} = \lim_{h \rightarrow 0} \frac{f(x_0  + h \cdot \vec{v}) - f(x_0)}{h}
-	\end{align*}
-
-\end{definition}
-
 \begin{definition}[Rotation]
 	Die Rotation erzeugt das Wirbelfeld zu einem Vektorfeld:
 	
@@ -1007,15 +1164,49 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 	\end{align*}
 \end{definition}
 
-\begin{satz}[Berechnung der Richtungsableitung]
-	Für $f$ stetig differenzierbar lässt sich die Richtungsableitung mithilfe des Skalarprodukts wie folgt berechnen:
+
+\begin{definition}[Laplace Operator]
+	Sei $\f{\realset^n}{\realset}$. Der Laplace Operator $\Delta$ beschreibt die Divergenz des Gradienten und ist definiert als
 	
 	\begin{align*}
-		D_v f(x_0) = \langle \nabla f(x_0), v \rangle
+	\Delta f  = \sum_{i=1}^{n} \partialf{^2f}{x_i^2} = div(\nabla f) = \nabla \cdot (\nabla f)
 	\end{align*}
+\end{definition}
+
+\pagebreak
+	
+\section{Integralrechnung mehrere Veränderlicher}
+
+\begin{satz}[Integration durch Substitution]
+	Sei $U$ eine offene Menge in $\realset^n$ und $\function{\phi}{U}{\realset^n}$ eine injektive differenzierbare Funktion mit stetigen partiellen Ableitungen und einer Jacobi Matrix ungleich null für jedes $x \in U$. Dann gilt für jede relle stetige Funktion mit \emph{kompaktem Support in $\phi(U)$}:
+	
+	\begin{equation}
+		\int_{\phi(U)}	 f(x) dx = \int_U f(\phi(u)) |det(J \phi)(u)| du
+ 	\end{equation}
+ 	
+ 	Dabei bezeichnet $det(J \phi)(u)$ die Determinante der Jacobi Matrix von $\phi$ ausgewertet am Punkt $u$.
+	
 \end{satz}
 
-\section{Integralrechnung mehrere Veränderlicher}
+\begin{satz}[Satz von Stoke]
+	content...
+\end{satz}
+
+\begin{satz}[Gauß'scher Integralsatz]
+	Sei $\Omega \subset \realset^n$ eine kompakte Menge mit abscnittweise stetigem Rand $\partial \Omega$ orientiert durch ein äußeres Normaleinheitsvektorfeld $\vec{n}$. Sei $F$ ein stetig differenzierbares Vektorfeld auf einer offenen Menge $U \subseteq U$. Dann gilt:
+	
+	\begin{align*}
+		\int_\Omega \nabla \cdot \vec{F} \medspace dV = \int_{\partial \Omega} \inner{\vec{F}}{\vec{n}} \medspace dS
+	\end{align*}
+	
+	Allgemein formuliert sagt der Satz aus, dass die Summe der Quellen und Senkens eines Vekorfelds in einem Volumen dem Gesamtfluss des Vektorfeldes durch die Oberfläche entspricht.
+	Oder informell: was sich im inneren ändert, ist das, was an den Seiten rausfließt.	
+	
+\end{satz}
+
+\begin{satz}[Green'sche erste Formel]
+	
+\end{satz}
 
 \pagebreak
 
@@ -1064,7 +1255,107 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 	Setze $y(0)$ und löse nach den verbleibenden Konstanten. Erstelle neue Lösung mit konkreten Werten der konstanten.
 \end{definition}
 
+\pagebreak
+
 \section{Partielle Differentialgleichungen}
+
+\begin{definition}[Bekannte PDE]
+	\begin{itemize}
+		\item Laplace-Equation
+		\item Poission-Equation
+		\item Heat Equation
+		\item Wave Equation
+		\item Convection Equation
+		\item Advection-Diffusion Equation
+		\item Inkompressible Navier Stokes Equation 
+	\end{itemize}
+\end{definition}
+
+\pagebreak
+
+
+\section{Topologie}
+
+\pagebreak
+
+
+\section{Differentialgeometrie}
+
+
+\begin{definition}[Parametrisierbare Kurve]
+	Eine parametrisierbare Kurve ist eine Abbildung $\function{\gamma}{[a, b]}{\realset^n} : t \mapsto (\gamma_1(t), \dots, \gamma_n(t))$, deren Komponenten $\gamma_i$ stetig sind. $\gamma$ heißt differenzierbar, wenn all $\gamma_i$ differenzierbar sind. Die Menge $\gamma([a,b]) ) \{\gamma(t) \medspace | \medspace t \in [a,b] \}$ heißt Spur von $\gamma$.
+\end{definition}
+
+\begin{definition}[Tangentialvektor]
+	Eine Kurve $\function{\gamma}{[a,b]}{\realset^n}$ sei differenzierbar. $\gamma'(t) := (\suboneton{\gamma'})$ heißt \emph{Tangentialvektor} an der Stelle $t$. Falls $\gamma'(t) \neq 0$, so heißt $T_\gamma = \frac{\gamma'(t)}{||\gamma'(t)||}$ \emph{Tangentialeinheitsvektor}.
+\end{definition}
+
+\begin{definition}[Normalenvektor]
+	content...
+\end{definition}
+
+
+\begin{satz}[Berechnung der Einheitsnormalen]
+	\begin{itemize}[noitemsep]
+		\item Kreis um den Punkt x an der Stelle y : $\frac{y - x}{\norm{y - x}}$
+		\item 1D Skalare Funktion: $n = \frac{(-f'(x), 1)}{\sqrt{f'(x)^2 + 1}}$
+		\item nD Skalare Funktion: $n = \frac{(-\nabla f(x), 1)}{ \norm{\nabla f}^2 + 1}$ bzgl der Parametrisierung 
+		 $F(x) = (x_1, .., x_{n-1}, f(x_1, ..., x_{n-1}))$	
+		\item Parametrisierte Kurve: $n = \pm \frac{f_x \times f_y}{\norm{f_x \times f_y}}$
+	\end{itemize}
+\end{satz}
+
+\pagebreak
+
+\section{Funktionalanalysis}
+
+\begin{definition}[Funktional]
+	Sei $V$ ein Vektorraum über $\fieldk$. Ein Funktional $\Phi$ ist eine Abbildung $\Phi : V \rightarrow \fieldk$
+\end{definition}
+
+\begin{definition}[Lineare Funktionale]
+	content...
+\end{definition}
+
+\begin{definition}[Norm einer Funktion]
+	content...
+\end{definition}
+
+\begin{satz}[Fundamental Lemma]
+	content...
+\end{satz}
+
+\begin{definition}[Eigenfunktionen]
+	content...
+\end{definition}
+
+\begin{definition}[Faltung]
+	content...
+\end{definition}
+
+\begin{definition}[Raum kontinuierlich differenzierbarer Funktionen]
+	content...
+\end{definition}
+
+\begin{definition}[Banach-Raum]
+	Ein Vektorraum $X$ zusammen mit einer Norm $\norm{\cdot}$ heißt Banach-Raum, falls:
+	\begin{itemize}
+		\item ...
+	\end{itemize}
+\end{definition}
+
+
+\begin{definition}[Prä-Hilbert-Raum]
+	content...
+\end{definition}
+
+\begin{definition}[Hilbert-Raum]
+	content...
+\end{definition}
+
+\begin{definition}[Sobolov-Raum]
+	content...
+\end{definition}
 
 \pagebreak
 

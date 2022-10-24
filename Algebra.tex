@@ -350,12 +350,14 @@ Per Definition ist $S = \emptyset$ linear unabhängig. Enthält $S$ den Nullvekt
 	Lineare Abbildungen lassen sich als Matrizen $A \in \fieldkmtimesn$ darstellen: $\phi_A : \fieldk^n \rightarrow \fieldk^m : v \mapsto Av$ Darauß folgt:
 	\begin{description}[noitemsep]
 		\item $Kern(\phi_A) = \{v \in \fieldk^n \medspace | \medspace Av = 0\}$
-		\item $dim(Kern(\phi_A)) = n - rang(A)$
-		\item $dim(Bild(\phi_A)) = Rang(A)$
+		\item $dim(Kern(\phi_A)) = n - rang(A), dim(Bild(\phi_A)) = Rang(A)$
 	\end{description}
+
+	Anschaulich beschreibt die lineare Abbildung, wie die Basisvektoren verändert werden: $Ax = (\vec{b_1} |... | \vec{b_n}) (x_1, ..., x_n)^T = x_1 \cdot \vec{b_1} + ... + x_n \cdot \vec{b_n}  $
+	
+	Für $\phi : V \rightarrow W$ linear, $dim(V) < \infty$, $dim(W) < \infty$ gilt: $\phi$ ist Isomorphismus $\leftrightarrow \phi$ ist injektiv $\leftrightarrow \phi$ ist surjektiv.
 \end{definition}
 
-Für $\phi : V \rightarrow W$ linear, $dim(V) < \infty$, $dim(W) < \infty$ gilt: $\phi$ ist Isomorphismus $\leftrightarrow \phi$ ist injektiv $\leftrightarrow \phi$ ist surjektiv.
 
 \begin{satz}
 	Eine Matrix $A \in \fieldkntimesn$ ist invertierbar, wenn: $\exists B \in \fieldkntimesn : A \cdot B = I \rightarrow B = A^{-1}$.  A ist invertierbar $\leftrightarrow rang(A) = n$ und es gilt $A \cdot A^{-1} = A^{-1} \cdot A = I$ (links -und rechtsinvers).
@@ -548,6 +550,10 @@ Für $\phi : V \rightarrow W$ linear, $dim(V) < \infty$, $dim(W) < \infty$ gilt:
 	\end{smallmatrix} \right)$. $A$ heißt dann \emph{triagonalisierbar}.
 \end{satz}
 
+\begin{satz}[Eigenwerte und Inverse]
+	Sei $A$ invertierbar. Ist $\lambda$ ein  Eigenwert von $A$ zum Eigenvektor $v$, ist $\frac{1}{\lambda}$ ein Eigenwert zum Eigenvektor $v$ in $A^{-1}$. Darauß folgt insbesondere, dass der maximale Eigenwert $\lambda_{max}$ von $A$, $\frac{1}{\lambda_{max}}$ der kleinste von $A^{-1}$ ist.
+\end{satz}
+
 \begin{satz}[Satz von Gershgorin]
 	Sei $A \in \complexset^{n \times n}$. Definiere Kreise um $a_{i,i}$ mit Radius $r_i := \sum_{j = 1, j \neq i}^n |a_{i, j}|$. Die Gershgorin-Scheibe sei definiert als $R_i := \{z \in \complexset \medspace | \medspace |z -a_{i,i}| \leq r_i\}$. Es gilt:\begin{itemize}[noitemsep]
 		\item Alle Eigenwerte $\lambda_i \in \complexset $ von $A$ liegen mindestens in einer Scheibe
@@ -589,6 +595,10 @@ Für $\phi : V \rightarrow W$ linear, $dim(V) < \infty$, $dim(W) < \infty$ gilt:
 \begin{satz}[Erhaltung der Eigenwerte]
 	content...
 \end{satz}
+
+\begin{definition}[Singulärwert]
+	content...
+\end{definition}
 
 \pagebreak
 
@@ -668,6 +678,7 @@ Für $\phi : V \rightarrow W$ linear, $dim(V) < \infty$, $dim(W) < \infty$ gilt:
 		\item Maximumsnorm: $||x||_\infty := max_{i \in \{1,...,n\}} |x_i|$
 		\item 1-Norm/Manhattan-Norm: $||x||_1 := \sum_{i=1}^{n} |x_i|$
 		\item p-Norm: $||v||_p := (\sum_{i=1}^{n} |x_i|^p)^{\frac{1}{p}}$
+		\item Energy-Norm: $\norm{v}_A = \sqrt{\inner{v}{Av}} = \sqrt{v^TAv}$
 	\end{enumerate}
 \end{definition}
 
@@ -751,24 +762,10 @@ Für $\phi : V \rightarrow W$ linear, $dim(V) < \infty$, $dim(W) < \infty$ gilt:
 	Eine Matrix $A \in \complexset^{n \times n}$ heißt normal genau dann wenn $AA^H = A^HA$. Alle unitären Matrizen sind normal.
 \end{definition}
 
+\begin{satz}[Gram-Schmidt Verfahren]
+	content...
+\end{satz}
+
 \pagebreak
-
-\section{Besondere Vektorräume}
-
-\begin{definition}[Banach-Raum]
-	Ein Vektorraum $X$ zusammen mit einer Norm $\norm{\cdot}$ heißt Banach-Raum, falls:
-	\begin{itemize}
-		\item ...
-	\end{itemize}
-\end{definition}
-
-
-\begin{definition}[Pre-Hilbert-Raum]
-	content...
-\end{definition}
-
-\begin{definition}[Hilbert-Raum]
-	content...
-\end{definition}
 
 

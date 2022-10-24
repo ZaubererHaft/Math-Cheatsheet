@@ -70,8 +70,54 @@
 \end{definition}
 
 \begin{satz}[Gauß with Pivoting]
-	Gauß with pivoting preserves symmetry and positive definiteness in the residual matrix. I.e., for pos./neg. definitie matrices Gaussian elimination is possible without pivoting
+	Gauß with pivoting preserves symmetry and positive definiteness in the residual matrix. I.e., for pos./neg. definite matrices Gaussian elimination is possible without pivoting
 \end{satz}
+
+\begin{definition}[LU decomposition/factorization]
+	Decompose Matrix into $A = LU$ where $L$ Lower unit triangular matrix, $U$ upper triangular matrix. Gauß and LU deliver the same result with same operations (excluding permutations). Ansatz
+	\begin{align*}
+		U = Q_1 \cdot ... \cdot Q_n A \rightarrow \underbrace{\inv{Q_n} \cdot ... \cdot \inv{Q_1}}_{=: L} U = A
+	\end{align*}
+	The inverse of the elementary transformation matrices is thereby easily to obtain. If permutation operations $P$ occur:
+	\begin{itemize}[noitemsep]
+		\item perform then at the beginning of a principal step
+		\item multiply old $L^{(1)}$ on both sides with $P$ yielding $\tilde{L}$
+		\item now multiply $\tilde{L}$ with $L^{(2)}$ giving $\hat{L}^{(2)}$ and $PA = \hat{L}^{(2)}A^{(2)}$
+	\end{itemize}
+
+	Comparison:
+	
+	\begin{multicols}{2}
+		Gauß: always $\BigO{n^3}$
+		\begin{align*}
+		 \text{simulataneously}	\begin{cases}
+				U = \inv{L}A \\
+				y = \inv{L}b 
+			\end{cases} \\
+			Ux = y \medspace \medspace \text{Backward Substitution}
+		\end{align*}
+		LU: initially $\BigO{n^3}$, reuse: $\BigO{n^2}$
+		\begin{align*}
+			A &= LU \\
+			Ly &= b \medspace \medspace \text{Forward Substitution}\\
+			Ux &= y \medspace \medspace \text{Backward Substitution}
+		\end{align*}
+	\end{multicols}
+\end{definition}
+
+\begin{definition}[Iterative Refinement]
+	Increase precision end the end (need double precision for $z$)
+	\begin{enumerate}[noitemsep]
+		\item Compute Residual $r = b - Ax^{(i)}$
+		\item Solve system $Az = r$
+		\item Update Solution $x^{(i+1)} = x^{(i)} + z$
+		\item Stop if $\frac{\norm{z}}{\norm{x^{(i+1)}}} < tol$
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}[Gauß for general $n \times n$ matrices]
+	content...
+\end{definition}
 
 \pagebreak
 

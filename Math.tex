@@ -6,7 +6,8 @@
 \usepackage{pgfplots}
 \usepackage{multicol}
 \usetikzlibrary{calc}
-
+\usetikzlibrary{shadings}
+\pgfplotsset{compat=1.16}
 \usetikzlibrary{quotes,angles}
 
 \begin{document}
@@ -60,9 +61,15 @@
 \newcommand{\BigO}[1]{\mathcal{O}(#1)}
 \newcommand{\partialf}[2]{\frac{\partial #1}{\partial #2}}
 
+\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\prob}[1]{Pr[#1]}
+\newcommand{\expec}[1]{\mathbb{E}[#1]}
+\newcommand{\var}[1]{Var[#1]}
+
 \newtheorem{definition}{Definition}
 \newtheorem{satz}{Satz}
 
+\include{Discrete}
 \include{Algebra}
 \include{Analysis}
 \include{Probability}

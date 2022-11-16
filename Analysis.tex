@@ -188,7 +188,7 @@
 	\begin{enumerate}[noitemsep]
 	\item \emph{\textbf{Harmonische Reihe:}} $\sum_{k=1}^{\infty} \frac{1}{k} = \infty$ (Divergenz)
 	\item \emph{\textbf{Geometrische Reihe:}} $\sum_{k=0}^{\infty} z^k = \frac{1}{1 - z}$, falls $|z| < 1$
-	\item \emph{\textbf{Teleskopreihe Reihe:}}  $\sum_{k=1}^{\infty} \frac{1}{k(k+1)} = 1$
+	\item \emph{\textbf{Teleskopreihe(n):}}  $\sum_{k=1}^{\infty} \frac{1}{k(k+1)} = 1$; $\sum^n_{k=1} \frac{1}{k-1} - \frac{1}{k} = 1 - \frac{1}{n}$
 	\item \emph{\textbf{Riemannsche Zetafunktion:}} $\zeta(s) = \sum_{k=1}^{\infty} \frac{1}{k^s}$ ist konvergent für $s>1$	
 	\item \emph{\textbf{Exponentialreihe:}} $e^x = \sum_{k=0}^{\infty} \frac{x^k}{k!}$ konvergiert	
 \end{enumerate}
@@ -246,13 +246,12 @@
 \end{definition}
 	
 \section{Funktionen}
-
-\begin{tikzpicture}
+\begin{tikzpicture}[scale=0.9]
 	\begin{axis}[
 	width=200,
 	height = 150,
 	ymin=-2,
-	ymax=4,
+	ymax=5,
 	xmin=2,
 	xmax=1,
 	samples=100,
@@ -279,6 +278,7 @@
 		\item Rechenregeln: $e^x \cdot e^y = e^{x+y}$, $e^x \div e^y = e^{x-y}$
 		\item Weitere Eigenschaften: stetig auf $\realset$, differenzierbar auf $\realset$, streng monoton wachsend, Wertemenge: $(0, \infty)$, $\liminfty{x} \frac{e^x}{x^m} = \infty$, $\limdown{x}{0} \frac{e^x - 1}{x} = 1$
 		\item Komplexe Exponentialfunktion: $e^{x+iy} = e^x(cos(y) + i sin(y)) \rightarrow e^{iy} = cos(y) + i sin(y)$
+		\item Matrix-Exponentialfunktion für $A \in \realset^{n \times n}$: $e^A := \sum_{i = 0}^\infty \frac{A^k}{k!}$
 	\end{description}
 \end{definition}
 
@@ -453,9 +453,9 @@ Sinus und Kosinus beschreiben die Länge der Ankathete bzw. Gegenkathete im Einh
 \begin{definition}[Eigenschaften]
 	Für Sinus, Kosinus und Tangens gilt:
 	\begin{description}[noitemsep]
-		\item $sin(0) = 0, sin( \frac{\pi}{2})=1, sin(\pi) = 0, sin(\frac{3 \pi}{2}) = -1, sin(2 \pi) = 0$
-		\item $cos(0) = 1, cos (\frac{\pi}{2}) = 0, cos (\pi) = 1, cos(\frac{3 \pi}{2}) = 0, cos (2 \pi) = 1$
-		\item $tan(0) = 0, tan(\pi) = 0, tan(2 \pi) = 0 \dots$
+		\item $sin(0) = 0, sin( \frac{\pi}{2})=1, sin(\pi) = 0, sin(\frac{3 \pi}{2}) = -1, sin(2 \pi) = 0, sin(\frac{\pi}{3}) = \frac{\sqrt{3}}{2}$. In general $sin(x) = sin(x + 2 \pi)$
+		\item $cos(0) = 1, cos (\frac{\pi}{2}) = 0, cos (\pi) = 1, cos(\frac{3 \pi}{2}) = 0, cos (2 \pi) = 1, cos(\frac{\pi}{3}) = \frac{1}{2}$. In general $cos(x) = cos(x + 2 \pi)$
+		\item $tan(0) = 0, tan(\pi) = 0, tan(2 \pi) = 0 \dots$ 
 		\item Ableitung: $\frac{\partial}{\partial x}(cos(x)) = -sin(x), \frac{\partial}{\partial x}(sin(x)) = cos(x)$, \\ $\frac{\partial}{\partial x}(tan(x)) = \frac{1}{cos(x)^2} = 1 + tan(x)^2$
 		\item Grenzwerte $\limto{x}{0} \frac{sin(x)}{x} = 1, \limto{x}{0} \frac{1 - cos(x)}{0.5x} = 1, \limdown{x}{0} \frac{tan (x)}{x} = 1$
 		\item Rechenregeln: $cox(-x) = cos(x), sin(-x) = -sin(x)$ \\ $cos(x \pm y) = cos(x)cos(y) \pm sin(x)sin(y)$, \\ $sin(x \pm y) = sin(x)cos(y) \pm sin(y)cos(x)$
@@ -467,7 +467,7 @@ Sinus und Kosinus beschreiben die Länge der Ankathete bzw. Gegenkathete im Einh
 \begin{definition}[Umkehrfunktionen]
 Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 	\begin{multicols}{2}
-		\begin{tikzpicture}[scale=0.9]
+		\begin{tikzpicture}[scale=0.8]
 			\begin{axis}[
 			width=200,
 			height = 200,
@@ -554,22 +554,23 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 	ymax=1.25,
 	axis x line=center,
 	axis y line=center,
+	xtick={0, 1}, 
+	ytick={1, 0},
 	xlabel style={at={(axis description cs:0.5,-0.0)},anchor=north},
 	xlabel={$\realset$},
 	ylabel style={at={(axis description cs:-0.0,.5)},rotate=90,anchor=south},
-	ylabel={$\complexset$},
-	no markers]
+	ylabel={$\complexset$}]
 	
-	\addplot [red, domain=0:1]{x}  node[above,pos=1] {$z = x + iy$};
+	\addplot [red, domain=0:1]{x}  node[above,pos=1] {$z = a + ib$};
 	\addplot [blue, domain=0:1] coordinates {(1,0)(1,1)};	
-	\node[right] at (40, 5)  {$a = c \cdot cos(\phi)$} ;
-	\node[right] at (15, 50)  {$c = |z|$} ;
-	\node[right] at (100, 50)  {$b = c \cdot sin(\phi)$} ;
-	\node[right] at (15, 10)  {$\phi$} ;
+	\node[right] at (1, 0.1)  {$a = r cos(\phi)$} ;
+	\node[right] at (0.5, 0.45)  {$r = |z|$} ;
+	\node[right] at (0.05, 1)  {$b = r  sin(\phi)$} ;
+	\node[right] at (0.1, 0.07)  {$\phi = arccos(\frac{a}{r}), b \geq 0$} ;
 	\end{axis}
 	\end{tikzpicture}
 	
-	$(c, \phi) $ bezeichnet man als Polarkoordinaten der komplexen Zahl
+	$(r, \phi) $ bezeichnet man als Polarkoordinaten der komplexen Zahl. Der Wert des Winkels $\phi$ wird auch als \emph{Argument} bezeichnet. Algebraisch ist es der Wert sodass $z = r (cos \phi + i sin \phi) = re^{i\phi}$
 	
 \end{definition}
 
@@ -1185,6 +1186,12 @@ lower left=gray!60,lower right=gray!80!black] (1.75,0.5,0) -- (1.75,1.9,0)
  	\end{equation}
  	
  	Dabei bezeichnet $det(J \phi)(u)$ die Determinante der Jacobi Matrix von $\phi$ ausgewertet am Punkt $u$.
+ 	
+ 	Für eine Transformation eines Integrals über $C$ (z.B. $[a,b]$) nach $\hat{C}$ (z.B. $[-1,1]$) definiert man also $\function{\phi}{\hat{C}}{C}$ (e.g. $\phi(x) = \frac{b - a}{2}x + \frac{b + a}{2}$) und wendet dann an:
+ 	
+ 	\begin{align*}
+ 		\int_{C_k} f(x) dx = \int_{\inv{\phi}(C_k)} f(\phi(x)) \cdot |det(\phi'(x))| \medspace dx = \int_{-1}^{1} f(\phi(x)) \cdot \frac{b - a}{2} dx
+ 	\end{align*}
 	
 \end{satz}
 
@@ -1211,16 +1218,46 @@ lower left=gray!60,lower right=gray!80!black] (1.75,0.5,0) -- (1.75,1.9,0)
 \pagebreak
 
 \section{Gewöhnliche Differentialgleichungen}
-\begin{definition}[Differentialgleichungen mit separierbar rechter Hälfte]
+
+\begin{definition}[Gebiet]
+	content...
+\end{definition}
+
+\begin{definition}[System Gewöhnlicher Differentialgleichungen]
+	content...
+\end{definition}
+
+\begin{satz}[Satz von Peano]
+	content...
+\end{satz}
+
+\begin{definition}[Lipschitz-Bedingung]
+	content...
+\end{definition}
+
+\begin{satz}[Notwendiges Kriterium für Lipschitz-Bedingung]
+	content...
+\end{satz}
+
+\begin{satz}[Picard-Lindelöf]
+	content...
+\end{satz}
+
+\begin{definition}[Spezielle Differentialgleichungen]
+	content...
+\end{definition}
+
+\begin{satz}[Lösungsverfahren für DGl mit separierbar rechter Hälfte ]
 	
 	Gestalt: $\frac{d y}{d x} = y'(x) = f(x)g(y(x)), \function{f,g}{\realset}{\realset}$ stetig. Ansatz falls $g(y(x)) \neq 0$:
 	
 	\begin{equation*}
 		\int_{t_0}^{t} \frac{y'(x)}{g(y(x))} dx = \int_{t_0}^{t} f(x) dx \rightarrow \int_{y(t_0)}^{y(t)} \frac{1}{g(s)} ds = \int_{t_0}^{t} f(x) dx
 	\end{equation*}
-\end{definition}
+\end{satz}
 
-\begin{definition}[Lineare DGL erster Ordnung]
+
+\begin{satz}[Lösungsverfahren für Lineare DGL erster Ordnung]
 	Die folgenden Lösungsverfahren gelten:
 	\begin{itemize}
 		\item Homogen $y'(x) + a(x)y(x) = 0$ Ansatz: bringe $a(x)y(x)$ auf die rechte Seite und löse diese DGL mit separierbarer rechter Hälfte
@@ -1231,9 +1268,9 @@ lower left=gray!60,lower right=gray!80!black] (1.75,0.5,0) -- (1.75,1.9,0)
 				\item Summiere Ergebnisse aus 1) und 2)
 			\end{enumerate}
 	\end{itemize}
-\end{definition}
+\end{satz}
 
-\begin{definition}[Lineare DGL zweiter Ordnung mit konstanten Koeffizienten]
+\begin{satz}[Lösungsverfahren für Lineare DGL zweiter Ordnung mit \\ konstanten Koeffizienten]
 	Die folgenden Lösungsverfahren gelten:
 	
 	\begin{itemize}
@@ -1249,7 +1286,7 @@ lower left=gray!60,lower right=gray!80!black] (1.75,0.5,0) -- (1.75,1.9,0)
 			\item Summiere Ergebnisse aus 1) und 2)
 		\end{enumerate}
 	\end{itemize}
-\end{definition}
+\end{satz}
 
 \begin{definition}[Anfangswertproblem]
 	Setze $y(0)$ und löse nach den verbleibenden Konstanten. Erstelle neue Lösung mit konkreten Werten der konstanten.
@@ -1259,17 +1296,42 @@ lower left=gray!60,lower right=gray!80!black] (1.75,0.5,0) -- (1.75,1.9,0)
 
 \section{Partielle Differentialgleichungen}
 
-\begin{definition}[Bekannte PDE]
+\begin{definition}[Quasilineare PDGL]
+	content...
+\end{definition}
+
+\begin{definition}[Klassifikation von PDGL]
+	content...
+\end{definition}
+
+\begin{definition}[Wohlgestellte PDGL]
+	content...
+\end{definition}
+
+\begin{definition}[Bekannte PDGL]
 	\begin{itemize}
 		\item Laplace-Equation
 		\item Poission-Equation
 		\item Heat Equation
 		\item Wave Equation
-		\item Convection Equation
+		\item Advection Equation
 		\item Advection-Diffusion Equation
 		\item Inkompressible Navier Stokes Equation 
 	\end{itemize}
 \end{definition}
+
+\begin{satz}[Lösungsverfahren Separation der Variablen]
+	content...
+\end{satz}
+
+\begin{satz}[Lösungsverfahren Methode der Charaktersitiken]
+	content...
+\end{satz}
+
+\begin{satz}[Lösungsverfahren Variation der Konstanten]
+	content...
+\end{satz}
+
 
 \pagebreak
 
@@ -1309,12 +1371,24 @@ lower left=gray!60,lower right=gray!80!black] (1.75,0.5,0) -- (1.75,1.9,0)
 
 \section{Funktionalanalysis}
 
-\begin{definition}[Funktional]
-	Sei $V$ ein Vektorraum über $\fieldk$. Ein Funktional $\Phi$ ist eine Abbildung $\Phi : V \rightarrow \fieldk$
+\begin{definition}[Offene Menge]
+	content...
 \end{definition}
 
-\begin{definition}[Lineare Funktionale]
+\begin{definition}[Funktionsräume]
 	content...
+\end{definition}
+
+\begin{definition}[Funktional]
+	Sei $V$ ein Vektorraum über den Körper $\fieldk$. Ein Funktional $\Phi$ ist eine Abbildung $\Phi : V \rightarrow \fieldk$, also eine Abbildung von einen Vektorraum in den zugehörigen Körper.
+\end{definition}
+
+\begin{definition}[Linearform / Lineares Funktional]
+	Ist ein lineares Funktional
+\end{definition}
+
+\begin{definition}[Bilinearform / Bilineares Funktional]
+	Eine Abbildung $\function{a}{V \times W}{\realset}$ zwischen zwi Vektorräumen $V,W$ wird Bilineaform genannt, falls $a$ linear in jedem argument ist
 \end{definition}
 
 \begin{definition}[Norm einer Funktion]

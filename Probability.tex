@@ -231,6 +231,8 @@
 	
 \end{definition}
 
+\pagebreak
+
 \section{Kontinuierlich}
 
 \begin{definition}[Kontinuierliche Zufallsvariable]
@@ -249,7 +251,7 @@
 \end{definition}
 
 \begin{definition}[Kontinuierlicher Erwartungswert]
-	Der kontinuierliche Erwartungswert ist definiert als 
+	Der kontinuierliche \\ Erwartungswert ist definiert als 
 	\begin{align*}
 		\expec{X} := \int_{- \infty}^{+ \infty} t \cdot f_X(t) dt
 	\end{align*}
@@ -265,17 +267,120 @@
 \end{definition}	
 
 \begin{definition}[Gemeinsame Dichte/Verteilung]
+	Seien $X,Y$ kontinuierliche Zufallsvariablen. Der gemeinsame Wahrscheinlichkeitsraum über $\realset^2$ ist durch die gemeinsame Dichtefunktion $f_{X,Y}$ beschrieben und es gilt
+	
+	\begin{align*}
+		\int_{-\infty}^\infty \int_{-\infty}^\infty f_{X,Y}(x,y)dx dy = 1 \\
+		\rightarrow \prob{A} = \int_A f_{X,Y}(x,y) dx dy
+	\end{align*}
+	
+	Die gemeinsame Verteilung ist definiert als
+	
+	\begin{align*}
+		F_{X,Y}(x,y) = \pr{X \leq x, Y \leq y} = \int_{- \infty}^y \int_{- \infty}^y f_{X,Y}(u,v) du dv
+	\end{align*}
+	Und man definiert die
+	\begin{align*}
+		\text{Randdichte} \medspace f_X(x) &= \int_{- \infty}^\infty f_{X,Y}(x,v) dv \\
+		\text{Randverteilung} \medspace F_X(x) &= \int_{- \infty}^x \int_{-\infty}^{\infty} f_{X,Y}(u,v) du dv	
+	\end{align*}
+\end{definition}
+
+\begin{definition}[Gleichverteilung]
+	Die Gleichverteilung einer Zufallsvariable über $[a,b]$ ist definiert als:
+	\begin{align*}
+		f_X(x) = \begin{cases}
+			\frac{1}{b - a} & x \in [a,b] \\
+			0 & sonst
+		\end{cases}, 
+		F_{X} = \begin{cases}
+		0 & x < a \\
+		\frac{x - a}{b - a} & x \in [a,b] \\
+		1 & x > b
+		\end{cases}, \expec{X} = \frac{a + b}{2}, \var{X} = \frac{(a-b)^2}{12}
+	\end{align*}
+\end{definition}
+
+
+\begin{definition}[Normalverteilung]
+	Die Normalverteilung einer Zufallsvariable $X$ mit Erwartungswert $\expec{X} =: \mu$ und Varianz $\var{X} =: \sigma^2$ kann als Binominalverteilung für $n \rightarrow \infty$ interpretiert werden. Wir schreiben $X \sim N(\mu, \sigma^2)$
+	
+	\begin{align*}
+	f_X(x) &= \frac{1}{\sqrt{2\pi}\sigma} \cdot e^{-\frac{(x-\mu)^2}{2\sigma^2}}  =: \phi(x;\mu,\sigma) \overset{\mu = 0, \sigma^2 = 1}{=:} \phi(x) \\
+	F_X(x) &= \int_{-\infty}^{x} \frac{1}{\sqrt{2\pi}\sigma} \cdot e^{-\frac{(t- \mu)^2}{2 \sigma^2}} dt =: \Phi(x; \mu, \sigma) \overset{\mu = 0, \sigma^2 = 1}{=:} \Phi(x)
+	\end{align*}
+\end{definition}
+
+\begin{satz}[Normierung der Normalverteilung]
+	Sei $X \sim N(\mu, \sigma^2)$. Dann gilt $Y := \frac{X - \mu}{\sigma} \sim N(0,1)$
+\end{satz}
+
+\begin{satz}[Lineare Transformation der Normalverteilung]
+	Sei $X \sim N(\mu, \sigma^2)$. Dann gilt für $a \in \realset \backslash \{0\}$ und $b \in \realset$: $Y = aX + b \sim N(a\mu + b, a^2 \sigma^2)$ ist ebenfalls normalverteilt.
+\end{satz}
+
+\begin{satz}[Additivität der Normalverteilung]
+	Für $\suboneton{X}$ unabhängig mit $\sim N(\mu_i,\sigma_i^2)$. Dann ist $Z := a_1N_1 + ... + a_nX_n$  ebenfalls normalverteilt, $Z \sim N(\mu, \sigma^2)$, mit $\mu = \sum_{i=1}^na_i\mu_i$ und $\sigma^2 = \sum_{i=1}^{n} a_i^2\sigma_i^2$        
+\end{satz}
+
+\begin{definition}[Exponentialverteilung]
+	Die Exponentialverteilung einer Zufallsvariable $X$ kann als Grenzwert der geometrischen Verteilung aufgefasst werden. Wir schreiben $X \sim Exp(\lambda)$ und es gilt:
+	
+	\begin{align*}
+		f_X(x) = \begin{cases}
+			\lambda e^{-\lambda x} &, x \geq 0 \\
+			0 & sonst
+		\end{cases}, F_X(x) = 1 - e^{-\lambda x}, \expec{X} = \frac{1}{\lambda}, \var{\frac{1}{\lambda^2}}
+	\end{align*}
+	 
+\end{definition}
+
+\begin{satz}[Eigenschaften der Exponentialverteilung] Die Exponentialverteilung hat eine Reihe wichtiger Eigenschaften
+	\begin{itemize}[noitemsep]
+		\item Für $X \sim Exp(\lambda_x)$, $Y \sim Exp(\lambda_y)$, $X,Y$ unabhängig gilt: $Z := X + Y \sim Exp(\lambda_x + \lambda_y)$
+		\item $X \sim Exp(\lambda) \rightarrow Y := aX \sim Exp(\frac{\lambda}{a})$ 
+		\item Gedächtnislosigkeit: $\pr{X > x + y | X > y} = \pr{X > x}$
+	\end{itemize}
+\end{satz}
+
+\begin{satz}[Faltungssatz]
+	Seien $X,Y$ unabhängig, $Z := X + Y$. $f_Z(z) = \int_{- \infty}^{\infty} f_X(x) \cdot F_Y(z-x) dx $
+\end{satz}
+
+\begin{satz}[Zentraler Grenzwertsatz]
+	Seien $\suboneton{X}$ unabhängig mit selber Verteilung, Existenz des Erwartungswerts und der Varianz sei gegeben. $Y_n := \sum_{i=1}^{n}X_i$. Dann gilt:
+	\begin{align*}
+		Z := \frac{Y_n - n \mu}{\sigma \sqrt{n}} \sim N(0,1) \medspace \text{für} \medspace n \rightarrow \infty
+	\end{align*}
+\end{satz}
+
+\begin{satz}[Grenzwertsatz De Moivre]
+	Seien $\suboneton{X}$ unabhängige Bernoulli-verteilte Zufallsvariable mit gleicher Wahrscheinlichkeit $p$. $H := \sum_{i = 1}^n X_i$.Dann gilt:
+	\begin{align*}
+	Z := \frac{H_n - np}{\sqrt{np(1-p)}} \sim N(0,1)\medspace \text{für} \medspace n \rightarrow \infty
+	\end{align*}
+\end{satz}
+
+\begin{satz}[Momenterzeugende Funktion]
+	Eine Momenterzeugende Funktion ist definiert als $M_X(s) = \expec{e^{Xs}}.$ Es gilt: $M_X(0)^k = \expec{X^k}$. Sie ist definiert für
+	\begin{itemize}[noitemsep]
+		\item $X \sim Unif(a,b) \rightarrow M_X(s) = \frac{e^{sb} - e^{sa}}{s(b-a)}$
+		\item $X \sim N(0,1) \rightarrow M_X(s) = e^{\frac{s^2}{2}}$
+		\item $X \sim N(\mu,\sigma^2) \rightarrow M_X(s) = e^{s\mu + \frac{(s \sigma)^2}{2}} $
+		\item $X \sim Exp(\lambda) \rightarrow M_X(s) = \frac{\lambda}{\lambda - s} ,$ falls $s < \lambda$
+	\end{itemize}
+\end{satz}
+
+\pagebreak
+
+\section{Stochastik}
+
+\begin{definition}[Stochastischer Prozess]
 	content...
 \end{definition}
 
 \pagebreak
 
-\section{Deskriptive Statistik}
-
-\section{Induktive Statistik}
-
-\pagebreak
-
-\section{Stochastik}
+\section{Deskriptive und Induktive Statistik}
 
 \pagebreak

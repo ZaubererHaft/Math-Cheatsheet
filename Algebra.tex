@@ -9,10 +9,7 @@
 		\item Inverses Element: $\forallin{a}{G}: \exists a^{-1} \in G: a \cdot a^{-1} = 1 = a^{-1} \cdot a$
 	\end{enumerate}
 
-	Die Gruppe heißt endlich, falls gilt: $|G| < \infty$. $G$ heißt \emph{kommutativ}, falls zusätzlich gilt:
-	\begin{description}
-		\item $\forallin{a,b}{G}: a \cdot b = b \cdot a$
-	\end{description}
+	Die Gruppe heißt endlich, falls gilt: $|G| < \infty$. $G$ heißt \emph{kommutativ}, falls zusätzlich gilt: $\forallin{a,b}{G}: a \cdot b = b \cdot a$
 \end{definition}
 
 \begin{definition}[Körper]
@@ -50,6 +47,7 @@
 		\item Eine Matrix heißt \emph{symmetrisch}, wenn $A^T = A$ gilt.
 		\item Elemente aus $\fieldk$ heißen auch \emph{Skalare}. 
 		\item Eine Matrix heipt \emph{diagonal-dominant}, falls $\forallin{i}{\{1,...,n\}} : a_{i,i} \geq \sum_{j=1, i \neq j}^{n} a_{i,j} $. Gilt sogar $>$, so nennt man $A$ \emph{strikt diagonal-dominant}
+		\item Die Spur einer Matrix $A \in \fieldkntimesn$ ist definiert als $tr(A) = \sum_{i = 1}^n a_{i,i}$
 	\end{enumerate}
 
 \end{definition}
@@ -437,6 +435,7 @@ Per Definition ist $S = \emptyset$ linear unabhängig. Enthält $S$ den Nullvekt
 		\item Die Determinante von $A$ ist $det(A) = \sum_{\sigma \in S_n}(sgn(\sigma) \cdot \Pi_{i=1}^n a_ {i, \sigma(i)})$		
 	\end{enumerate}
 	Allgemein beschreibt die Determinante eine Funktion $A \mapsto det(A)$. Sie gibt an, wie sich das Volumen einer Region bei der durch die Matrix beschriebenen linearen Abbildung ändert. Eine Determinante von 0 reduziert dann z.B. ein Volumen zu einer Fläche bzw. eine Fläche zu einer Linie usw., wohingegen eine negative Determinante die Orientierung des Raums ändert.
+	Ist also $f(x) = Ax, A \in \realset^{m \times n}, S \subseteq \realset^n$ so gilt dass das Volumen von $f(S)$ mit $\sqrt{|det (A^T A)|} \cdot Vol(S) $ beschrieben wird
 \end{definition}
 
 \begin{satz}
@@ -475,16 +474,46 @@ Per Definition ist $S = \emptyset$ linear unabhängig. Enthält $S$ den Nullvekt
 		\end{pmatrix} \in \fieldkmtimesn$ mit $B \in \fieldk^{l \times l}, D \in \fieldk^{(n-l) \times (n-l)}, C \in \fieldk^{(n-l) \times l}$.
 		Es gilt: $det(A) = det(B) \cdot det(D)$
 	\end{enumerate}
+
+
+\begin{definition}[Minor]
+	content...
+\end{definition}
+
+
+\begin{definition}[Hauptminor]
+	content...
+\end{definition}
+
+
+\begin{definition}[Kofaktor]
+	content...
+\end{definition}
+
+\begin{definition}[Adjunkte]
+	content...
+\end{definition}
 \end{satz}
 
+\pagebreak		
 
 \section{Eigenwerte und Eigenvektoren}
 \begin{definition}	
-	Sei $A \in \fieldkntimesn; \lambda \in \fieldk $ heißt \emph{Eigenwert}, wenn es ein $v \neq 0 \in \fieldk^n$ gibt, sodass $Av = \lambda v$ gilt. $v$ heißt dann \emph{Eigenvektor} zum Eigenwert $\lambda$. Er ist ein Vektor, dessen Richtung durch $A$ (d.h. einer linearen Abbildung) nicht verändert wird.
+	Sei $A \in \fieldkntimesn; \lambda \in \fieldk $ heißt \emph{Eigenwert}, wenn es ein $v \neq 0 \in \fieldk^n$ gibt, sodass $Av = \lambda v$ gilt. $v$ heißt dann (rechter) \emph{Eigenvektor} zum Eigenwert $\lambda$. Er ist ein Vektor, dessen Richtung durch $A$ (d.h. einer linearen Abbildung) nicht verändert wird.
+	
+	Für $w^H A = \lambda w^H$ können wir analog den linken Eigenvektor definieren.
 
 	Der Eigenraum zum Eigenwert $\lambda$ ist definiert als $E_\lambda := \{x \in \fieldk^n \medspace | \medspace Ax = \lambda x \}$, d.h. die Menge aller Eigenvektoren zum Eigenwert $\lambda \cup \{0\}$. 
 	
 	\textcolor{red}{Das Eigenwert/Eigenvektorproblem ist nicht mittels Gauß Elimination lösbar, denn letzteres ändert die Eigenwerte: $Ax = \lambda x \leftrightarrow B^{-1}A = B^{-1}(\lambda x) =: \lambda y, y \neq x$}
+\end{definition}
+
+\begin{definition}[Spektrum]
+	Das Spektrum einer Matrix $A \in A \in \fieldkntimesn$ ist die Menge aller Eigenwerte: $\sigma(A) = \{\lambda \in \mathbb{K}^n | \exists v \neq 0 : Ax = \lambda v\}$. Man definiert:
+	\begin{itemize}[noitemsep]
+		\item $\rho(A) = max_{\lambda \in \sigma(A)} |\lambda|$ Spektralradius
+		\item $s(A) = max_{\lambda \in \sigma(A)} Re(\lambda)$ Spektralschranke	
+	\end{itemize}
 \end{definition}
 
 \begin{satz}[Charakteristisches Polynom]
@@ -532,6 +561,11 @@ Per Definition ist $S = \emptyset$ linear unabhängig. Enthält $S$ den Nullvekt
 	0 & & \lambda_n
 	\end{smallmatrix} \right) S^{-1} $ 
 \end{definition}
+
+\begin{satz} [Spur und Eigenwerte]
+ 	Sei $A \in \fieldkntimesn$
+	Es gilt: $tr(A) = \sum_{i = 1}^n \lambda_i$, die Spur ist also gleich der Summe der Eigenwerte.
+\end{satz}
 
 \begin{satz}
 	Sei $A \in \fieldkntimesn. A$ ist diagonalisierbar genau dann wenn 
@@ -596,7 +630,15 @@ Per Definition ist $S = \emptyset$ linear unabhängig. Enthält $S$ den Nullvekt
 	content...
 \end{satz}
 
-\begin{definition}[Singulärwert]
+\pagebreak
+
+\section{Singulärwerte}
+
+\begin{definition}[Singulärwertzerlegung]
+	content...
+\end{definition}
+
+\begin{definition}[Pseudo-Inverse]
 	content...
 \end{definition}
 
@@ -617,6 +659,7 @@ Per Definition ist $S = \emptyset$ linear unabhängig. Enthält $S$ den Nullvekt
 	\begin{enumerate}[noitemsep]
 		\item Es gilt: $A$ ist diagonalisierbar
 		\item Seien $\lambda, \mu$ verschiedene Eigenwerte von $A$. Dann gilt $\forall v \in E_\lambda, w \in E_\mu : \langle v, w \rangle = 0 $
+		\item Linke und Rechte Eigenvektoren sind identisch
 	\end{enumerate}
 \end{satz}
 
@@ -647,9 +690,6 @@ Per Definition ist $S = \emptyset$ linear unabhängig. Enthält $S$ den Nullvekt
 	Wenn eine symmetrische Matrix $A \in \fieldkntimesn$  positiv definit ist, so sind ihre diagonaleinträge positiv, d.h. $\forallin{i}{1,...,n} : a_{i,i} > 0$	
 \end{satz}
 
-\begin{definition}[Minor]
-	content...
-\end{definition}
 
 \begin{satz}[Positiv Definiertheit und Minore]
 	content...
@@ -725,7 +765,7 @@ Per Definition ist $S = \emptyset$ linear unabhängig. Enthält $S$ den Nullvekt
 	\begin{enumerate}[noitemsep]
 		\item Positivität: $\inner{x}{x} \leq 0, \inner{x}{x} = 0 \leftrightarrow x = 0$
 		\item Linearität: $\inner{x + \alpha y}{z} = \inner{x}{z} + \alpha \inner{y}{z}$
-		\item  Symmetrie: $\inner{x}{y} = \bar{\inner{y}{x}}$
+		\item  Symmetrie: $\inner{x}{y} = \inner{\bar{y}}{x}$
 	\end{enumerate}
 \end{definition}
 
@@ -770,4 +810,26 @@ Per Definition ist $S = \emptyset$ linear unabhängig. Enthält $S$ den Nullvekt
 
 \section{Tensor}
 
+\begin{definition}[Kronecker-Produkt]
+	content...
+\end{definition}
 
+\begin{satz}[Rechenregeln Kronecker-Produkt]
+	content...
+\end{satz}
+
+\begin{definition}[Tensor]
+	content...
+\end{definition}
+
+\begin{definition}[Ko - und Kontravarianz]
+	content...
+\end{definition}
+
+\begin{definition}[Tensorraum]
+	content...
+\end{definition}
+
+\begin{definition}[Operationen auf Tensoren]
+	content...
+\end{definition}

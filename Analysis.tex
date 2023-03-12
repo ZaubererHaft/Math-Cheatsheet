@@ -52,7 +52,7 @@
 	\begin{enumerate}[noitemsep]
 		\item \textbf{\emph{Dreiecksungleichung:}} $\forallinreal{x,y} : | x + y | \leq |x| + |y|$
 		\item \textbf{\emph{Umgekehrte Dreiecksungleichung:}} 	$\forallinreal{x,y} : | x + y | \geq ||x| - |y||$
-		\item \textbf{\emph{Cauchy-Schwarz-Ungleichung:}} 	$\forallinreal{x,y}^n : | <x + y> | \leq ||x|| + ||y||$
+		\item \textbf{\emph{Cauchy-Schwarz-Ungleichung:}} 	$\forallinreal{x,y}^n : | \inner{x}{y}|^2 \leq ||x||^2 \cdot ||y||^2$
 		\item \textbf{\emph{Abschätzen von Polynomen}} 	$ax^2 + bx + c \leq (a + b + c)x^2 $
 		\item \textbf{\emph{Abschätzen der Wurzel:}} 	$\sqrt{ab} \leq \frac{a + b}{2}$
 		\item \textbf{\emph{Bernoulli-Ungleichung:}} 	$(1+x)^n \geq 1 + nx$ für $x > -1$	
@@ -957,10 +957,6 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 		\end{cases}$
 \end{satz}
 
-\begin{definition}[Lebesgue-Integral]
-	content...
-\end{definition}
-
 \pagebreak
 
 \section{Verallgemeinerungen für mehrere Veränderliche}
@@ -976,12 +972,12 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 \end{definition}
 
 \begin{definition}[Punktfolge]
-	Eine Abbildung $\function{\phi}{\naturalset}{\realset^n}$ heißt auch Punktfolge. Man schreibt für die Glieder der Punktfolge hochgestellte Indices: $x^k = (x_1^k, ..., x_n^k)$, für die Folge selbst schreibt man $(x^k)$. Eine Punktfolge heißt beschränkt, wenn ihre Wertemenge $\{ x^k | k \in \naturalset \}$ beschränkt ist.
+	Eine Abbildung $\function{\phi}{\naturalset}{\realset^n}$ heißt auch Punktfolge. Man schreibt für die Glieder der Punktfolge hochgestellte Indices: $x^{(k)} = (x_1^{(k)}, ..., x_n^{(k)})$, für die Folge selbst schreibt man $(x^{(k)})$. Eine Punktfolge heißt beschränkt, wenn ihre Wertemenge $\{ x^{(k)} \medspace |\medspace k \in \naturalset \}$ beschränkt ist.
 \end{definition}
 
 
 \begin{definition}[Grenzwerte]
-	$a \in \realset^n$ heißt Grenzwert der Folge $(x^k)$, falls \\ $\lim_{k \rightarrow \infty} \norm{x^k - a} = 0$. Die Folge heißt dann auch konvergent. Besitzt eine Punktfolge keinen endlichen Grenzwert, so heißt sie divergent.
+	$a \in \realset^n$ heißt Grenzwert der Folge $(x^{(k)})$, falls \\ $\lim_{k \rightarrow \infty} \norm{x^{(k)} - a} = 0$. Die Folge heißt dann auch konvergent. Besitzt eine Punktfolge keinen endlichen Grenzwert, so heißt sie divergent.
 	Bei konvergenten Folgen liegen in jeder $\epsilon$ Umgebung von $g$ fast alle Folgenglieder und nur endlich viele außerhalb. Eine Punktfolge konvergiert nur dann, wenn sie kompontenweise konvergiert.
 \end{definition}
 
@@ -989,15 +985,15 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 	Bei Funktionen mehrerer Veränderlicher ist der Definitionsbereich $D$ eine Teilmenge des $\realset^n$. Sie ordnet 
 	jedem Punkt $x \in D \subseteq \realset^n$ eine relle Zahl zu: $\f{D \subseteq \realset^n}{\realset}$. Man nennt solche Funktionen auch skalares Feld (jeden Punkt in einem Raum wird ein skalar zugeordnet). 
 	
-	Ein skalares Feld $f$ heißt auf $E \subseteq D$ nach oben (unten) beschränkt, falls $f(E) = \{f(x) | x \in E\} \subseteq \realset$  nach oben (unten) beschränkt ist.´ 
+	Ein skalares Feld $f$ heißt auf $E \subseteq D$ nach oben (unten) beschränkt, falls $f(E) = \{f(x) \medspace | \medspace x \in E\} \subseteq \realset$  nach oben (unten) beschränkt ist.´ 
 \end{definition}
 
-\begin{definition}[Grenzwert von skalarer Feldern]
-	Eine Funktion $\f{D \subseteq \realset^n}{\realset}$ sei in der Umgebung von $x_0 = (x_1, ..., x_n) \in D$ definiert (aber nicht zwansweise an $x^0 $selbst. $f$ hat an der Stelle  $x^0$ den Grenzwert $a$, $a = \lim_{x \rightarrow x_0} f(x)$ genau dann wenn für jede Folge $(x^k)$ aus $D$ mit $x_0 \neq x^k$ und $\lim_{k \rightarrow \infty} x^k = x_0$ gilt: $\lim_{k \rightarrow \infty} f(x^k) = a$
+\begin{definition}[Grenzwerte skalarer Feldern]
+	Eine Funktion $\f{D \subseteq \realset^n}{\realset}$ sei in der Umgebung von $x_0 = (x_1, ..., x_n) \in D$ definiert (aber nicht zwansweise an $x^0$ selbst). $f$ hat an der Stelle  $x_0$ den Grenzwert $a$, $a = \lim_{x \rightarrow x_0} f(x)$, genau dann wenn, für jede Folge $(x^{(k)})_{k \in \naturalset}$ aus $D$ mit $x_0 \neq x^{(k)}$ und $\lim_{k \rightarrow \infty} x^{(k)} = x_0$ gilt: $\lim_{k \rightarrow \infty} f(x^{(k)}) = a$
 \end{definition}
 
 \begin{definition}[Stetigkeit]
-		Eine Funktion $\f{D \subseteq \realset^n}{\realset}$  heißt stetig im Punkt $x_0 = (x_1, ..., x_n) \in D$ wenn der Grenzwert $\lim_{x \rightarrow x_0} f(x)$ existiert und $\lim_{x \rightarrow x_0} f(x) = f(x_0)$ . $f$ heißt stetig auf derr Menge $M \subseteq D$, falls $f$ in jedem Punkt $x_0 \in M$ stetig ist.
+		Eine Funktion $\f{D \subseteq \realset^n}{\realset}$  heißt stetig im Punkt $x_0 = (x_1, ..., x_n) \in D$ wenn der Grenzwert $\lim_{x \rightarrow x_0} f(x)$ existiert und $\lim_{x \rightarrow x_0} f(x) = f(x_0)$ . $f$ heißt stetig auf der Menge $M \subseteq D$, falls $f$ in jedem Punkt $x_0 \in M$ stetig ist.
 \end{definition}
 
 \pagebreak
@@ -1008,9 +1004,35 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 	Betrachte $\function{f}{\realset^n}{\realset} : (\suboneton{x}) \mapsto f(\suboneton{x}) \in \realset$. Ist die Funktion $\function{f}{\realset}{\realset} : \xi \mapsto f(x_1, \dots, x_{k-1}, \xi, x_{k+1}, \dots, x_n)$ differenzierbar, heißt ihre Ableitung an der Stelle $x_k$ partielle Ableitung. Wir schreiben $\frac{\partial f}{\partial x_k}$ bzw. $\partial_k f(x)$. Alternative Notationen sind: $f_{x_1}(x) := \partialf{f(x)}{x_1}$ oder $f_{x_1x_2}(x) := \partialf{^2 f(x)}{x_1 \partial x_2} = \frac{\partial}{\partial x_1}(\partialf{f(x)}{x_2})$
 \end{definition}
 
+\begin{definition}[Differentiationsregeln]
+	content...
+\end{definition}
+
+
+\begin{definition}[Gradient]
+	Betrachte $\function{f}{\realset^n}{\realset}$, deren sämtliche partiellen Ableitungen existieren. 
+	Der Vektor $\nabla f(x) = grad(f(x)) = (\partial_1 f(x) \dots \partial_n f(x))^T$ heißt Gradient.
+\end{definition}
+
+\begin{definition}[Partielle Ableitungen höherer Ordnung]
+	content...
+\end{definition}
+
 \begin{satz}[Satz von Schwarz]
 	Für zweimal stetig differenzierbare Functionen $f \in C^2$ gilt: $\partialf{^2f}{x \partial y} = \partialf{^2f}{y \partial x}$
 \end{satz}
+
+\begin{definition}
+	Die Matrix $Hf(x) := (\partial_j \partial_i f(x))_{1 \leq i \leq j \leq n}$ heißt \emph{Hesse-Matrix}.
+\end{definition}
+
+\begin{definition}[Laplace Operator]
+	Sei $\f{\realset^n}{\realset}$. Der Laplace Operator $\Delta$ beschreibt die Divergenz des Gradienten und ist definiert als
+	
+	\begin{align*}
+	\Delta f  = \sum_{i=1}^{n} \partialf{^2f}{x_i^2} = div(\nabla f) = \nabla \cdot (\nabla f)
+	\end{align*}
+\end{definition}
 
 
 \begin{definition}[Richtungsableitung]
@@ -1021,25 +1043,69 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 	\end{align*}
 \end{definition}
 
+\begin{satz}[Berechnung der Richtungsableitung]
+	Für $f$ stetig differenzierbar lässt sich die Richtungsableitung mithilfe des Skalarprodukts wie folgt berechnen:
+	
+	\begin{align*}
+	D_v f(x_0) = \langle \nabla f(x_0), v \rangle 
+	\end{align*}
+\end{satz}
 
-\begin{definition}[Gradient]
-	 Betrachte $\function{f}{\realset^n}{\realset}$, deren sämtliche partiellen Ableitungen existieren. 
-	 Der Vektor $\nabla f(x) = grad(f(x)) = (\partial_1 f(x) \dots \partial_n f(x))^T$ heißt Gradient.
+\section{Differentialrechnung vektorwertiger Funktionen}
+
+\begin{definition}[Partielle Ableitung vektorwertiger Funktionen]
+	content...
 \end{definition}
+
+\begin{definition}[Divergenz]
+	Die Divergenz eines Vektorfeld beschreibt den Zu - order Abfluss einer Größe. Sei $\vec{f} : \realset^n \rightarrow \realset^n$:
+	
+	\begin{align*}
+	div(f) = \nabla \cdot \vec{f}(\vec{x}) = \sum_{i = 1}^{n} \frac{\partial f_i (\vec{x}) }{\partial x_i}
+	\end{align*}
+	
+\end{definition}
+
+
+\begin{definition}[Rotation]
+	Die Rotation erzeugt das Wirbelfeld zu einem Vektorfeld:
+	
+	\begin{align*}
+	curl(v(t, \vec{x})) = \nabla \times v(t,\vec{x}) = \begin{pmatrix} \frac{\partial}{\partial y} v_z(t, \vec{x}) - \frac{\partial}{\partial z} v_y(t, \vec{x}) \\
+	\frac{\partial}{\partial z} v_x(t, \vec{x}) - \frac{\partial}{\partial x} v_z(t, \vec{x}) \\ \frac{\partial}{\partial x} v_y(t, \vec{x}) - \frac{\partial}{\partial y} v_x(t, \vec{x})
+	\end{pmatrix} 
+	\end{align*}
+\end{definition}
+
 
 \begin{definition}[Totale Differenzierbarkeit]
-	Sei $\function{f}{\realset^n}{\realset}$ eine Funktion. $f$ ist an der Stelle $a$ total differenzierbar, falls ein $c = (c_1, ..., c_n)^T \in \realset^n$ existiert, sodass
+	Sei $U \subseteq \realset^n, \function{f}{U}{\realset^m}$. $f$ heißt in $x \in U $ total differenzierbar, falls es eine lineare Abbildung $\function{A}{\realset^n}{\realset^m} : h \mapsto A(h) := Ah, h = (h_1, ..., h_m)^T$ gibt, sodass gilt: 
+	
 	\begin{align*}
-		\lim_{h \rightarrow 0} \frac{f(a + h) - f(x) - c \cdot h}{\norm{h}} = 0
+		\lim_{h \rightarrow 0} \frac{f(x + h) - f(x) - A \cdot h}{\norm{h}} = 0
 	\end{align*}
-	Wir schreiben $f'(a) = (c_1, ..., c_n)^T$ analog dem eindimensionalen Fall und nennen $f'(a)$ totale Ableitung. 	
+	
+	Diese Abbildung kann man als Matrix beschreiben $A \in \realset^{n \times m}$. Es gilt: $f$ ist differenzierbar $\leftrightarrow$ alle Komponenten sind in $x$ differenzierbar.
+	Die Matrix $A$ heißt auch Jacobi Matrix. Man schreibt:
+	$A = Jf(x) = (\frac{\partial f_i}{\partial x_j})_{1 \leq i \leq n, 1 \leq j \leq m} \in \realset^{n \times m}$
+	
+	Oder alternativ $f'(x) = h$ analog dem eindimensionalen Fall und nennen $f'(h)$ totale Ableitung. 		
 \end{definition}
 
-\begin{definition}[Totales Differential/Totale Ableitung]
+
+\begin{satz}[Totale und Partielle Differenzierbarkeit]
+	content...
+\end{satz}
+
+\begin{satz}[Differentiationsregeln]
+	content...
+\end{satz}
+
+\begin{definition}[Totales/Vollständiges Differential]
 	Sei $\f{\realset^n}{\realset}$ total differenzierbar. Das Totale Differential beschreibt die Änderung in einer kleinen Umgebung eines Punktes $a$ und ist gegeben durch
 	
 	\begin{align*}
-	\frac{d f (\vec{x}) }{d \vec{x}} = d f(\vec{x}) = \sum_{i = 1}^{n} \frac{\partial f (\vec{x}) }{\partial x_i}
+	d f(\vec{x}) = \sum_{i = 1}^{n} \frac{\partial f (\vec{x}) }{\partial x_i} dx_i
 	\end{align*}
 	
 	In der Physik wird dies auch als \textbf{Materialableitung} bezeichnet. Ist $f$ von anderen Funktionen abhängig, z.B. $f(t, u(t))$, so ist die Kettenregel zu verwenden:
@@ -1051,20 +1117,18 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 \end{definition}
 
 \begin{satz}[Gradient und totale Ableitung]
-	Sei $\f{\realset^n}{\realset}$ in $a$ total differenzierbar, d.h. $f'(a) = (c_1,...,c_n)^T$. Dann ist $f$ partielle differenzierbar und es gilt: $\partialf{f}{x_k}(a) = c_k$
+	Sei $\f{\realset^n}{\realset}$ in $a$ total differenzierbar, d.h. $f'(a) = (c_1,...,c_n)$. Dann ist $f$ partiell differenzierbar und es gilt: $\partialf{f}{x_k}(a) = c_k$ bzw. $\nabla f (a)^T = f'(a) $
 \end{satz}
 
-
-\begin{satz}[Berechnung der Richtungsableitung]
-	Für $f$ stetig differenzierbar lässt sich die Richtungsableitung mithilfe des Skalarprodukts wie folgt berechnen:
-	
-	\begin{align*}
-	D_v f(x_0) = \langle \nabla f(x_0), v \rangle 
-	\end{align*}
-\end{satz}
 
 \begin{satz}[Eigenschaften des Gradienten]
 	Sei $f : D \subset \realset^n \rightarrow \realset, x \in D$ total differenzierbar. Es gilt: $\nabla f = 0$, so verschwinden alle Richtungsableitungen.	Gilt $\nabla f \neq 0$, so gibt es unter allen Richtungsableitungen $\partialf{f}{h}$ mit $\norm{h}_2 = 1$ eine größte, nämlich die des Gradienten
+\end{satz}
+
+\begin{satz}[Kettenregel des Gradienten]
+	\begin{align*}
+		\nabla_y f(g(y)) \overset{x := g(y)}{=} (Jg)^T(y) \nabla_x f(x)
+	\end{align*}
 \end{satz}
 
 \begin{tikzpicture}[bullet/.style={circle,fill,inner sep=1pt},
@@ -1115,9 +1179,9 @@ lower left=gray!60,lower right=gray!80!black] (1.75,0.5,0) -- (1.75,1.9,0)
 \node[anchor=north east] at (b2) {$(x_0,y_0)$};
 \end{tikzpicture}
 
-\begin{definition}
-	Die Matrix $Hf(x) := (\partial_j \partial_i f(x))_{1 \leq i \leq j \leq n}$ heißt \emph{Hesse-Matrix}.
-\end{definition}
+\pagebreak
+
+\section{Anwendung multivariabler Differentiation}
 
 \begin{satz}
 	Sei $U \subseteq \realset^n$ offen, $\function{f}{U}{\realset}$ zweimal stetig differenzierbar, d.h. $\partial_i \partial_j$ existiert für alle $i, j$. Dann gilt:
@@ -1127,11 +1191,6 @@ lower left=gray!60,lower right=gray!80!black] (1.75,0.5,0) -- (1.75,1.9,0)
 	\end{enumerate}
 \end{satz}
 
-\begin{definition}
-	Sei $U \subseteq \realset^n, \function{f}{U}{\realset^m}$. $f$ heißt in $x \in U $ differenzierbar, falls es eine lineare Abbildung $\function{A}{\realset^n}{\realset^m} : h \mapsto A(h) := Ah$ gibt, sodass gilt: $f(x+h) = f(x) + Ah + \mathcal{o}(||h||)$ für $h \rightarrow 0$. Diese Abbildung kann man als Matrix beschreiben $A \in \realset^{n \times m}$. Es gilt: $f$ ist differenzierbar $\leftrightarrow$ alle Komponenten sind in $x$ differenzierbar.
-	Die Matrix $A$ heißt auch Jacobi Matrix. Man schreibt:
-	$A = Jf(x) = (\frac{\partial f_i}{\partial x_j})_{1 \leq i \leq n, 1 \leq j \leq m} \in \realset^{m \times n }$
-\end{definition}
 
 \begin{definition}[Multivariate Ableitungen]
 	Zusammenfassend gilt:
@@ -1144,45 +1203,19 @@ lower left=gray!60,lower right=gray!80!black] (1.75,0.5,0) -- (1.75,1.9,0)
 \end{definition}
 
 
-
-\begin{definition}[Divergenz]
-	Die Divergenz eines Vektorfeld beschreibt den Zu - order Abfluss einer Größe. Sei $\vec{f} : \realset^n \rightarrow \realset^n$:
-
-	\begin{align*}
-	 div(f) = \nabla \cdot \vec{f}(\vec{x}) = \sum_{i = 1}^{n} \frac{\partial f_i (\vec{x}) }{\partial x_i}
-	\end{align*}
-	
-\end{definition}
-
-
-\begin{definition}[Rotation]
-	Die Rotation erzeugt das Wirbelfeld zu einem Vektorfeld:
-	
-	\begin{align*}
-		curl(v(t, \vec{x})) = \nabla \times v(t,\vec{x}) = \begin{pmatrix} \frac{\partial}{\partial y} v_z(t, \vec{x}) - \frac{\partial}{\partial z} v_y(t, \vec{x}) \\
-		\frac{\partial}{\partial z} v_x(t, \vec{x}) - \frac{\partial}{\partial x} v_z(t, \vec{x}) \\ \frac{\partial}{\partial x} v_y(t, \vec{x}) - \frac{\partial}{\partial y} v_x(t, \vec{x})
-		\end{pmatrix} 
-	\end{align*}
-\end{definition}
-
-
-\begin{definition}[Laplace Operator]
-	Sei $\f{\realset^n}{\realset}$. Der Laplace Operator $\Delta$ beschreibt die Divergenz des Gradienten und ist definiert als
-	
-	\begin{align*}
-	\Delta f  = \sum_{i=1}^{n} \partialf{^2f}{x_i^2} = div(\nabla f) = \nabla \cdot (\nabla f)
-	\end{align*}
-\end{definition}
-
 \pagebreak
 	
 \section{Integralrechnung mehrere Veränderlicher}
 
+\begin{definition}
+	content...
+\end{definition}
+
 \begin{satz}[Integration durch Substitution]
-	Sei $U$ eine offene Menge in $\realset^n$ und $\function{\phi}{U}{\realset^n}$ eine injektive differenzierbare Funktion mit stetigen partiellen Ableitungen und einer Jacobi Matrix ungleich null für jedes $x \in U$. Dann gilt für jede relle stetige Funktion mit \emph{kompaktem Support in $\phi(U)$}:
+	Sei $U$ eine offene Menge in $\realset^n$ und $\function{\phi}{U}{\realset^n}$ eine injektive differenzierbare Funktion mit stetigen partiellen Ableitungen und einer Jacobi Matrix ungleich null für jedes $x \in U$. Dann gilt für jede relle stetige Funktion mit kompaktem Träger in $\phi(U)$:
 	
 	\begin{equation}
-		\int_{\phi(U)}	 f(x) dx = \int_U f(\phi(u)) |det(J \phi)(u)| du
+		\int_{\phi(U)}	 f(x) dx = \int_U f(\phi(u)) \cdot |det(J \phi)(u)| du
  	\end{equation}
  	
  	Dabei bezeichnet $det(J \phi)(u)$ die Determinante der Jacobi Matrix von $\phi$ ausgewertet am Punkt $u$.
@@ -1335,12 +1368,6 @@ lower left=gray!60,lower right=gray!80!black] (1.75,0.5,0) -- (1.75,1.9,0)
 
 \pagebreak
 
-
-\section{Topologie}
-
-\pagebreak
-
-
 \section{Differentialgeometrie}
 
 
@@ -1369,68 +1396,11 @@ lower left=gray!60,lower right=gray!80!black] (1.75,0.5,0) -- (1.75,1.9,0)
 
 \pagebreak
 
-\section{Funktionalanalysis}
-
-\begin{definition}[Offene Menge]
-	content...
-\end{definition}
-
-\begin{definition}[Funktionsräume]
-	content...
-\end{definition}
-
-\begin{definition}[Funktional]
-	Sei $V$ ein Vektorraum über den Körper $\fieldk$. Ein Funktional $\Phi$ ist eine Abbildung $\Phi : V \rightarrow \fieldk$, also eine Abbildung von einen Vektorraum in den zugehörigen Körper.
-\end{definition}
-
-\begin{definition}[Linearform / Lineares Funktional]
-	Ist ein lineares Funktional
-\end{definition}
-
-\begin{definition}[Bilinearform / Bilineares Funktional]
-	Eine Abbildung $\function{a}{V \times W}{\realset}$ zwischen zwi Vektorräumen $V,W$ wird Bilineaform genannt, falls $a$ linear in jedem argument ist
-\end{definition}
-
-\begin{definition}[Norm einer Funktion]
-	content...
-\end{definition}
-
-\begin{satz}[Fundamental Lemma]
-	content...
-\end{satz}
-
-\begin{definition}[Eigenfunktionen]
-	content...
-\end{definition}
-
-\begin{definition}[Faltung]
-	content...
-\end{definition}
-
-\begin{definition}[Raum kontinuierlich differenzierbarer Funktionen]
-	content...
-\end{definition}
-
-\begin{definition}[Banach-Raum]
-	Ein Vektorraum $X$ zusammen mit einer Norm $\norm{\cdot}$ heißt Banach-Raum, falls:
-	\begin{itemize}
-		\item ...
-	\end{itemize}
-\end{definition}
 
 
-\begin{definition}[Prä-Hilbert-Raum]
-	content...
-\end{definition}
-
-\begin{definition}[Hilbert-Raum]
-	content...
-\end{definition}
-
-\begin{definition}[Sobolov-Raum]
-	content...
-\end{definition}
+\section{Dynamische Systeme}
 
 \pagebreak
 
+\section{Maßtheorie}
 

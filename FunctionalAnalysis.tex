@@ -1,0 +1,223 @@
+\section{Funktionalanalysis}
+
+\begin{definition}[Beschränkte Funktion]
+	Sei $ \Omega \neq \emptyset \subseteq \realset^n, V = \aspace{\Omega}{\realset}$, Menge aller Funktionen von $\Omega$ nach $\realset$. $f \in V$ wird beschränkt genannt, falls $\exists c \in \realset : \forallin{x}{\Omega} : |f(x)| < c$. Die Menge aller Beschränkten Funktionen  $\bspace{\Omega}{\realset}$ ist ein Unterraum von $V$.
+\end{definition}
+
+\begin{definition}[Offene (Punkt-) Menge]
+	Sei $x \in \realset^n, \epsilon > 0$. $B_\epsilon(x) := \{y \in \realset^n \medspace | \medspace \norm{y-x}_2 < \epsilon \}$ heißt offener Kugelkörper mit Radius $\epsilon$. Eine Menge $\Omega \subseteq \realset^n$ heißt offen in $\realset^n$, falls $\forallin{x}{\Omega} : \exists \epsilon > 0 : B_\epsilon(x) \subseteq \Omega$
+\end{definition}
+
+\begin{definition}[Geschlossene (Punkt-) Menge]
+	Eine Menge $A \subseteq \realset^n$ heißt geschlossen, falls $\realset^n \setminus A = \{x \in \realset^n \medspace | \medspace x \notin A \}$ offen ist
+\end{definition}
+
+\begin{definition}[Raum stetig differenzierbarer Funktionen]
+	Sei $\Omega \subseteq \realset^n, \Omega$ nicht leer und offen, $k \in \naturalset$
+	\begin{itemize}[noitemsep]
+		\item $\cnspace{k}{\Omega}{\realset}$ bezeichnet den Raum der kontinuierlich differenzierbaren Funktionen, das heißt für alle $f \in \cnspace{k}{\Omega}{\realset}$ existiert die Ableitung bis zur Ordnung $k$ und ist stetig
+		\item $\cnspace{0}{\Omega}{\realset}$ bezeichnet den Raum der stetigen Funktionen
+		\item $\cnspace{\infty}{\Omega}{\realset}$ bezeichnet den Raum der unendlich oft stetig differenzierbaren Funktionen
+	\end{itemize}
+\end{definition}
+
+\begin{definition}[Funktional]
+	Sei $V$ ein Vektorraum über den Körper $\fieldk$. Ein Funktional $\Phi$ ist eine Abbildung $\Phi : V \rightarrow \fieldk$, also eine Abbildung von einen Vektorraum in den zugehörigen Körper. Ist ein Funktional linear, so heißt es Linearform.
+\end{definition}
+
+
+\begin{definition}[Bilinearform / Bilineares Funktional]
+	Eine Abbildung $\function{a}{V \times W}{\realset}$ zwischen zwi Vektorräumen $V,W$ wird Bilineaform genannt, falls $a$ linear in jedem Argument ist, d.h.
+	\begin{itemize}[noitemsep]
+		\item $\forallin{v_1, v_2}{V}, \forallin{w}{W}: a(v_1 + v_2, w) = a(v_1,w) + a(v_2,w)$
+		\item $\forallin{v}{V}, \forallin{w_1, w_2}{W}: a(v, w_1 + w_2) = a(v,w_1) + a(v,w_2)$	
+		\item $\forallin{\lambda}{\fieldk}, \forallin{v}{V}, \forallin{w}{W}: a(\lambda v, w) = \lambda a(v,w) + a(v,w)$	
+		\item $\forallin{\lambda}{\fieldk}, \forallin{v}{V}, \forallin{w}{W}: a( v, \lambda w) = a(v,w) + \lambda a(v,w)$	
+	\end{itemize}
+	Man schreibt $\inner{u}{v} := a(u,v)$
+\end{definition}
+
+\begin{definition}[Skalarpodukt]
+	Sei $V$ ein Vektorraum über $\fieldk$. Eine Bilinearform $\function{a}{V \times V}{\realset}$ heißt Skalarprodukt, falls
+	\begin{enumerate}[noitemsep]
+		\item $\forallin{u,v}{V} : a(u,v) = a(v,u)$ (Symmetrie)
+		\item $\forallin{v \neq 0}{V} : a(v,v) > 0$ (Positivität)
+		\item $\forallin{v}{V} : a(v,v) = 0 \leftrightarrow v = 0 $ (Eindeutigkeit des neutralen Elements)	
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}[Norm einer Funktion]
+	Sei $V$ ein Vektorraum über $\fieldk$. Eine Abbilduhg $\function{\normempty}{V}{\realset}$ heißt Norm auf $V$, falls $\forallin{u,v}{V}, \alpha \in \realset$ gilt:
+	\begin{enumerate}[noitemsep]
+		\item $\norm{v} > 0, \norm{v} = 0 \leftrightarrow v = 0$ (Positivität)
+		\item $\norm{\alpha v} = |\alpha| \cdot \norm{v}$ (Absolute Homogenität)
+		\item $\norm{u + v} \leq \norm{u} + \norm{v}$ (Dreiecksungleichung)
+	\end{enumerate}
+ \end{definition}
+
+\begin{definition}[Induzierte/Natürliche Norm]
+	Sei $V$ ein Vektorraum mit Skalarprodukt $\innerempty$. Dann definiert $\norm{v} := |\inner{v}{v}|^\frac{1}{2}$ eine Norm auf $V$, genannt natürliche Norm oder Norm induziert von $\innerempty$.
+\end{definition}
+
+\begin{satz}[Cauchy-Schwarz Ungleichung]
+	Sei $V$ ein reller Vektorraum mit Skalarprodukt $\innerempty$. Dann gilt: $|\inner{u}{v}|^2 \leq \inner{u}{u} \inner{v}{v}$. Ist $\normempty$ die induzierte norm, dann gilt: $|\inner{u}{v}| \leq \norm{u} \cdot \norm{v}$
+\end{satz}
+
+\begin{definition}[Konvergenz auf Vektorräumen]
+	Sei $V$ ein reller Vektorraum mit Norm $\normempty : V \rightarrow \realset$, sei $\sequence{v}{n}$ Folge in $V$, d.h. $\forallin{n}{\naturalset} : v_n \in V$. $\sequence{v}{n}$ heißt konvergent, falls $\exists v \in V: \liminfty{n} \norm{v_n - v} = 0$ bzw. $\forall \epsilon > 0 : \exists N \in \naturalset : \forall n \geq N : \norm{v_n -v} < \epsilon$. $v$ heißt dann Grenzwert der Folge. Man schreibt $v = \liminfty{n} v_n$ oder $v_n \overset{n \rightarrow \infty}{v}$.
+\end{definition}
+
+\begin{satz}[Eindeutigkeit des Grenzwerts]
+	Falls ein Grenzwert zu einer Folge existiert, so ist es eindeutig. Für endlich-dimensionale Vektorräume konvergiert eine Folge mit einer Norm $\normempty_a$ genau dann, wenn es mit einer anderen Norm $\normempty_b$ konvergiert aufgrund der Äquivalenz von Normen auf endlich-dimensionalen Vektorräumen. Für unendlich-dimensionale Vektorräume gilt dies im Allgemeinen nicht.
+\end{satz}
+
+\begin{definition}[Punktweise Konvergenz]
+	Sei $\Omega \neq \emptyset \subseteq \realset^n$. Sei $\sequence{f}{n}$ eine Folge an Funktionen, $f_n \in \aspace{\Omega}{\realset}$. Die Folge heißt punktweise konvergent, falls $\forallin{x}{\Omega}$ die Folge $(f_n(x))_{n \in \naturalset}$ konvergent in $\realset$ ist. Sei $f \in \aspace{\Omega}{\realset}$ mit $f(x) = \liminfty{n}f_n(x)$. $f$ heißt dann punktweiser Grenzwert von $\sequence{f}{n}$
+\end{definition}
+
+\begin{definition}[Gleichmäßige Konvergenz]
+	Sei $\Omega \neq \emptyset \subseteq \realset^n$, $f \in \bspace{\Omega}{\realset}$ mit Norm $\norm{f}_\infty := sup_{x \in \Omega}|f(x)|$. Sei $\sequence{f}{n} \subseteq \bspace{\Omega}{\realset}$. Falls $f_n \overset{n \rightarrow \infty}{\rightarrow} f$ bzgl. der Norm $\normempty_\infty$, so konvergiert $f_n$ gleichmäßig gegen $f$.
+\end{definition}
+
+\begin{satz}[Eigenschaften gleichmäßiger Konvergenz]
+	Konvergiere $f_n \rightarrow f$ gleichmäßig. Dann gilt:
+	\begin{itemize}[noitemsep]
+		\item $(f_n(x))_{n \in \naturalset}$ konvergiert punktweise gegen $f$
+		\item Falls alle $f_n$ stetig sind, so ist der Grenzwert $f$ auch stetig 
+	\end{itemize} 
+\end{satz}
+
+\begin{definition}[$\epsilon$ - $\delta$ Kriterium für Stetigkeit ]
+	Seien $V,W$ relle Vektorräume mit Normen $\normempty_V, \normempty_W$. Sei $\Omega \subseteq V$. $\function{f}{\Omega}{W}$ heißt stetig im Punkt $v_0 \in \Omega$, falls $\forall \epsilon > 0: \exists \delta > 0: \forallin{v}{V} : \norm{v - v_0}_V < \delta \rightarrow \norm{f(v) - f(v_0}_W < \epsilon$.
+\end{definition}
+
+\begin{definition}[Folgenkriterium für Stetigkeit ]
+	Seien $V,W$ relle Vektorräume mit Normen $\normempty_V, \normempty_W$. Sei $\Omega \subseteq V$. $f$ heißt stetig im Punkt $v_0 \in \Omega$, falls für jede Folge $\sequence{v}{n}$ in $\Omega$ mit $vn \overset{n \rightarrow \infty}{\rightarrow} v_0$ gilt dass $f(vn) \overset{n \rightarrow \infty}{\rightarrow} f(v_0)$, bzw. $\liminfty{n} \norm{v_n - v_0}_V = 0 \Rightarrow \liminfty{n} \norm{f(v_n) - f(v_0)}_W = 0$ 
+\end{definition}
+
+\begin{definition}[Beschränkte Lineare Funktion]
+	Seien $V,W$ relle Vektorräume mit Normen $\normempty_V, \normempty_W$. Eine lineare Abbildung $\function{L}{V}{W}$ heißt beschränkt, falls $\exists C > 0 : \forallin{v}{V} : \norm{L(v)}_W \leq C \cdot \norm{v}_V$.
+\end{definition}
+
+\begin{satz}[Stetigkeit Linearer Funktionen]
+		Seien $V,W$ relle Vektorräume. Eine lineare Abbildung $\function{L}{V}{W}$ ist genau dann stetig, wenn
+		\begin{itemize}[noitemsep]
+			\item $L$ stetig in $v_0 = 0$ ist bzw. genau dann, wenn
+			\item $L$ beschränkt ist
+		\end{itemize}
+\end{satz}
+
+\begin{definition}[Cauchy Folge]
+	Sei $V$ reller Vektorraum, $\normempty_V$ Norm auf $V$. Eine Folge $\sequence{v}{n}$ in $V$ heißt Cauchy-Folge, falls $\forall \epsilon > 0 : \exists N \in \naturalset : \forall n,m \geq N : \norm{v_n - v_m}_V < \epsilon$. Falls $\sequence{v}{n}$ konvergent ist, dann ist $\sequence{v}{n}$ Cauchy-Folge.
+\end{definition}
+
+\begin{definition}[Vollständiger Vektorraum]
+		Sei $V$ reller Vektorraum, $\normempty_V$ Norm auf $V$. $V$ heißt vollständig, falls jede Cauchy Folge $\sequence{v}{n}$ in $V$ konvergiert bzgl. der Norm $\normempty_V$. 
+\end{definition}
+
+\begin{definition}[Banach-Raum]
+	Falls ein Vektorraum $V$ zusammen mit einer Norm $\normempty$ vollständig ist, so heißt $V$ Banach-Raum. 
+\end{definition}
+
+\begin{definition}[Hilbert-Raum]
+	Sei $V$ Vektorraum mit $\innerempty : V \times V \rightarrow \realset$ Skalarprodukt. Sei $\norm{v} := \sqrt{\inner{v}{v}}$ Norm. Falls $V$ Banach-Raum bzgl. $\normempty$ ist, dann heißt $V$ Hilbert-Raum bzgl. $\innerempty$.
+\end{definition}
+
+\begin{definition}[Träger]
+	Der Träger einer Funktion $f$ umfasst die Menge aller $x$ sodass $f(x) \neq 0$ : $supp(f) = \{ x \medspace | \medspace f(x) \neq 0 \}$. Der Träger einer Funktion $f \in \cnspace{\infty}{[a,b]}{\realset}$ ist definiert als $supp(f) = \{x \medspace | \medspace \exists(x_n) \medspace \text{mit} \medspace x_n \rightarrow x \medspace \text{und} \medspace f(x_n) \neq 0 \}$. Der Träger heißt kompakt, falls er geschlossen und beschränkt ist.
+\end{definition}
+
+\begin{definition}[Testfunktionenraum]
+	Als Testfunktionenraum wird üblicherweise verwendet:
+	\begin{itemize}[noitemsep]
+		\item $\testspace{[a,b]}{\realset} := \{ \function{\phi}{[a,b]}{\realset} \medspace | \medspace \phi \in \cnspace{1}{[a,b]}{\realset} \land \phi(a) = \phi(b) = 0 \}$
+		\item $\testspacecompact{(a,b)}{\realset} := \{ \phi \in \cnspace{\infty}{[a,b]}{\realset} \medspace | \medspace \phi \medspace$ hat kompakten Träger, der in $(a,b)$ enthalten ist.  $\}$.
+	\end{itemize}
+\end{definition}
+
+\begin{definition}[Lebesgue-Integral]
+	content...
+\end{definition}
+
+\begin{definition}[$L^p$ - Raum]
+	Der $L^p$-, oder auch Lebesgue-, Raum ist definiert als: $L^p([a,b], \realset) := \{ f \in \aspace{[a,b]}{\realset} \medspace | \medspace f $ ist messbar und $ \medspace \int_a^b |f(x|^p \medspace d\lambda < \infty \}, p \in \naturalset$. Jeder $\lpspace{p}{[a,b]}{\realset}$-Raum ist ein Banach-Raum mit der Norm: $\norm{f}_{L^p} := (\int_{a}^{b} |f(x|^p \medspace d \lambda )^\frac{1}{p}$.
+\end{definition}
+
+\begin{satz}[$L^2$ - Hilbert-Raum]
+	Der $\lpspace{2}{[a,b]}{\realset}$ ist der einzige Hilbert-Raum unter den $L^p$-Räumen mit dem Skalarprodukt $\inner{f}{g} := \int_{a}^{b} |f(x)g(x)| d\lambda$
+\end{satz}
+
+\begin{definition}[Schwache Ableitung]
+	Sei $f \in \lpspace{2}{[a,b]}{\realset}$. $g \in \lpspace{2}{[a,b]}{\realset}$ heißt Schwache Ableitung, falls $\forallin{\phi}{\testspace{[a,b]}{\realset}}$ gilt:
+	\begin{align*}
+		\int_{a}^{b} f(x) \phi'(x) dx = - \int_{a}^{b} g(x) \phi(x) dx
+	\end{align*}
+	Falls eine klassische/starke Ableitung $f'(x)$ existiert, so ist sie gleich der schwachen Ableitung $g$. 
+\end{definition}
+
+\begin{definition}[Abgeschlossene Hülle]
+	Sei $V$ reller Vektorraum mit Norm $\normempty$. Sei $A \subseteq V$. Die abgeschlossene Hülle von $A, \bar{A}$ ist die Menge aller $v \in V$ sodass es eine Folge $\sequence{a}{n}$ mit $a_n \in A $ mit $\liminfty{n} a_n = v$.
+\end{definition}
+
+\begin{satz}[Dichte der Testfunktionenräume]
+	content...
+\end{satz}
+
+\begin{definition}[Schwache Ableitungen höherer Ordnung]
+	content...
+\end{definition}
+
+
+\begin{definition}[Sobolev-Raum]
+	content...
+\end{definition}
+
+\begin{definition}[Sobolev-Raum mit kompaktem Träger]
+	content...
+\end{definition}
+
+\begin{satz}[Berechnung der schwachen Ableitung]
+	content...
+\end{satz}
+
+\begin{satz}[Poincaré-Friedrichs-Ungleichung]
+	content...
+\end{satz}
+
+\begin{satz}[Variationelle Gleichung]
+	content...
+\end{satz}
+
+\begin{satz}[Riesz - Repräsentation]
+	content...
+\end{satz}
+
+\begin{definition}[Koerzitive Funktion]
+	content...
+\end{definition}
+
+\begin{satz}[Lax-Milgram]
+	content...
+\end{satz}
+
+\begin{satz}[Schätzung der Lösung einer variationellen Gleichung]
+	content...
+\end{satz}
+
+
+\begin{satz}[Fundamental Lemma]
+	content...
+\end{satz}
+
+\begin{definition}[Eigenfunktionen]
+	content...
+\end{definition}
+
+\begin{definition}[Faltung]
+	content...
+\end{definition}
+
+
+
+
+\pagebreak

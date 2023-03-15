@@ -31,6 +31,8 @@
 \newcommand{\realset}{\mathbb{R}}
 \newcommand{\complexset}{\mathbb{C}}
 \newcommand{\naturalset}{\mathbb{N}}
+\newcommand{\integerset}{\mathbb{Z}}
+\newcommand{\rationalset}{\mathbb{Q}}
 \newcommand{\sequence}[2]{(#1_{#2})_{#2 \in \naturalset}}
 \newcommand{\sequencean}{\sequence{a}{n}}
 \newcommand{\sequencebn}{\sequence{b}{n}}
@@ -73,10 +75,13 @@
 \newcommand{\testspace}[2]{C_0^1(#1,#2)}
 \newcommand{\testspacecompact}[2]{C_C^\infty(#1,#2)}
 \newcommand{\lpspace}[3]{L^#1(#2,#3)}
+\newcommand{\sobolevspace}[3]{H^#1(#2,#3)}
+\newcommand{\sobolevspacecompact}[3]{H^#1_0(#2,#3)}
 
 \newtheorem{definition}{Definition}
 \newtheorem{satz}{Satz}
 
+\include{Fundamentals}
 \include{Discrete}
 \include{Algebra}
 \include{Analysis}

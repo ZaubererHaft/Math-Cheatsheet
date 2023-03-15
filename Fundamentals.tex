@@ -1,0 +1,112 @@
+\section{Elementare Algebra}
+
+\begin{definition}[Zahlenmengen]
+	Zum Rechnen werden Zahlenmengen betrachtet:
+	\begin{itemize}[noitemsep]
+		\item Natürliche Zahlen $\naturalset := \{ 1, 2, 3, ... \}$
+		\item Ganze Zahlen $\integerset := \{...,-1, 0, 1, ... \}$.
+		\item Rationale Zahlen, Menge der Bruchzahlen: $\rationalset := \{ \frac{p}{q} \medspace | \medspace q \neq 0 \land p,q \in \integerset \}$
+		\item Reelle Zahlen $\realset$, die durch rationale Zahlen approximiert werden können, z.B. $e, \pi \in \realset$ (Irrationale Zahlen)
+	\end{itemize}
+	Zahlenmengen sind Mengen, die erweitert werden können, z.B. $\rationalset^+_0$, alle positive rationalen Zahlen und $0$.
+\end{definition}
+
+\begin{definition}[Grundrechenarten]
+	Grundrechenarten auf den Zahlenmengen sind:
+	\begin{itemize}[noitemsep]
+		\item Addition: Summanden ergeben eine Summe
+		\item Subtraktion: Ein Minuend und ein Subtrahend ergeben eine Differenz
+		\item Multiplikation: Faktoren bilden ein Produkt
+		\item Division: Ein Dividend und ein Divisor ergeben ein Quotient
+	\end{itemize}
+\end{definition}
+
+\begin{definition}[Brüche]
+	Brüche sind in der Menge $\rationalset$ enthalten. Man schreibt $\frac{\text{Zähler}}{\text{Nenner}}$. Der Bruch heißt echter Bruch, falls der Zähler kleiner als der Nenner ist. Bei unechten Brüchen ist der Zähler größer als der Nenner. Unechte Brüche können als Gemischter Bruch dargestellt werden, d.h. als Summe aus $\naturalset$ und einen Bruch aus $\rationalset$: $a + \frac{b}{c} = a\frac{b}{c}$
+\end{definition}
+
+\begin{satz}[Rechnen mit Brüchen]
+	Für Brüche $\frac{p}{q}$, $\frac{r}{s} \in \rationalset, \alpha \in \realset $ gilt:
+	\begin{itemize}[noitemsep]
+		\item Erweitern: Zähler und Nenner werden mit der gleichen Zahl multipliziert: $\frac{p}{q} = \frac{p \cdot \alpha}{q \cdot \alpha}$
+		\item Kürzen: Zähler und Nenner werden durch die gleichen Zahl dividiert: $\frac{p }{q} = \frac{p \div \alpha}{q \div \alpha}$. Ein Bruch heißt vollständig gekürzt, falls er nicht ohne Rest weiter kürzbar ist
+		\item Multiplikation von Brüchen: $\frac{p}{q} \cdot \frac{r}{s} = \frac{p \cdot r}{q \cdot s}$
+		\item Division von Brüchen: Multiplizieren des ersten Bruchs mit dem Kehrbruch des zweiten: $\frac{p}{q} \div \frac{r}{s} = \frac{p}{q} \cdot \frac{s}{r}$
+		\item Addition und Subtraktion: Bei gleichen Nenner werden die Zähler addiert und subtrahiert: $\frac{p}{q} \pm \frac{r}{q} = \frac{p \pm r}{q}$
+	\end{itemize}
+\end{satz}
+
+\begin{definition}[Terme und Termarten]
+	Ein Term besteht aus Zahlen und Variablen, die durch Rechenoperationen verknüpft werden und auch Klammern und Potenzen enthalten. Für die Variablen können Zahlen oder weitere Terme eingesetzt werden. Terme sind gleichartig, wenn sie sich nur in ihren Koeffizienten unterscheiden. Sie können dann durch Addition und Subtraktion zusammengefasst werden. Außerdem werden sie nach der zuletzt ausgeführten Rechenoperation in Termarten eingeteilt.
+\end{definition}
+
+\begin{satz}[Rechengesetze]
+	Es gelten die folgenden Rechengesetze. Seien $a,b,c \in \realset$:
+	Assoziativgesetz:
+	\begin{itemize}[noitemsep]
+		\item Addition: $(a+b)+c = a + (b+c)$
+		\item  Multiplikation: $(a \cdot b) \cdot c = a \cdot (b \cdot c)$
+	\end{itemize}
+	Kommutativgesetz:
+	\begin{itemize}[noitemsep]
+		\item Addition: $a + b = b + a$
+		\item Multiplikation: $a \cdot b = b \cdot a $
+	\end{itemize}
+	Distributivgesetz:
+	\begin{itemize}[noitemsep]
+		\item $a \cdot (b + c) = a \cdot b + a \cdot c$
+		\item $a \cdot (b - c) = a \cdot b - a \cdot c$
+		\item $(a + b) \div c = a \div c + b \div c$
+		\item Achtung: $c \div (a + b) = \frac{c}{a + b} \neq \frac{c}{a} + \frac{c}{b}$
+	\end{itemize}
+	Multiplikation von Summen: Jeder Summand des ersten Faktors wird mit jedem Summand des zweiten Faktors multipliziert: $(a + b) \cdot (c + d) = a \cdot (c + d) + b \cdot (c + d) = a \cdot c + a \cdot d + b \cdot c + b \cdot d$
+	
+	Faktorisieren: Manche Terme lassen sich durch Ausklammern gemeinsamer Faktoren in ein Produktterm verwandeln, z.B. $2a + 3ab = a(2 + 3b)$
+\end{satz}
+
+\begin{satz}[Binomische Formeln]
+	Es gilt:
+	\begin{itemize}[noitemsep]
+		\item  $(a \pm b)^2 = a^2 \pm 2ab + b^2$
+		\item  $(a+b)(a-b) = a^2 - b^2$
+	\end{itemize}
+\end{satz}
+
+\begin{definition}[Bruchterme]
+	Tritt im Nenner eines Terms eine Variable auf, so heißt der Term Bruchterm. Es gelten die gleichen Rechenregeln wie bei gewöhnlichen Brüchen.
+\end{definition}
+
+\begin{definition}[Potenz]
+	Eine Potenz hat die Form $x^a, a \in \integerset$. $x$ heißt Basis, $a$ Exponent. Gilt $a \in \naturalset \rightarrow x^a = x \cdot ... \cdot x$ ($a$ mal). $x^0 := 1$. $x^{-a} := \frac{1}{x^a}$. 
+\end{definition}
+
+\begin{satz}[Rechnen mit Potenzen]
+	Sei $x,y \neq 0 \in \realset, m,n \in \integerset$.
+	\begin{itemize}[noitemsep]
+		\item Potenzen mit gleicher Basis werden multipliziert, indem man die Exponenten addiert: $x^m \cdot x^n = x^{m + n}$
+		\item  Produkte werden potenziert, indem man die eizelnen Faktoren potenziert: $(x \cdot y)^n = x^n \cdot y^n$
+		\item  Potenzen werden potenziert, indem man die Exponenten multipliziert: $(x^m)^n = x^{m \cdot n}$
+		\item Potenzen mit gleicher Basis werden dividiert, indem man die Exponenten subtrahiert: $x^m \div x^n = x^{m - n}$
+		\item  Brüche werden potenziert, indem man Zähler und Nenner potenziert: $(\frac{x}{y})^n = \frac{x^n}{y^n}$
+	\end{itemize} 
+\end{satz}
+
+\begin{definition}[Wurzel]
+	Sei $n \geq 1, a \in \realset^+_0$. Die Gleichung $x^n = a$ besitzt genau eine nicht-negative reelle Lösung. Man schreibt: $x = \sqrt[n]{a}$. $\sqrt[n]{a}$ heißt Wurzel oder Radix, $n$ Wurzelexponent, $a$ Radikand.	
+	
+	Wurzeln lassen sich auch in Potenzschreibweise darstellen: $\sqrt[n]{a^k} = \sqrt[n]{a}^k = a^{\frac{k}{n}}$. Es gelten damit die Potenzgesetze. 
+	Bei der Additione dürfen nur Wurzeln mit gleichem Radikand zusammengefasst werden: $x\sqrt{b} + y\sqrt{b} = (x+y)\sqrt{b}$.
+	
+	Teilweises Radizieren: Abspalten einer Quadratzahl und dann radizieren (Wurzel ziehen), z.B. $\sqrt{20} = \sqrt{4 \cdot 5} = \sqrt{4}\sqrt{5}= 2 \sqrt{5}$
+\end{definition}
+
+\begin{definition}[Gleichung]
+	Eine Gleichung verbindet zwei Terme durch ein Gleichheitszeichen. Eine Äquivalenzumformung ist eine Umformung, die die Lösungsmenge der Gleichung unverändert lässt.
+\end{definition}
+
+\begin{definition}[Ungleichung]
+		Eine Gleichung verbindet zwei Terme durch $\leq, \geq, <, >$ und dürfen wie Gelichungen umgeformt werden. Bei einer Multiplikation oder Division durch eine negative Zahl dreht sich die Aussage um.
+\end{definition}
+
+\pagebreak
+\section{Geometrie}

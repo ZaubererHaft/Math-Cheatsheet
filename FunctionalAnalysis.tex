@@ -101,10 +101,7 @@
 
 \begin{satz}[Stetigkeit Linearer Funktionen]
 		Seien $V,W$ relle Vektorräume. Eine lineare Abbildung $\function{L}{V}{W}$ ist genau dann stetig, wenn
-		\begin{itemize}[noitemsep]
-			\item $L$ stetig in $v_0 = 0$ ist bzw. genau dann, wenn
-			\item $L$ beschränkt ist
-		\end{itemize}
+		 $L$ stetig in $v_0 = 0$ ist bzw. genau dann, wenn $L$ beschränkt ist.
 \end{satz}
 
 \begin{definition}[Cauchy Folge]
@@ -120,7 +117,7 @@
 \end{definition}
 
 \begin{definition}[Hilbert-Raum]
-	Sei $V$ Vektorraum mit $\innerempty : V \times V \rightarrow \realset$ Skalarprodukt. Sei $\norm{v} := \sqrt{\inner{v}{v}}$ Norm. Falls $V$ Banach-Raum bzgl. $\normempty$ ist, dann heißt $V$ Hilbert-Raum bzgl. $\innerempty$.
+	Sei $V$ Vektorraum mit $\innerempty $ Skalarprodukt. Sei $\norm{v} := \sqrt{\inner{v}{v}}$ Norm. Falls $V$ Banach-Raum bzgl. $\normempty$ ist, dann heißt $V$ Hilbert-Raum bzgl. $\innerempty$.
 \end{definition}
 
 \begin{definition}[Träger]
@@ -128,15 +125,11 @@
 \end{definition}
 
 \begin{definition}[Testfunktionenraum]
-	Als Testfunktionenraum wird üblicherweise verwendet:
+	Der Testfunktionenraum kann definiert werden als
 	\begin{itemize}[noitemsep]
 		\item $\testspace{[a,b]}{\realset} := \{ \function{\phi}{[a,b]}{\realset} \medspace | \medspace \phi \in \cnspace{1}{[a,b]}{\realset} \land \phi(a) = \phi(b) = 0 \}$
 		\item $\testspacecompact{(a,b)}{\realset} := \{ \phi \in \cnspace{\infty}{[a,b]}{\realset} \medspace | \medspace \phi \medspace$ hat kompakten Träger, der in $(a,b)$ enthalten ist.  $\}$.
 	\end{itemize}
-\end{definition}
-
-\begin{definition}[Lebesgue-Integral]
-	content...
 \end{definition}
 
 \begin{definition}[$L^p$ - Raum]
@@ -160,50 +153,101 @@
 \end{definition}
 
 \begin{satz}[Dichte der Testfunktionenräume]
-	content...
+	Der Raum $\testspacecompact{(a,b)}{\realset}$ is dicht in $\lpspace{2}{[a,b]}{\realset}$, d.h., $\forallin{f}{\lpspace{2}{[a,b]}{\realset}} : \exists \sequence{\phi}{n}$ mit $\phi_n \in \testspacecompact{(a,b)}{\realset}$ sodass $\phi_n \overset{n \rightarrow \infty}{\rightarrow} f$ bzgl. $\normempty_{L^2}$. Alternativ kann dies mittels der abgeschlossenen Hülle ausgedrückt werden:
+	\begin{align*}
+		\overline{\testspacecompact{(a,b)}{\realset}} = \lpspace{2}{[a,b]}{\realset} \Rightarrow \overline{\testspace{[a,b]}{\realset}} = \lpspace{2}{[a,b]}{\realset}
+	\end{align*}
+\end{satz}
+
+\begin{satz}[Eindeutigkeit der Schwachen Ableitung]
+	Die schwache Ableitung ist eindeutig als Element von $\lpspace{2}{[a,b]}{\realset}$.
 \end{satz}
 
 \begin{definition}[Schwache Ableitungen höherer Ordnung]
-	content...
+	Sei $f \in \lpspace{2}{[a,b]}{\realset}$ mit $f' \in \lpspace{2}{[a,b]}{\realset}$ schwacher Ableitung. Falls $f'$ wieder eine schwache Ableitung $h \in \lpspace{2}{[a,b]}{\realset}$ besitzt, schreibt man $f'' := h$. In gleicher Art und weise sind höhere schwächere Ableitungen $f^{(n)}$ definiert.
 \end{definition}
 
 
 \begin{definition}[Sobolev-Raum]
-	content...
-\end{definition}
+	Der Sobolev-Raum der Ordnung $m$ ist definiert als $\sobolevspace{m}{[a,b]}{\realset} := \{ f \in \lpspace{2}{[a,b]}{\realset} \medspace | \medspace f^{(k)} \in \lpspace{2}{[a,b]}{\realset} $ (schwache Ableitung) existiert für $ k=1,...,m \} $.
+\end{definition} 
+
+\begin{satz}[Sobolev Hilbert-Raum]
+	Seien $u,v \in \sobolevspace{m}{[a,b]}{\realset}$.
+	\begin{align*}
+		\inner{u}{v}_{H^m} := \int_{a}^{b} u(x)v(x) + u'(x)v'(x) + ... + u^{(m)}(x)v^{(m)}(x) dx
+	\end{align*} definiert ein Skalarprodukt auf $\sobolevspace{m}{[a,b]}{\realset}$. Zusammen mit der induzierten Norm $\norm{u}_{H^m} := \sqrt{\inner{u}{u}_{H^m}}$ ist der Sobolev-Raum vollständig, d.h., $\sobolevspace{m}{[a,b]}{\realset}$ formt einen Hilbert-Raum mit $\normempty_{H^m}$.
+\end{satz}
 
 \begin{definition}[Sobolev-Raum mit kompaktem Träger]
-	content...
+	Sei $k \geq 1$. \\ $\sobolevspacecompact{k}{(a,b)}{\realset} := \overline{\testspacecompact{(a,b)}{\realset}}$, d.h. $\sobolevspacecompact{k}{(a,b)}{\realset}$ beinhaltet alle Funktionen $f \in \sobolevspace{k}{[a,b]}{\realset}$ für die es eine Folge $\sequence{f}{n}, f_n \in \testspacecompact{(a,b)}{\realset}$ gibt, sodass $f_n \overset{n \rightarrow \infty}{\rightarrow} f$ bzgl. $\normempty_{H^k}$. $\sobolevspacecompact{k}{(a,b)}{\realset}$ formt einen Hilbertraum mit $\normempty_{H^k}$.
 \end{definition}
 
 \begin{satz}[Berechnung der schwachen Ableitung]
-	content...
+	Sei $-\infty < a < b < \infty$, $\function{u}{[a,b]}{\realset}$ definiere die folgenden Eigenschaften:
+	\begin{itemize}[noitemsep]
+		\item $u$ ist stetig auf $[a,b]$
+		\item es gibt eine endliche Anzahl an Punkten $a_j, j \in \{0,...,n\}$ mit $a = a_0 < a_1 < ... < a_n = b$ sodass $u$ stetig differenzierbar für alle $j$ auf dem offenen Unterintervall $(a_j,a_{j+1})$ mit klassischer Ableitung $u'(x)$  und die Ableitung stetig fortsetzbar auf das geschlossene Intervall $[a_j, a_{j+1}]$ ist
+	\end{itemize} Dann gilt: $u$ ist schwach differenzierbar mit der schwachen Ableitung
+	\begin{align*}
+		h(x) = \begin{cases}
+		 u'(x), & \text{falls} \medspace $u$ \medspace \text{klassisch differenzierbar in } \medspace x \medspace \text{ist} \\
+		 \text{beliebig} & \text{sonst}
+		\end{cases}
+	\end{align*}
+	und $u \in \sobolevspacecompact{1}{[a,b]}{\realset}$ sowie  $u \in \sobolevspacecompact{1}{[a,b]}{\realset} \leftrightarrow u(a) = u(b) = 0$
 \end{satz}
 
-\begin{satz}[Poincaré-Friedrichs-Ungleichung]
-	content...
+\begin{satz}[Vereinfachte Poincaré-Friedrichs-Ungleichung]
+	Sei $v \in \sobolevspacecompact{1}{(0,1)}{\realset}$. Dann gilt: $\int_{0}^{1} v(x)^2 dx \leq \frac{1}{8} \int_{0}^{1} v'(x)^2 dx$
 \end{satz}
 
 \begin{satz}[Variationelle Gleichung]
-	content...
+	Sei $V$ ein reller normierter Vektorraum. Sei $\function{a}{V \times V}{\realset}$ bilinear, symmetrisch und positiv definit, d.h., ein Skalarprodukt. Sei $\function{L}{V}{\realset}$ eine lineare Abbildung. Definiere $\function{F}{V}{\realset} : v \mapsto \frac{1}{2}a(v,v) - Lv$. Dann gilt: $v_1 \in V$ minimiert $F$ genau dann, wenn $v_1$ die variationelle Gleichung $a(v_1, v) = Lv$ für alle $v \in V$ löst, d.h., die Abbildung $v \mapsto Lv$ ist gleich der Abbildung $v \mapsto a(v_1,v)$ 
 \end{satz}
 
-\begin{satz}[Riesz - Repräsentation]
-	content...
+\begin{satz}[Riesz'scher Darstellungssatz]
+	Sei $V$ Hilbert-Raum mit $\innerempty$. Sei $\function{L}{V}{\realset}$ lineare Abbildung und stetig bzgl der induzierten Norm $\norm{v} = \sqrt{\inner{v}{v}}$. Dann gibt es genau ein $\tilde{v} \in V$ sodass $Lv = \inner{\tilde{v}}{v}$.
 \end{satz}
 
 \begin{definition}[Koerzitive Funktion]
-	content...
+	Sei $V$ reller Vektorraum mit Norm $\normempty$. Eine bilineare Abbildung wird koerzitiv genannt, falls $\exists C > 0 : \forallin{v}{V} : |a(v,v)| \geq C \norm{v}^2$
 \end{definition}
 
 \begin{satz}[Lax-Milgram]
-	content...
+	Sei $V$ Hilbert-Raum. Sei $a$ eine stetige Bilinearform sodass $a(v,v) \geq C \norm{v}^2$ (koerzitiv). Sei $\function{L}{V}{\realset}$ linear und stetig. Dann gibt es genau ein $v_1$ sodass $Lv = a(v_1,v)$. Die Lösung der variationellen Gleichung ist damit eindeutig bestimmt.
 \end{satz}
 
 \begin{satz}[Schätzung der Lösung einer variationellen Gleichung]
-	content...
+	Sei $v_1$ Lösung der variationellen Gleichung $a(v_1,v) = Lv, \forallin{v}{V}$. Dann gilt: $\norm{v_1} \leq \frac{2D}{C}$, wobei $L$ beschränkt mit $|Lv| \leq D \norm{v}$ und $a$ koerzitiv mit $a(v,v) \geq C \norm{v}^2 $
 \end{satz}
 
+\begin{satz}[Anwendung auf Dirichlet Randwertprobleme]
+	Sei $\Omega$ Gebiet mit Lipschitz-stetigem Rand. Betrachte die lineare elliptische partielle Differentialgleichung zweiter Ordnung
+	\begin{align*}
+		- \sum_{i,k = 1}^{n} \partialf{}{x_i}(a_{i,k}(x) \partialf{u(x)}{x_k}) + a_0(x)u(x) = f(x) \\
+		u(x) = 0, \forallin{x}{\partial \Omega}, f \in \lpspace{2}{\Omega}{\realset}
+	\end{align*}
+	$u \in \cnspace{2}{\Omega}{\realset}$ heißt starke Lösung der Differentialgleichung.
+	Multipliziere mit $v \in \testspacecompact{\Omega}{\realset}$ und integriere über $\Omega$. Die folgende Gleichung ist als schwache Form der Differentialgleichung definiert:
+	\begin{align*}
+		- \int_{\Omega} \sum_{i,k = 1}^{n} \partialf{}{x_i}(a_{i,k}(x) \partialf{u(x)}{x_k}) v(x) + a_0(x)u(x) v(x) dx = \int_\Omega f(x) v(x) dx
+	\end{align*}
+	Definiere nun:
+	\begin{align*}
+		&a(u,v) := \int_{\Omega} \sum_{i,k = 1}^{n} \partialf{}{x_i}(a_{i,k}(x) \partialf{u(x)}{x_k}) v(x) + a_0(x)u(x) v(x) dx \\
+		&L(v) := \int_\Omega f(x)v(x) dx
+	\end{align*}
+	Dann heißt $u \in \sobolevspacecompact{1}{\Omega}{\realset}$ schwache Lösung  der Differentialgleichung genau dann, wenn $a(u,v) = L(v)$. Ist Lax-Milgram anwendbar, so ist $u$ eindeutig bestimmt und minimiert $F(v) = \frac{1}{2} a(v,v) - Lv$
+\end{satz}
+
+\begin{definition}[Galerkin-Schema]
+	content...
+\end{definition}
+
+\begin{satz}[Lemma von Céa]
+	content...
+\end{satz}
 
 \begin{satz}[Fundamental Lemma]
 	content...
@@ -218,6 +262,8 @@
 \end{definition}
 
 
-
+\begin{definition}[Distribution]
+	content...
+\end{definition}
 
 \pagebreak

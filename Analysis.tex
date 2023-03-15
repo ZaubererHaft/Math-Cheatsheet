@@ -845,30 +845,6 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 
 \end{satz}
 
-\begin{tikzpicture}
-\begin{axis}[
-    axis lines = left,
-    legend pos=south east,
-    width=10cm,height=8cm,
-      axis x line=center,
-    axis y line=center,
-	xlabel = \(x\),
-	ylabel = {\(f(x)\)}
-]
-\addplot[color=blue, samples=100, domain=-5:5]{cos(deg(x))};
-\addlegendentry{\(cos(x)\)}
-\addplot[domain=-5:5]{1};
-\addlegendentry{\(p(x) = 1\)}
-\addplot[color=orange,domain=-2:2]{1 - 0.5 * x^2};
-\addlegendentry{\(p(x) = 1 - 0.5 x^2\)}
-\addplot[color=green,domain=-2:2]{1 - 0.5 * x^2 + 1/24 * x^4};
-\addlegendentry{\(p(x) = 1 - 0.5  x^2 + 1/24  x^4\)}
-\end{axis}
-\end{tikzpicture}
-
-\begin{satz}[Taylor'sche Formel in 2D]
-	content...
-\end{satz}
 
 \begin{satz}
 	Zu jeder Potenzreihe $\serieskzeroinfty{a}x^k$ gibt es einen Konvergenzradius sodass $\forallin{z}{\complexset}$ gilt:
@@ -1001,29 +977,57 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 \section{Differentialrechnung mehrerer Veränderlicher}
 
 \begin{definition}[partielle Ableitung]
-	Betrachte $\function{f}{\realset^n}{\realset} : (\suboneton{x}) \mapsto f(\suboneton{x}) \in \realset$. Ist die Funktion $\function{f}{\realset}{\realset} : \xi \mapsto f(x_1, \dots, x_{k-1}, \xi, x_{k+1}, \dots, x_n)$ differenzierbar, heißt ihre Ableitung an der Stelle $x_k$ partielle Ableitung. Wir schreiben $\frac{\partial f}{\partial x_k}$ bzw. $\partial_k f(x)$. Alternative Notationen sind: $f_{x_1}(x) := \partialf{f(x)}{x_1}$ oder $f_{x_1x_2}(x) := \partialf{^2 f(x)}{x_1 \partial x_2} = \frac{\partial}{\partial x_1}(\partialf{f(x)}{x_2})$
+	Sei $D \subseteq \realset^n$ offen, $\f{D}{\realset}, \xi \in D$. $F$ ist in $\xi$ nach  $x_i$ partiell differenzierbar, falls der Grenzwert
+	
+	\begin{align*}
+		\partialf{f}{x_i} := \lim_{h \rightarrow 0} \frac{f(\xi + h \cdot e_i) - f(\xi)}{h} 
+	\end{align*}
+	existiert. $e_i$ bezeichnet den $i$-ten Einheitsvektor.  Wir schreiben $\frac{\partial f}{\partial x_i}$ bzw. $\partial_{x_i} f(x)$ oder $f_{x_i}(x)$ und $\partialf{f}{x_i}(\xi)$ heißt partielle Ableitung von $f$ nach $x_i$ im Punkt $\xi$.
+	
+	Ist $f$ in allen Punkten $\xi \in D$ partiell differenzierbaer nach $x_i$, so heißt $f$ auf $D$ partiell differenzierbar nach $x_i$. Gilt dies für alle $x_i, i=1,...,n$, so heißt $f$ partiell differenzierbar auf $D$. Sind die partiellen Ableitungen stetig, so heißt $f$ stetig partiell differenzierbar.
 \end{definition}
 
-\begin{definition}[Differentiationsregeln]
-	content...
-\end{definition}
+\begin{satz}[Differentiationsregeln]
+	Seien $\function{f,g}{D}{\realset}, D \subseteq \realset^n$ partiell differenzierbar. Dann gilt:
+	\begin{enumerate}[noitemsep]
+		\item  Linearität: $\partialf{}{x_i}(\alpha f(x) + \beta g(x)) = \alpha \partialf{f}{x_i}(x) + \beta \partialf{g}{x_i}(x) $
+		\item  Produktregel: $\partialf{}{x_i}( f(x) g(x)) = \partialf{f}{x_i}(x)g(x) + f(x)\partialf{g}{x_i}(x)$
+		\item  Quotientenregel: $\partialf{}{x_i}( \frac{f(x)}{g(x)}) = \frac{\partialf{f}{x_i}(x)g(x) - f(x)\partialf{g}{x_i}(x)}{g(x)^2}$ falls $g(x) \neq 0$
+	\end{enumerate}
+	
+\end{satz}
 
 
 \begin{definition}[Gradient]
-	Betrachte $\function{f}{\realset^n}{\realset}$, deren sämtliche partiellen Ableitungen existieren. 
-	Der Vektor $\nabla f(x) = grad(f(x)) = (\partial_1 f(x) \dots \partial_n f(x))^T$ heißt Gradient.
+	Betrachte $\function{f}{D \subseteq\realset^n}{\realset}$, deren sämtliche partiellen Ableitungen in $\xi$ nach allen $x_i$ existieren. 
+	Dann nennt man den Vektor $\nabla f(x) = grad(f(x)) = \left(\begin{smallmatrix}
+		\partialf{f}{x_1}(\xi) \\
+		 \vdots \\
+		 \partialf{f}{x_n}(\xi)
+	\end{smallmatrix}\right)$ Gradient.
+	Mit ihm lassen sich die Differentiationsregeln schreiben als
+	\begin{itemize}[noitemsep]
+		\item  $\nabla(\alpha f + \beta g) = \alpha \nabla f + \beta \nabla g$
+		\item  $\nabla (fg) = \nabla (f) g + f \nabla(g)$
+		\item  $\nabla (\frac{f}{g}) = \frac{1}{g^2} (\nabla (f) g - f \nabla(g))$	
+	\end{itemize}
+und er definiert die Richtung des steilsten Anstiegs von $f$ im Punkt $\xi$ bzgl. $\normempty_2$
 \end{definition}
 
 \begin{definition}[Partielle Ableitungen höherer Ordnung]
-	content...
+	Sei $D \subseteq \realset^n$ offen, $\f{D}{\realset}$. Ist $f$ auf $D$ partiell differenzierbar und sind die partiellen Ableitungen selbst wieder partiell differenzierbar, erhält man die partielle Ableitung zweiter Ordnung: 
+	\begin{align*}
+		\partialf{^2}{x_j x_i} := \partialf{}{x_j}(\partialf{f}{x_i})
+	\end{align*}
+	Analog definiert man partielle Ableitungen $k$-ter Ordnung.  Sind die partiellen Ableitungen stetig, so heißt $f$ $k-fach$ stetig (partiell) differenzierbar
 \end{definition}
 
 \begin{satz}[Satz von Schwarz]
-	Für zweimal stetig differenzierbare Functionen $f \in C^2$ gilt: $\partialf{^2f}{x \partial y} = \partialf{^2f}{y \partial x}$
+	Sei $D \subseteq \realset^n$ offen, $\f{D}{\realset}$, $f \in \cnspace{2}{D}{\realset}$.  Dann gilt: $\partialf{^2f}{x_j \partial x_i} = \partialf{^2f}{x_i \partial x_j}$. Ist $f$ $k$-mal stetig differenzierbar, so kann man die Reihenfolge der partiellen Ableitungen bis zur Ordnung $k$ beliebig tauschen.
 \end{satz}
 
-\begin{definition}
-	Die Matrix $Hf(x) := (\partial_j \partial_i f(x))_{1 \leq i \leq j \leq n}$ heißt \emph{Hesse-Matrix}.
+\begin{definition}[Hesse-Matrix]
+	Die Matrix $Hf(\xi) := (\partial_j \partial_i f(\xi))_{1 \leq i \leq j \leq n}$ heißt \emph{Hesse-Matrix}.Für eine zweimal stetig differenzierbare Funktion ist diese symmetrisch. 
 \end{definition}
 
 \begin{definition}[Laplace Operator]
@@ -1036,152 +1040,246 @@ Für Sinus, Kosinus und Tangens seien die folgenden Umkehrfunktionen definiert:
 
 
 \begin{definition}[Richtungsableitung]
-	Wie die partielle Ableitung beschreibt die Richtungsableitung die lokale Änderungsrate, allerdings in einer vorgegebenen Richtung eines normierten Vektors $\vec{v}$ und nicht entlang der Einheitsvektoren:
+	Wie die partielle Ableitung beschreibt die Richtungsableitung die lokale Änderungsrate, allerdings in einer vorgegebenen Richtung eines normierten Vektors $\vec{v}$ und nicht entlang der Einheitsvektoren. Sei $D \subseteq \realset^n$ offen, $\f{D}{\realset}, \xi \inner{ D}{arg2}$. Für einen Vektor $v \in \realset^n$ mit $\norm{v} = 1$ heißt
 	
 	\begin{align*}
-	D_v f(x_0) = \frac{\partial f(x_0)}{\partial \vec{v}} = \lim_{h \rightarrow 0} \frac{f(x_0  + h \cdot \vec{v}) - f(x_0)}{h}
+	D_v f(\xi) = \frac{\partial f}{\partial v}(\xi) = \lim_{h \rightarrow 0} \frac{f(\xi  + h \cdot \vec{v}) - f(\xi)}{h}
 	\end{align*}
+
+	Richtungsableitung oder Gateaux-ABleitung von $f$ in Richtung $v$.
 \end{definition}
 
 \begin{satz}[Berechnung der Richtungsableitung]
-	Für $f$ stetig differenzierbar lässt sich die Richtungsableitung mithilfe des Skalarprodukts wie folgt berechnen:
+	Sei $D \subseteq \realset^n$ offen, $\xi \inner{ D}{arg2}, \f{D}{\realset}$ in $\xi$ stetig partiell differenzierbar. Dann existiert die Richtungsableitung $D_v f(\xi)$ für jeden normierten Vektor $v \in \realset^n$ und es gilt:
 	
 	\begin{align*}
-	D_v f(x_0) = \langle \nabla f(x_0), v \rangle 
+	D_v f(\xi) = \langle \nabla f(\xi), v \rangle = v^T \nabla f (\xi)
 	\end{align*}
-\end{satz}
 
-\section{Differentialrechnung vektorwertiger Funktionen}
-
-\begin{definition}[Partielle Ableitung vektorwertiger Funktionen]
-	content...
-\end{definition}
-
-\begin{definition}[Divergenz]
-	Die Divergenz eines Vektorfeld beschreibt den Zu - order Abfluss einer Größe. Sei $\vec{f} : \realset^n \rightarrow \realset^n$:
-	
-	\begin{align*}
-	div(f) = \nabla \cdot \vec{f}(\vec{x}) = \sum_{i = 1}^{n} \frac{\partial f_i (\vec{x}) }{\partial x_i}
-	\end{align*}
-	
-\end{definition}
-
-
-\begin{definition}[Rotation]
-	Die Rotation erzeugt das Wirbelfeld zu einem Vektorfeld:
-	
-	\begin{align*}
-	curl(v(t, \vec{x})) = \nabla \times v(t,\vec{x}) = \begin{pmatrix} \frac{\partial}{\partial y} v_z(t, \vec{x}) - \frac{\partial}{\partial z} v_y(t, \vec{x}) \\
-	\frac{\partial}{\partial z} v_x(t, \vec{x}) - \frac{\partial}{\partial x} v_z(t, \vec{x}) \\ \frac{\partial}{\partial x} v_y(t, \vec{x}) - \frac{\partial}{\partial y} v_x(t, \vec{x})
-	\end{pmatrix} 
-	\end{align*}
-\end{definition}
-
-
-\begin{definition}[Totale Differenzierbarkeit]
-	Sei $U \subseteq \realset^n, \function{f}{U}{\realset^m}$. $f$ heißt in $x \in U $ total differenzierbar, falls es eine lineare Abbildung $\function{A}{\realset^n}{\realset^m} : h \mapsto A(h) := Ah, h = (h_1, ..., h_m)^T$ gibt, sodass gilt: 
-	
-	\begin{align*}
-		\lim_{h \rightarrow 0} \frac{f(x + h) - f(x) - A \cdot h}{\norm{h}} = 0
-	\end{align*}
-	
-	Diese Abbildung kann man als Matrix beschreiben $A \in \realset^{n \times m}$. Es gilt: $f$ ist differenzierbar $\leftrightarrow$ alle Komponenten sind in $x$ differenzierbar.
-	Die Matrix $A$ heißt auch Jacobi Matrix. Man schreibt:
-	$A = Jf(x) = (\frac{\partial f_i}{\partial x_j})_{1 \leq i \leq n, 1 \leq j \leq m} \in \realset^{n \times m}$
-	
-	Oder alternativ $f'(x) = h$ analog dem eindimensionalen Fall und nennen $f'(h)$ totale Ableitung. 		
-\end{definition}
-
-
-\begin{satz}[Totale und Partielle Differenzierbarkeit]
-	content...
-\end{satz}
-
-\begin{satz}[Differentiationsregeln]
-	content...
-\end{satz}
-
-\begin{definition}[Totales/Vollständiges Differential]
-	Sei $\f{\realset^n}{\realset}$ total differenzierbar. Das Totale Differential beschreibt die Änderung in einer kleinen Umgebung eines Punktes $a$ und ist gegeben durch
-	
-	\begin{align*}
-	d f(\vec{x}) = \sum_{i = 1}^{n} \frac{\partial f (\vec{x}) }{\partial x_i} dx_i
-	\end{align*}
-	
-	In der Physik wird dies auch als \textbf{Materialableitung} bezeichnet. Ist $f$ von anderen Funktionen abhängig, z.B. $f(t, u(t))$, so ist die Kettenregel zu verwenden:
-	
-	\begin{align*}
-	d f(t, u(t))  = \frac{\partial f (t, u(t))}{\partial t} + \frac{\partial f (t, u(t))}{\partial u(t)} \cdot \frac{\partial u (t)}{\partial t}
-	\end{align*}
-	
-\end{definition}
-
-\begin{satz}[Gradient und totale Ableitung]
-	Sei $\f{\realset^n}{\realset}$ in $a$ total differenzierbar, d.h. $f'(a) = (c_1,...,c_n)$. Dann ist $f$ partiell differenzierbar und es gilt: $\partialf{f}{x_k}(a) = c_k$ bzw. $\nabla f (a)^T = f'(a) $
-\end{satz}
-
-
-\begin{satz}[Eigenschaften des Gradienten]
-	Sei $f : D \subset \realset^n \rightarrow \realset, x \in D$ total differenzierbar. Es gilt: $\nabla f = 0$, so verschwinden alle Richtungsableitungen.	Gilt $\nabla f \neq 0$, so gibt es unter allen Richtungsableitungen $\partialf{f}{h}$ mit $\norm{h}_2 = 1$ eine größte, nämlich die des Gradienten
-\end{satz}
-
-\begin{satz}[Kettenregel des Gradienten]
-	\begin{align*}
-		\nabla_y f(g(y)) \overset{x := g(y)}{=} (Jg)^T(y) \nabla_x f(x)
-	\end{align*}
+	Für $v = \frac{\nabla f}{\norm{\nabla f}}$ nimmt die Richtungsableitung ihren größten Wert an und es gilt $D_v f = \norm{\nabla f}$
 \end{satz}
 
 \begin{tikzpicture}[bullet/.style={circle,fill,inner sep=1pt},
-declare function={f(\x,\y)=2-0.5*pow(\x-1.25,2)-0.5*pow(\y-1,2);}]
-\begin{axis}[view={150}{45},colormap/blackwhite,axis lines=middle,%
-zmax=2.2,zmin=0,xmin=-0.2,xmax=2.4,ymin=-0.2,ymax=2,%
-xlabel=$x$,ylabel=$y$,zlabel=$z$,
-xtick=\empty,ytick=\empty,ztick=\empty]
-\addplot3[surf,shader=interp,domain=0.6:2,domain y=0.5:1.2,opacity=0.7] 
-{f(x,y)};
-\addplot3[thick,domain=0.6:2,samples y=1]  ({x},1.2,{f(x,1.2)}); 
-\draw[dashed] (1.75,0,0) node[above left]{$x_0$} -- (1.75,1.2,0)
-node[bullet] (b1) {}  -- (0,1.2,0) node[above right]{$y_0$}
-(1.75,1.2,0) -- (1.75,1.2,{f(1.75,1.2)})node[bullet] {};
-\draw (1.75,1.2,{f(1.75,1.2)}) -- (0.75,1.2,{f(1.75,1.2)+0.5})
-coordinate[pos=0.5] (aux1);
-\draw[opacity=0.5,upper left=gray!80!black,upper right=gray!60,
-lower left=gray!60,lower right=gray!80!black] (2,1.2,0) -- (0.6,1.2,0)
--- (0.6,1.2,2.2) -- (2,1.2,2.2) -- cycle;
-\addplot3[surf,shader=interp,domain=0.6:2,domain y=1.2:1.9,opacity=0.7] 
-{f(x,y)};
-\end{axis}
-\draw (aux1) -- ++ (-1,1) node[above,align=center]{Steigung in $x$ Richtung\\
-	$\partial_xf(x,y)|_{x=x_0,y=y_0}$};
-\node[anchor=north west] at (b1) {$(x_0,y_0)$}; 
-%
-\begin{axis}[xshift=6.5cm,view={150}{45},colormap/blackwhite,axis lines=middle,%
-zmax=2.2,zmin=0,xmin=-0.2,xmax=2.4,ymin=-0.2,ymax=2,%
-xlabel=$x$,ylabel=$y$,zlabel=$z$,
-xtick=\empty,ytick=\empty,ztick=\empty]
-\addplot3[surf,shader=interp,domain=0.6:1.75,domain y=0.5:1.9,opacity=0.7] 
-{f(x,y)};
-\addplot3[thick,domain=0.5:1.9,samples y=1]  (1.75,{x},{f(1.75,x)}); 
-\draw[dashed] (1.75,0,0) node[above left]{$x_0$} -- (1.75,1.2,0)
-node[bullet] (b2){}
--- (0,1.2,0) node[above right]{$y_0$}
-(1.75,1.2,0) -- (1.75,1.2,{f(1.75,1.2)})node[bullet] {};
-\draw (1.75,1.2,{f(1.75,1.2)}) -- (1.75,0.2,{f(1.75,1.2)+0.2})
-coordinate[pos=0.5] (aux2);
-\draw[opacity=0.5,upper left=gray!80!black,upper right=gray!60,
-lower left=gray!60,lower right=gray!80!black] (1.75,0.5,0) -- (1.75,1.9,0)
--- (1.75,1.9,2.2) -- (1.75,0.5,2.2) -- cycle;
-\addplot3[surf,shader=interp,domain=1.75:2,domain y=0.5:1.9,opacity=0.7] 
-{f(x,y)};
-\end{axis}
-\draw (aux2) -- ++ (0.3,1) node[above,align=center]{Steigung in $y$ Richtung\\
-	$\partial_yf(x,y)|_{x=x_0,y=y_0}$};
-\node[anchor=north east] at (b2) {$(x_0,y_0)$};
+	declare function={f(\x,\y)=2-0.5*pow(\x-1.25,2)-0.5*pow(\y-1,2);}]
+	\begin{axis}[view={150}{45},colormap/blackwhite,axis lines=middle,%
+		zmax=2.2,zmin=0,xmin=-0.2,xmax=2.4,ymin=-0.2,ymax=2,%
+		xlabel=$x$,ylabel=$y$,zlabel=$z$,
+		xtick=\empty,ytick=\empty,ztick=\empty]
+		\addplot3[surf,shader=interp,domain=0.6:2,domain y=0.5:1.2,opacity=0.7] 
+		{f(x,y)};
+		\addplot3[thick,domain=0.6:2,samples y=1]  ({x},1.2,{f(x,1.2)}); 
+		\draw[dashed] (1.75,0,0) node[above left]{$x_0$} -- (1.75,1.2,0)
+		node[bullet] (b1) {}  -- (0,1.2,0) node[above right]{$y_0$}
+		(1.75,1.2,0) -- (1.75,1.2,{f(1.75,1.2)})node[bullet] {};
+		\draw (1.75,1.2,{f(1.75,1.2)}) -- (0.75,1.2,{f(1.75,1.2)+0.5})
+		coordinate[pos=0.5] (aux1);
+		\draw[opacity=0.5,upper left=gray!80!black,upper right=gray!60,
+		lower left=gray!60,lower right=gray!80!black] (2,1.2,0) -- (0.6,1.2,0)
+		-- (0.6,1.2,2.2) -- (2,1.2,2.2) -- cycle;
+		\addplot3[surf,shader=interp,domain=0.6:2,domain y=1.2:1.9,opacity=0.7] 
+		{f(x,y)};
+	\end{axis}
+	\draw (aux1) -- ++ (-1,1) node[above,align=center]{Steigung entlang $x$\\
+		$\partial_xf(x,y)|_{x=x_0,y=y_0}$};
+	\node[anchor=north west] at (b1) {$(x_0,y_0)$}; 
+	%
+	\begin{axis}[xshift=6.5cm,view={150}{45},colormap/blackwhite,axis lines=middle,%
+		zmax=2.2,zmin=0,xmin=-0.2,xmax=2.4,ymin=-0.2,ymax=2,%
+		xlabel=$x$,ylabel=$y$,zlabel=$z$,
+		xtick=\empty,ytick=\empty,ztick=\empty]
+		\addplot3[surf,shader=interp,domain=0.6:1.75,domain y=0.5:1.9,opacity=0.7] 
+		{f(x,y)};
+		\addplot3[thick,domain=0.5:1.9,samples y=1]  (1.75,{x},{f(1.75,x)}); 
+		\draw[dashed] (1.75,0,0) node[above left]{$x_0$} -- (1.75,1.2,0)
+		node[bullet] (b2){}
+		-- (0,1.2,0) node[above right]{$y_0$}
+		(1.75,1.2,0) -- (1.75,1.2,{f(1.75,1.2)})node[bullet] {};
+		\draw (1.75,1.2,{f(1.75,1.2)}) -- (1.75,0.2,{f(1.75,1.2)+0.2})
+		coordinate[pos=0.5] (aux2);
+		\draw[opacity=0.5,upper left=gray!80!black,upper right=gray!60,
+		lower left=gray!60,lower right=gray!80!black] (1.75,0.5,0) -- (1.75,1.9,0)
+		-- (1.75,1.9,2.2) -- (1.75,0.5,2.2) -- cycle;
+		\addplot3[surf,shader=interp,domain=1.75:2,domain y=0.5:1.9,opacity=0.7] 
+		{f(x,y)};
+	\end{axis}
+	\draw (aux2) -- ++ (0.3,1) node[above,align=center]{Steigung entlang $y$\\
+		$\partial_yf(x,y)|_{x=x_0,y=y_0}$};
+	\node[anchor=north east] at (b2) {$(x_0,y_0)$};
 \end{tikzpicture}
 
 \pagebreak
 
-\section{Anwendung multivariabler Differentiation}
+\section{Differentialrechnung vektorwertiger Funktionen}
+
+\begin{definition}[Vektorwertige Funktion und Vektorfeld]
+	Als vektorwertige Funktion bezeichnen wir eine Funktion $\f{ \realset^n}{\realset^m} : x \mapsto \left(\begin{smallmatrix}
+		f_1(x) \\
+		\vdots \\
+		f_m(x)
+	\end{smallmatrix}\right) $. Gilt $n = m$, so heißt $f$ Vektorfeld. Sind die komponentenweise Funktionen $k$-mal partiell stetig differenzierbar, so heißt das Vektorfeld $C^k$-Vektorfeld.
+\end{definition}
+
+\begin{definition}[Partielle Ableitung vektorwertiger Funktionen]
+	Sei $D \subseteq \realset^n$ offen, $\xi \in D$. $\f{D}{\realset^m}$ heißt partiell differenzierbar in $\xi$, falls der Grenzwert
+	\begin{align*}
+		\partialf{f}{x_i}(\xi) := \lim_{h \rightarrow 0} \frac{f(\xi + he_i) - f(\xi)}{h}
+	\end{align*}
+	existiert. Der Grenzwert ist dabei als vektorwertiger Grenzwert bzgl. der Euklidschen Norm zu verstehen. 
+	
+	Die partiellen Ableitungen lassen sich demnach komponentweise bestimmen:
+	\begin{align*}
+	\partialf{f}{x_i}(\xi) := \left(\begin{smallmatrix}
+		\partialf{f_1}{x_i}(\xi)  \\
+		\vdots \\
+		\partialf{f_m}{x_i}(\xi) 
+	\end{smallmatrix}\right)
+	\end{align*}
+\end{definition}
+
+\begin{definition}[Jacobi-Matrix]
+	Sei $D \subseteq \realset^n$ offen, $\xi \in D$, $\f{D}{\realset^m}$ partiell differenzierbar in $\xi$. Die Matrix
+	\begin{align*}
+		Jf(\xi) = Df = f'= \left(\begin{smallmatrix}
+			\nabla^T f_1(\xi) \\
+			\vdots \\
+			\nabla^T f_m(\xi) \\	
+		\end{smallmatrix}\right) = 
+		\left(\begin{smallmatrix}
+			\partialf{f_1}{x_1}(\xi) & \hdots & \partialf{f_1}{x_n}(\xi)
+			 \\
+			 \vdots & & 
+			 \\
+			\partialf{f_m}{x_1}(\xi) & \hdots & \partialf{f_m}{x_n}(\xi)	
+		\end{smallmatrix}\right) 
+	\end{align*}
+	heißt Jacobi-Matrix und ist die Verallgemeinerung des Gradienten auf den vektorwertigen Fall.
+\end{definition}
+
+\begin{definition}[Divergenz]
+	Die Divergenz eines Vektorfeld beschreibt den Zu - order Abfluss einer Größe. Sei $f : \realset^n \rightarrow \realset^n$ partiell differenzierbar Dann ist
+	\begin{align*}
+	div(f)(\xi) = \nabla \cdot f(\xi) = \sum_{i = 1}^{n} \frac{\partial f_i}{\partial x_i}(\xi) = tr(Jf(\xi))
+	\end{align*}
+\end{definition}
+
+\begin{satz}[Rechenregeln für die Divergenz]
+	Sei $D \subseteq \realset^n$ offen. Für partiell differenzierbare Vektorfelder $\function{f,g}{D}{\realset^n}$ und einer skalarwertige Funktion $\function{\phi}{D}{\realset}$ gilt:
+	\begin{itemize}[noitemsep]
+		\item Linearität: $div(\alpha f + \beta g) = \alpha \cdot div (f) + \beta \cdot div (g), \forallin{\alpha, \beta}{\realset}$
+		\item  Produktregel: $div(\phi f) = (\nabla \phi)^T f + \phi \cdot div (f)$
+	\end{itemize}
+\end{satz}
+
+
+\begin{definition}[Rotation]
+	Die Rotation erzeugt das Wirbelfeld zu einem Vektorfeld partiell differenzierbaren $\f{\realset^3}{\realset^3}$:
+	
+	\begin{align*}
+	curl(f(t, \xi)) = \nabla \times f(t,\xi) = \begin{pmatrix} \frac{\partial}{\partial y} f_z(t, \xi) - \frac{\partial}{\partial z} f_y(t, \xi) \\
+	\frac{\partial}{\partial z} f_x(t, \xi) - \frac{\partial}{\partial x} f_z(t, \xi) \\ \frac{\partial}{\partial x} f_y(t, \xi) - \frac{\partial}{\partial y} f_x(t, \xi)
+	\end{pmatrix} 
+	\end{align*}
+\end{definition}
+
+\begin{satz}[Rechenregeln für die Rotation]
+	Sei $D \subseteq \realset^3$ offen. Für partiell differenzierbare Vektorfelder $\function{f,g}{D}{\realset^3}$ und einer skalarwertige Funktion $\function{\phi}{D}{\realset}$ gilt:
+	\begin{itemize}[noitemsep]
+		\item Linearität: $curl(\alpha f + \beta g) = \alpha \cdot curl (f) + \beta \cdot curl (g), \forallin{\alpha, \beta}{\realset}$
+		\item  Produktregel: $curl(\phi f) = (\nabla \phi) \times f + \phi \cdot curl (f)$
+	\end{itemize}
+\end{satz}
+
+
+\begin{definition}[Totale Differenzierbarkeit]
+	Sei $D \subseteq \realset^n, \function{f}{D}{\realset^m}$. $f$ heißt in $\xi \in D $ (total / vollständig) differenzierbar, falls es eine lineare Abbildung $\function{A}{\realset^n}{\realset^m} : h \mapsto A(h) := Ah, h = (h_1, ..., h_m)^T$ gibt, sodass gilt: 
+	
+	\begin{align*}
+		\lim_{h \rightarrow 0} \frac{f(\xi + h) - f(\xi) - A \cdot h}{\norm{h}} = 0
+	\end{align*}
+\end{definition}
+
+
+\begin{satz}[Totale und Partielle Differenzierbarkeit]
+	Sei $D \subseteq \realset^n$ offen, $ \xi \in D, \function{f}{D}{\realset^m}$. Es gilt:
+	\begin{enumerate}[noitemsep]
+		\item Totale Differenzierbarkeit impliziert Stetigkeit: Ist $f$ in $\xi$ differenzierbar, so ist $f$ stetig
+		\item  Totale Differenzierbarkeit impliziert partielle Differenzierbarkeit: ist $f$ in $\xi$ total differenzierbar, so ist $f$ in $\xi$ partiell differenzierbar und $A$ ist identisch mit der Jacobi-Matrix von $f$.
+		\item  Stetig partielle Differenzierbarkeit: Gilt $f \in \cnspace{1}{D}{\realset}$, so ist $f$ auf $D$ total differenzierbar.
+	\end{enumerate}
+\end{satz}
+
+\begin{satz}[Differentiationsregeln]
+	Es gilt:
+	\begin{itemize}
+		\item  Linearität: 	Sei $D \subseteq \realset^n$ offen $\function{f,g}{D}{\realset^m}$ differenzierbar in $\xi \in D$. Dann ist $\alpha f + \beta g$ für alle $\alpha, \beta \in \realset$ in $\xi$ differenzierbar und es gilt 
+		\begin{align*}
+			J(\alpha f + \beta g)(\xi) = \alpha J f(\xi) + \beta J g(\xi)
+		\end{align*}
+		\item Kettenregel: Seien $D \subseteq \realset^n, E \subseteq \realset^m$ offen, $\f{D}{\realset^m} \in \xi, \function{g}{E}{\realset^k}$ in $f(\xi)$ differenzierbar. Dann ist die Verkettung $g \circ f$ ebenfalls in $\xi$ differenzierbar und es gilt:
+		\begin{align*}
+			J(g \circ f) = (g \circ f)'(\xi) = Jg(f(\xi)) \cdot Jf(\xi)
+		\end{align*}.
+		Für den Speziallfall $k=1$ gilt:
+		\begin{align*}
+				(g \circ f)'(\xi) = (\nabla_{f(\xi)} g(f(\xi)))^T \cdot Jf(\xi) = (Jf(\xi))^T \nabla_{f(\xi)} g(f(\xi))
+		\end{align*}
+		Wobei $\nabla_v$ den Gradienten bzgl. der Richtungsableitung $v$ beschreibt.
+			
+		Für den Speziallfall $n=k=1 (g(f(x)) = g(f_1(x),...,f_m(x))) $ gilt:
+		\begin{align*}
+		 	(g \circ f)'(\xi))  =  \nabla_{f(\xi)} g(f(\xi)) \cdot \left(\begin{smallmatrix}
+		 		f'_1(\xi) \\
+		 		\vdots \\
+		 		f'_m(\xi)
+		 	\end{smallmatrix}\right) = \sum_{k=1}^{m} \partialf{g}{f_k(\xi)} (f(\xi)) \cdot f_k'(\xi)
+		\end{align*}
+
+	\end{itemize}
+	Der Spezialfall $n=k=1$ und $f(\xi) = \xi$ wird auch als Totales Differential bezeichnet.
+\end{satz}
+
+
+\begin{definition}[Totales/Vollständiges Differential]
+	Sei $\f{\realset^n}{\realset}$ total differenzierbar. Das Totale Differential beschreibt die Änderung in einer kleinen Umgebung eines Punktes $\xi$ und ist gegeben durch
+	
+	\begin{align*}
+		 f'(\xi) = \sum_{i = 1}^{n} \frac{\partial f (\xi) }{\partial \xi_i} 
+	\end{align*}
+	
+	In der Physik wird dies auch als \textbf{Materialableitung} bezeichnet. Ist $f$ von anderen Funktionen abhängig, so ist die oben definierte Kettenregel zu verwenden. Beispiel: $n=k=1, m=2, \xi \in \realset, \f{\realset}{\realset^2}, \function{g}{\realset^2}{\realset}, f(t) = (f_1(t), f_2(t)) $
+	
+	\begin{align*}
+		&g(f(t))' = \partialf{g}{f_1}(f(t)) \cdot f_1'(t) + \partialf{g}{f_2}(f(t)) \cdot f_2'(t) \overset{f_1(t) = t, f_2(t) = u(t)}{=} \\
+		 &\partialf{g}{t}(f(t)) \cdot t' + \partialf{g}{u}(f(t)) \cdot u'(t) = \partialf{g}{t}(t, u(x))  + \partialf{g}{u}(f(t)) \cdot u'(t)
+	\end{align*}
+	
+\end{definition}
+
+
+\begin{definition}[Multivariate Ableitungen]
+	Zusammenfassend die Formen der vektorwertigen Differenzierung:
+	\begin{itemize}[noitemsep]
+		\item Skalar nach Vektor: $\f{\realset^n}{\realset} : \xi \in \realset^n \mapsto f(\xi) \in \realset \Rightarrow \nabla f(\xi) = \nabla f = (\frac{\partial f}{\partial \xi})^T = (\frac{\partial f(\xi)}{\partial \xi_1}, ..., \frac{\partial f(\xi)}{\partial \xi_n})^T$
+		\item Vektor nach Skalar: $f : \realset \rightarrow \realset^n : \xi \in \realset \mapsto f(\xi) \in \realset^n \Rightarrow Jf(\xi) = \frac{\partial  f(x\xi)}{\partial \xi} = (\frac{\partial f_1(\xi)}{\partial x}, ..., \frac{\partial f_n(x)}{\partial \xi})^T$  
+		\item Vektor nach Vektor:  $f : \realset^n \rightarrow \realset^m : \xi^n \in \realset^n \mapsto f(\xi) \in \realset^n \Rightarrow Jf (\xi) = (\frac{\partial f_{i}(\xi)}{\partial \xi_j})$
+		\item Skalar nach Matrix: $f : \mathbb{R}^{n \times m} \rightarrow \realset : A \in \realset^{m \times n} \mapsto f(A) \in \realset \Rightarrow \nabla f(A) = (\frac{\partial f(A)}{\partial A_{i, j}})$   
+		\item  $f'$ meint immer das Totale Differential
+	\end{itemize}
+	Wobei die Jacobi-Matrix als Generalisierung in der Schreibweise gegenüber dem Gradienten zu bevorzugen ist.
+\end{definition}
+
+
+\pagebreak
+
+\section{Anwendungen mehrdimensionaler Differentiation}
+
+\begin{satz}[Mittelwertsatz]
+	content...
+\end{satz}
+
+\begin{satz}[Mehrdimensionaler Satz von Taylor]
+	content...
+\end{satz}
 
 \begin{satz}
 	Sei $U \subseteq \realset^n$ offen, $\function{f}{U}{\realset}$ zweimal stetig differenzierbar, d.h. $\partial_i \partial_j$ existiert für alle $i, j$. Dann gilt:
@@ -1192,15 +1290,7 @@ lower left=gray!60,lower right=gray!80!black] (1.75,0.5,0) -- (1.75,1.9,0)
 \end{satz}
 
 
-\begin{definition}[Multivariate Ableitungen]
-	Zusammenfassend gilt:
-	\begin{itemize}[noitemsep]
-		\item Skalar nach Vektor: $\f{\realset^n}{\realset} : \vec{x} \in \realset^n \mapsto f(\vec{x}) \in \realset \Rightarrow \nabla f(\vec{x}) = \nabla f = (\frac{\partial f}{\partial \vec{x}})^T = (\frac{\partial f(\vec{x})}{\partial x_1}, ..., \frac{\partial f(\vec{x})}{\partial x_n})^T$
-		\item Vektor nach Skalar: $\vec{f} : \realset \rightarrow \realset^n : x \in \realset \mapsto \vec{f}(x) \in \realset^n \Rightarrow \frac{\partial \vec{f}(x)}{\partial x} = (\frac{\partial f_1(x)}{\partial x}, ..., \frac{\partial f_n(x)}{\partial x})^T$  
-		\item Vektor nach Vektor:  $\vec{f} : \realset^n \rightarrow \realset^m : x^n \in \realset^n \mapsto \vec{f}(\vec{x}) \in \realset^n \Rightarrow J\vec{f} (\vec{x}) = (\frac{\partial f_{i}(\vec{x})}{\partial x_j})$
-		\item Skalar nach Matrix: $f : \mathbb{R}^{n \times m} \rightarrow \realset : A \in \realset^{m \times n} \mapsto f(A) \in \realset \Rightarrow \nabla f(A) = (\frac{\partial f(A)}{\partial A_{i, j}})$   
-	\end{itemize}
-\end{definition}
+
 
 
 \pagebreak
@@ -1214,9 +1304,9 @@ lower left=gray!60,lower right=gray!80!black] (1.75,0.5,0) -- (1.75,1.9,0)
 \begin{satz}[Integration durch Substitution]
 	Sei $U$ eine offene Menge in $\realset^n$ und $\function{\phi}{U}{\realset^n}$ eine injektive differenzierbare Funktion mit stetigen partiellen Ableitungen und einer Jacobi Matrix ungleich null für jedes $x \in U$. Dann gilt für jede relle stetige Funktion mit kompaktem Träger in $\phi(U)$:
 	
-	\begin{equation}
+	\begin{align*}
 		\int_{\phi(U)}	 f(x) dx = \int_U f(\phi(u)) \cdot |det(J \phi)(u)| du
- 	\end{equation}
+ 	\end{align*}
  	
  	Dabei bezeichnet $det(J \phi)(u)$ die Determinante der Jacobi Matrix von $\phi$ ausgewertet am Punkt $u$.
  	
@@ -1404,3 +1494,6 @@ lower left=gray!60,lower right=gray!80!black] (1.75,0.5,0) -- (1.75,1.9,0)
 
 \section{Maßtheorie}
 
+\begin{definition}[Lebesgue-Integral]
+	content...
+\end{definition}

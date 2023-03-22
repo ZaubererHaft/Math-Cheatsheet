@@ -1156,7 +1156,7 @@ und er definiert die Richtung des steilsten Anstiegs von $f$ im Punkt $\xi$ bzgl
 \end{definition}
 
 \begin{definition}[Divergenz]
-	Die Divergenz eines Vektorfeld beschreibt den Zu - order Abfluss einer Größe. Sei $f : \realset^n \rightarrow \realset^n$ partiell differenzierbar Dann ist
+	Die Divergenz eines Vektorfeld beschreibt den Zu - oder Abfluss einer Größe. Sei $f : \realset^n \rightarrow \realset^n$ partiell differenzierbar Dann ist
 	\begin{align*}
 	div(f)(\xi) = \nabla \cdot f(\xi) = \sum_{i = 1}^{n} \frac{\partial f_i}{\partial x_i}(\xi) = tr(Jf(\xi))
 	\end{align*}
@@ -1274,21 +1274,68 @@ und er definiert die Richtung des steilsten Anstiegs von $f$ im Punkt $\xi$ bzgl
 \section{Anwendungen mehrdimensionaler Differentiation}
 
 \begin{satz}[Mittelwertsatz]
-	content...
+	Sei $D \subseteq \realset^n$ offen, $\f{D}{\realset}$ differenzierbar auf $D$. Seien $a,b \in D, a \neq b$ Punkte, deren Verbindungsstrecke $[a,b] := \{ a + t(b - a) \medspace | \medspace t \in [0,1] \}$ in $D$ liegt. Dann gibt es eine Zahl $\Theta \in (0,1)$ sodass 
+	\begin{align*}
+		f(b) - f(a) = \nabla^T f(a + \Theta (b-a)) (b - a)
+	\end{align*}
 \end{satz}
+
+\begin{definition}[Konvexe Menge]
+	Gilt der Mittelwertsatz für beliebige $a,b \in D$, so heißt $D$ konvex.
+\end{definition}
 
 \begin{satz}[Mehrdimensionaler Satz von Taylor]
-	content...
+	Sei $D \subseteq \realset^n$ offen und konvex, $\xi \in D$, $\f{D}{\realset} \in \cnspace{m+1}{D}{\realset}$. Dann gilt folgende Taylorentwicklung um $\xi$:
+	\begin{align*}
+		f(x) &= T_m(x, \xi) + R_m(x, \xi) \\
+		T_m(x, \xi) &= \sum_{k=0}^{m} \frac{1}{k!} [(x-\xi)^T \nabla]^k \cdot f(\xi) \\
+		R_m(x, \xi) &= \frac{1}{(m+1)!} [(x-\xi)^T \nabla]^{m+1} f(\xi + \Theta (x - \xi)), \Theta \in (0,1) \medspace \text{(Lagrange - Restglied)}
+	\end{align*}
+	Es gilt $[(x-\xi)^T\nabla]^k = [\sum_{i=1}^{m} (x_i - \xi_i) \partial{x_i}]^k$. Dieser Ausdruck wird ausmultipliziert und nach den partiellen Ableitungen sortiert. Für $n = 2$ gilt etwa	
+	\begin{align*}
+		[(x- \xi)^T \nabla]^0 &f(\xi) = f(\xi) \\
+		[(x- \xi)^T \nabla]^1 &f(\xi) = (x_1 - \xi_1) f_{x_1}(\xi) + (x_2 - \xi_2) f_{x_2}(\xi) = (x - \xi)^T \nabla f(\xi) \\
+		[(x- \xi)^T \nabla]^2 &f(\xi) = [(x_1 - \xi_1) \partial_{x_1} + (x_2 - \xi_2) \partial_{x_2}]^2 f(\xi) \\ &= (x_1 - \xi_1)^2  f_{x_1 x_1}(\xi) + 2 (x_1 - \xi_1) (x_2 - \xi_2) f_{x_1 x_2}(\xi)	+ (x_2 - \xi_2)^2 f_{x_2 x_2}(\xi) \\ &= \frac{1}{2} (x - \xi)^T H f(\xi) (x - \xi) \\
+		&\rightarrow T_2(x,\xi) = f(\xi) + (x - \xi)^T \nabla f(\xi) + \frac{1}{2} (x- \xi)^T Hf(\xi) (x- \xi)
+	\end{align*}	
 \end{satz}
 
-\begin{satz}
-	Sei $U \subseteq \realset^n$ offen, $\function{f}{U}{\realset}$ zweimal stetig differenzierbar, d.h. $\partial_i \partial_j$ existiert für alle $i, j$. Dann gilt:
+\begin{definition}[Minima/Maxima skalarer Felder]
+	Sei $D \subseteq \realset^n$ offen und $\f{D}{\realset}$. Ein Punkt $\xi \in D$ heißt lokales Minimum (bzw. lokales Maximum), falls eine Umgebung $U \subseteq D$ existiert mit $f(\xi) \leq f(y)$ (bzw. $f(\xi) \geq f(x)$) für alle $y \in U$. Tritt Gleichheit nur für $y = \xi$ auf, heißt $\xi$ striktes lokales Minimum (bzw. striktes lokales Maximum).
+\end{definition}
+
+\begin{satz}[Notwendiges Kroterium für lokale Extrema]
+	Sei $D \subseteq \realset^n$ offen und $\f{D}{\realset} \in \cnspace{1}{D}{\realset}$. Hat $f$ in $\xi$ ein lokales Extremum, so gilt $\nabla f(\xi) = 0$. $\xi$ heißt auch stationärer Punkt von $f$.
+\end{satz}
+
+\begin{satz}[Klassifikation stationärer Punkte]
+	Sei $D \subseteq \realset^n$ offen, $\function{f}{D}{\realset}$ zweimal stetig differenzierbar, $ \nabla f(\xi) = 0$ Dann gilt:
+	
 	\begin{enumerate}[noitemsep]
-		\item Falls $f$ in $x \in U$ ein lokales Extremum besitzt, gilt $\nabla f(x) = 0$. Im Falle eines lokalen Minimums ist $Hf(x)$ positiv semidefinit, im Falle eines lokalen Maximums $Hf(x)$ negativ semidefinit.
-		\item Falls $\nabla f(x) = 0$ und $Hf(x)$ positiv definit, dann hat $f$ ein striktes lokales Minimum. Falls $\nabla f(x) = 0$ und $Hf(x)$ negativ definit, dann hat $f$ ein striktes lokales Maximum. 
+		\item \textbf{(Notwendiges Kriterium)} Im Falle eines lokalen Minimums ist $Hf(x)$ positiv semidefinit, im Falle eines lokalen Maximums $Hf(x)$ negativ semidefinit.
+		\item \textbf{(Hinreichendes Kriterium)} Falls $\nabla f(x) = 0$ und $Hf(x)$ positiv definit, dann hat $f$ ein striktes lokales Minimum. Falls $\nabla f(x) = 0$ und $Hf(x)$ negativ definit, dann hat $f$ ein striktes lokales Maximum. 
+		
+		Ist $Hf(\xi)$ indefinit, so ist $\xi$ ein Sattelpunkt, d.h. in jeder Umgebung $U \subseteq D$ existieren $y,z \in U$ mit $f(y) < f(\xi) < f(z)$
 	\end{enumerate}
 \end{satz}
 
+\begin{definition}[Variationsproblem]
+	Bei einem Variationsproblem wird eine gesamte Funktion (und nicht ein Wert) gesucht, die ein Optimalitätskriterium erfüllt. In der Praxis wird dies oft über die Minimierung eines Integrals erreicht:
+	
+\end{definition}
+
+\begin{satz}[Euler-Lagrange-Gleichung]
+	Gesucht ist eine Funktion $\function{u}{[a,b]}{\realset}$, die ein Funktional
+	\begin{align*}
+		\int_{a}^{b}F(x,u,u_x) dx
+	\end{align*}
+	minimiert mit den Randbedingungen $u(a) = \alpha, u(b) = \beta$.
+	Jede Lösung ist notwendigerweise Lösung der Euler-Lagrange Gleichung
+	\begin{align*}
+		F_u - \frac{d}{dx}F_{u_x} = 0 \\
+		u(a) = \alpha, u(b) = \beta
+	\end{align*}
+\end{satz}
 
 
 
@@ -1343,15 +1390,19 @@ und er definiert die Richtung des steilsten Anstiegs von $f$ im Punkt $\xi$ bzgl
 \section{Gewöhnliche Differentialgleichungen}
 
 \begin{definition}[Gebiet]
-	content...
+	Eine Menge $U \subseteq \realset \times \realset^n$ heißt Gebiet, falls sie offen und zusammenhängend ist
 \end{definition}
 
 \begin{definition}[System Gewöhnlicher Differentialgleichungen]
-	content...
+	Sei $U$ Gebiet, $\f{U}{\realset}^n$ genügend oft differenzierbar. Sei $(t_0, x_0) \in U$ Anfangswert $t \in \realset, x \in \realset^n$. Gesucht ist $x \in \cnspace{1}{I}{\realset^n}$ auf einem Gebiet $I = (t_0, t_f) \subseteq \realset$ sodass 
+	\begin{align*}
+		x'(t) = f(t, x(t)) , t_0 \in I, x(t_0) x_0, (t,x(t)) \in U
+	\end{align*}
+	Dies wird Anfangswertproblem eines Systems gewöhnlicher Differentialgleichungen genannt.
 \end{definition}
 
 \begin{satz}[Satz von Peano]
-	content...
+	Sei $U$
 \end{satz}
 
 \begin{definition}[Lipschitz-Bedingung]
@@ -1419,35 +1470,117 @@ und er definiert die Richtung des steilsten Anstiegs von $f$ im Punkt $\xi$ bzgl
 
 \section{Partielle Differentialgleichungen}
 
-\begin{definition}[Quasilineare PDGL]
-	content...
+\begin{definition}[(Quasi-)lineare PDGL]
+	Eine partielle Differentialgleichung (PDGL) für $u(x_1,...,x_n), \function{u}{D \subseteq \realset^n}{\realset} $ mit $n$ unabhängigen Variablen $(x_1,...,x_n) \in D$ hat die Form:
+	\begin{align*}
+		F(x_1,...,x_n,u,\partialf{u}{x_1},...,\partialf{u}{x_n},\partialf{^2u}{x_i \partial x_j},...) = 0
+	\end{align*}
+	Ist $F$ linear in $u$ und all seiner Ableitunen, so heißt die PDGL linear.
+	
+	 Ist $F$ mindestens linear in der höchsten Ableitungen, so heißt $F$ quasilinear.
+	 Die Ordnung der PDGL ist bestimmt durch die höchste Ordnung der partiellen Ableitungen von $u$ in $F$.
 \end{definition}
 
-\begin{definition}[Klassifikation von PDGL]
-	content...
+\begin{definition}[Klassifikation von PDGL zweiter Ordnung]
+	Sei $x \in \Omega \subseteq \realset^n$ beschränktes Gebiet. Eine (quasi-) lineare PDGL zweiter Ordnung hat die Form
+	\begin{align*}
+		\sum_{i = 1}^n &\sum_{j=1}^{n} a_{i,j}(x,u,p) \partialf{^2 u}{x_i \partial x_j} = f(x, u, p) \\
+		A &= (a_{ij}), a_{ij}, f \in \cnspace{0}{Q}{\realset^n}, Q \subseteq \realset \times \realset^n, \\
+		x &= (x_1,...,x_n), p = (p_1,...,p_n), p_i := \partialf{u}{x_i}, u(x) \in \realset
+	\end{align*}
+	Die PDGL heißt dabei
+	\begin{itemize}[noitemsep]
+		\item Elliptisch, falls alle Eigenwerte von $A$ das gleiche Vorzeichen haben (positiv oder negativ definit)
+		\item Hyperbolisch, falls genau ein Eigenwert negativ ist und alle anderen positiv sind oder umgekehrt (indefinit).
+		\item Parabolisch, falls genau ein Eigenwert $0$ ist und alle anderen das gleiche Vorzeichen besitzen
+	\end{itemize}
+	Analog gilt dies für linear PDGL zweiter Ordnung:
+	\begin{align*}
+		L := -\sum_{i,k=1}^{n} a_{ik}(x) \partialf{^2}{x_i x_j} + \sum_{i = 1}^n b_i(x) \partialf{}{x_i} + c(x), Lu = f(x)
+	\end{align*}
 \end{definition}
 
-\begin{definition}[Wohlgestellte PDGL]
-	content...
+\begin{definition}[Wohl-gestellte PDGL]
+	Eine PDGL heißt wohl-gestellt, falls
+	\begin{itemize}[noitemsep]
+		\item Eine Lösung existiert und eindeutig ist sowie
+		\item Das Verhalten der Lösung sich stetig mit den Daten verändert (d.h., die Lösung ist stabil)
+	\end{itemize}
+	Wohl-gestelltheit wird oft Maximumsprinzipien, Fourier-Lösungen und Energieabschätzungen gezeigt.
 \end{definition}
 
 \begin{definition}[Bekannte PDGL]
-	\begin{itemize}
-		\item Laplace-Equation
-		\item Poission-Equation
-		\item Heat Equation
-		\item Wave Equation
-		\item Advection Equation
-		\item Advection-Diffusion Equation
-		\item Inkompressible Navier Stokes Equation 
+	Bekannte wohl-gestellte PDGL sind:
+	\begin{itemize}[noitemsep]
+		\item \textbf{Laplace-Gleichung}: $-\Delta u = 0$
+		\item \textbf{Poisson-Equation}: $-\Delta u = f$
+		\item \textbf{Kontinuitätsgleichung} (engl. Continuity Equation): $\nabla \cdot u = 0$
+		\item  \textbf{Erhaltungssatz} (engl. Conservation Law): $\partialf{u}{t} + \nabla \cdot F(u) = 0$
+		\item \textbf{Wärmeleitungsgleichung} (engl. Heat Equation) :  $\partialf{u}{t} = \kappa(x) \Delta u$ wobei $\kappa(x) > 0$ die  Temperaturleitfähigkeit beschreibt
+		\item \textbf{Wellengleichung} (engl. Wave Equation): $\partialf{^2 u}{t^2} = c(x)^2 \nabla^2 u $ wobei $c(x)$ die Ausbreitungsgeschwindigkeit der Welle, z.B. Schall oder Licht beschreibt.
+		\item \textbf{Diffusionsgleichung} (engl. Diffusion Euqation) $\partialf{u}{t} = \nabla \cdot (d(u, x) \nabla u) $ wobei $d(u,x)$ den Diffusionskoeffizienten beschreibt
+		\item \textbf{Transportgleichung} (engl. Transport Equation) $\partialf{u}{t} = - \nabla \cdot (f(x) u)$ mit dem Spezialfall $\partialf{u}{t} + v \nabla \cdot u = 0$ (engl. Advection Equation)
+		\item \textbf{Advektions-Diffusionsgleichung} (engl. Advection-Diffusion Equation): Summe aus Transport- und Diffusionsgleichung $\partialf{u}{t} = \nabla \cdot (d(u, x) \nabla u) - \nabla \cdot (f(x) u) + s(x) $ mit den zusätzlichen Zu - oder Abflusstermen $s$
+		\item \textbf{Inkompressible Navier-Stokes Gleichung}: 
+		\begin{align*}
+			\begin{cases}
+				\nabla \cdot u = 0 \\
+				\partialf{u}{t} + \underbrace{(u \cdot \nabla)u}_{\text{Advektion}} =\underbrace{ - \nabla p}_{\text{Oberflächenkräfte}} + \underbrace{\nu \Delta u}_{\text{Impulsdiffusion}} + \underbrace{g}_{\text{Volumenkräfte}}
+			\end{cases}
+		\end{align*} 
+		\begin{itemize}[noitemsep]
+			\item  $u$ - Geschwindigkeitsfeld abhängig von $t$
+			\item  $\nu = \frac{\mu}{\rho}$ kinematische Viskosität, $\mu$ dynamische Viskosität 			
+			\item  $g$ gravitationskräfte auf dem Flui
+			\item  $p$ - Druck	
+		\end{itemize}
+		\item \textbf{Flachwassergleichung} In 2D gegeben als
+		\begin{align*}
+			\partialf{}{t}\begin{pmatrix}
+				h \\
+				h u \\
+				h v 
+			\end{pmatrix} +
+			\partialf{}{x} \begin{pmatrix}
+				h u \\
+				h u^2 + \frac{1}{2} gh^2 \\
+				huv
+			\end{pmatrix} +
+			\partialf{}{x} \begin{pmatrix}
+				hv \\
+				huv \\
+				h v^2 + \frac{1}{2} gh^2
+			\end{pmatrix} = s(t,x,y) + b(x,y)
+		\end{align*} 
+	\begin{itemize}[noitemsep]
+		\item $h$ Wassertiefe zum Zeitpunkt $t$ an $x,y$
+		\item  $h u$ Geschwindigkeit in $x$-Richtung
+		\item  $h v$ Geschwindigkeit in $y$-Richtung	
+		\item  Gravitationskonstante
+		\item  $p$ hydrostatischer Druck ausgedrückt über $\partialf{}{x}(\frac{1}{2}gh^2)$
+		\item  $s$ Zuflussterm, $b$ Bathymetrie (Vermessung der Topographie des Meeresbodens)
+	\end{itemize}
 	\end{itemize}
 \end{definition}
 
-\begin{satz}[Lösungsverfahren Separation der Variablen]
-	content...
+\begin{definition}[Multi-Index]
+	Ein Multi-Index ist definiert als $n$-tupel $\alpha = (\alpha_1,...,\alpha_n)$ nicht-negativer natürlicher Zahlen mit $|\alpha| = \alpha_1 + ... + \alpha_n$. Mit ihm kann kompakt geschrieben werden:
+	\begin{align*}
+		D^\alpha u (x) = \frac{\partial^\alpha}{\partial x_1^{\alpha_1} ... \partial x_n^{\alpha_n}}
+	\end{align*}
+	Eine lineare PDGL der Ordnung $k$ hat demnach die Form
+	\begin{align*}
+		\sum_{|\alpha| < k} a_\alpha (x) D^\alpha = f(x)
+	\end{align*}
+\end{definition}
+
+
+\begin{satz}[Methode der Charakteristiken für PDGL erster Ordnung]
+	Gegeben sei eine quasi-lineare partielle Differentialgleichung
 \end{satz}
 
-\begin{satz}[Lösungsverfahren Methode der Charaktersitiken]
+
+\begin{satz}[Lösungsverfahren Separation der Variablen]
 	content...
 \end{satz}
 
@@ -1492,7 +1625,7 @@ und er definiert die Richtung des steilsten Anstiegs von $f$ im Punkt $\xi$ bzgl
 
 \pagebreak
 
-\section{Maßtheorie}
+	\section{Maßtheorie}
 
 \begin{definition}[Lebesgue-Integral]
 	content...

@@ -5,10 +5,12 @@
 \usepackage{amsmath}
 \usepackage{pgfplots}
 \usepackage{multicol}
+\usepackage{wrapfig}
 \usetikzlibrary{calc}
 \usetikzlibrary{shadings}
 \pgfplotsset{compat=1.16}
 \usetikzlibrary{quotes,angles}
+\usepgfplotslibrary{fillbetween}
 
 \begin{document}
 
@@ -69,14 +71,14 @@
 \newcommand{\var}[1]{Var[#1]}
 \newcommand{\aspace}[2]{A(#1,#2)}
 \newcommand{\bspace}[2]{B(#1,#2)}
-\newcommand{\cnspace}[3]{C^#1(#2,#3)}
+\newcommand{\cnspace}[3]{C^{#1}(#2,#3)}
 \newcommand{\normempty}{|| \cdot ||}
 \newcommand{\innerempty}{\langle \cdot, \cdot \rangle}
 \newcommand{\testspace}[2]{C_0^1(#1,#2)}
 \newcommand{\testspacecompact}[2]{C_C^\infty(#1,#2)}
 \newcommand{\lpspace}[3]{L^#1(#2,#3)}
-\newcommand{\sobolevspace}[3]{H^#1(#2,#3)}
-\newcommand{\sobolevspacecompact}[3]{H^#1_0(#2,#3)}
+\newcommand{\sobolevspace}[3]{H^{#1}(#2,#3)}
+\newcommand{\sobolevspacecompact}[3]{H^{#1}_0(#2,#3)}
 
 \newtheorem{definition}{Definition}
 \newtheorem{satz}{Satz}

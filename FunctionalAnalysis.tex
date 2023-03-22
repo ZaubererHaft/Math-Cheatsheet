@@ -242,15 +242,62 @@
 \end{satz}
 
 \begin{definition}[Galerkin-Schema]
-	content...
+	Eine Folge endlich-dimensionaler Unterräume $\sequence{V}{m}$ eines unendlich-dimensionalen Vektorraums $V$ heißt Galerkin-Schema, falls es für alle $v \in V$ eine Folge $\sequence{v}{m}, v_m \in V_m $ gibt, sodass $v_m \rightarrow v$ für $m \rightarrow \infty$. 
+	
+	Falls $\sequence{v}{j}, v_j \in V$ sodass für alle $m \in \naturalset$, $\{v_q,...,v_m\}$ linear unabhägig und $V_0 = \{\sum_{i = 1}^m a_j v_j \medspace | \medspace a_j \in \realset, m \in \natural\}$ dicht in $V$ ist ($\bar{v_0} = V$), dann heißt $(v_j)$ Galerkin-Basis von $V$.
 \end{definition}
 
-\begin{satz}[Lemma von Céa]
-	content...
+\begin{satz}[Approximation der variationallen Gleichung]
+ Sei $W$ endlich dimensionaler Unterraum von $V$. Die Lösung $v_m \in W $ sodass für alle $v \in W$ gilt $a(v_m,v) = Lv$, ist eindeutig aufgrund von Lax-Milgram.
+ Die Lösung kann ermitteln werden wie folgt:
+ 
+ \begin{align*}
+ 	w &= \langle w_1,...,w_d \rangle, v = \sum_{i=1}^{d} \alpha_i w_i, v_w = \sum_{i=1}^{d} \zeta_i w_i \\
+ 	\rightarrow L_W v &= \sum_{j=1}^{d} \alpha_j L w_j = (Lw_1,...,Lw_d) \left(\begin{smallmatrix}
+ 		\alpha_1 \\
+ 		\vdots \\
+ 		\alpha_d
+ 	\end{smallmatrix}\right) =: l_w^T \alpha \\
+ 	a_W(v_w,v) &= a_W(\sum_{i=1}^{d} \zeta_i w_i, \sum_{j=1}^{d} \alpha_j w_j) \overset{\textbf{bilinearity}}{=} \\ &= \left(\begin{smallmatrix}
+ 		\zeta_1,...,\zeta_d
+ 	\end{smallmatrix}\right)  \left(\begin{smallmatrix}
+	 		a_W(w_1,w_1) & \hdots & a_W(w_d,w_1) \\
+	 		\vdots & & \\
+	 		a_W(w_d,w_1) & \hdots & a_W(w_d,w_d) 
+	\end{smallmatrix}\right)
+	\left(\begin{smallmatrix}
+		\alpha_1 \\
+		\vdots \\
+		\alpha_d
+	\end{smallmatrix}\right) =: \zeta^T A \alpha \\
+	\rightarrow L_Wv &= a_W(v_w,v) \leftrightarrow \zeta^T A \alpha = l_W^T \alpha \leftrightarrow (\zeta A - l_W^T) \alpha = 0 \\ \leftarrow \zeta A &= l_W^T \leftrightarrow A^T \zeta = l_W \leftrightarrow \zeta = (A^T)^{-1} l_W \\
+	\rightarrow v_W &= \sum_{i=1}^{d} \zeta_i w_i \medspace \text{solution}
+ \end{align*}
 \end{satz}
 
-\begin{satz}[Fundamental Lemma]
-	content...
+\begin{satz}[Lemma von Céa]
+	Sei $V$ Hilbert-Raum, $\innerempty$ und Norm $\norm{u} = \sqrt{\inner{u}{u}}$. Sei $W$ endlich dimensionaler Unterraum von $V$. Sei $\function{a}{V \times V}{\realset}$ Bilinearform mit
+	\begin{itemize}[noitemsep]
+		\item $|a(w,v)| \leq C \norm{w} \cdot \norm{v}, \forallin{v,w}{V}$ (Stetig)
+		\item $|a(v,v)| \geq D \norm{v}^2$ (Koerziv) 
+	\end{itemize}
+	Dann gilt:
+	\begin{align*}
+		\norm{v_1 - v_W} \leq \frac{C}{D}\cdot inf_{v \in V} \norm{v_1 - v}
+	\end{align*}
+	und falls $a$ zusätzlich symmetrisch ist:
+	\begin{align*}
+	\norm{v_1 - v_W} \leq \sqrt{\frac{C}{D}} \cdot inf_{v \in V} \norm{v_1 - v}
+\end{align*}
+	Darauß folgt dass die Approximation der variationellen Gleichung konvergiert für eine Galerkin-Basis.
+\end{satz}
+
+\begin{satz}[Fundamentallemma der Variationsrechnung]
+	Sei $G \in \cnspace{0}{[a,b]}{\realset}, $. Falls 
+	\begin{align*}
+		\forall \eta \in \cnspace{1}{[a,b]}{\realset}, \eta(a) = \eta (b) = 0 :  \int_{a}^{b} \eta(x) G(x) dx = 0 
+	\end{align*}
+	So folgt dass $G(x) = 0$.
 \end{satz}
 
 \begin{definition}[Eigenfunktionen]

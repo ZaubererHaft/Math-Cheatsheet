@@ -1402,23 +1402,35 @@ und er definiert die Richtung des steilsten Anstiegs von $f$ im Punkt $\xi$ bzgl
 \end{definition}
 
 \begin{satz}[Satz von Peano]
-	Sei $U$
+	Sei $U \subseteq \realset \times \realset^n$ Gebiet, $f \in \cnspace{0}{U}{\realset}, (t_0, x_0) \in U$. Das Anfangswertproblem $x'(t,x(t)), x(t_0) = x_0$ hat mindestens eine Lösung die zu den Grenzen in beide Richtungen erweitert werden kann.
 \end{satz}
 
 \begin{definition}[Lipschitz-Bedingung]
-	content...
+	Definition:
+	\begin{itemize}[noitemsep]
+		\item \textbf{Globale Lipschitz-Bedingung}: Sei $U \subseteq \realset^{n+1}, f \in \cnspace{0}{U}{\realset^n}$. $f(t,x)$ erfüllt die globale Lipschitz-Bedingung bzgl. $x$ mit Lipschitz-Konstante $L$, falls $\exists L > 0 : \forallin{(t, x_1),(t, x_2)}{U} : \norm{f(t,x_1) - f(t,x_2)} \leq L \norm{x_1 - x_2}$
+		\item \textbf{Lokale Lipschitz-Bedingung}: Falls für jedes $(t_1,x_1) \in U$ ein $\sigma_1 = \sigma(t_1,x_2) > 0$ existiert, sodass $f(t,x)$ die globale Lipschitz Bedingung auf $U_{\sigma_1} \cap U$ erfüllt. $U_{\sigma_1}$ bezeichne dabei den offenen Kugelkörper mit Radius $\sigma_1$ um $(t_1,x_1)$
+	\end{itemize}
 \end{definition}
 
 \begin{satz}[Notwendiges Kriterium für Lipschitz-Bedingung]
-	content...
+	Sei $D \subseteq \realset^{n+1}$ konvexes Gebiet. FAlls in $D$ alle partiellen Ableitungen $|\partialf{f_i}{x_k}| \leq K$ beschränkt sind, dann erfüllt $f$ die globale Lipschitz-Bedingung auf $D$. Man erhält außerdem: $L \leq K \cdot n$.
+	
+	Sei $D \subseteq \realset^{n+1}$ Gebiet, $f \in \cnspace{0}{D}{\realset^n}$. Falls $Jf \in \cnspace{0}{D}{\realset^{n \times n}}$, dann erfüllt $f$ die lokale Lipschitz-Bedingung auf $D$.
 \end{satz}
 
 \begin{satz}[Picard-Lindelöf]
-	content...
+	Sei $D = [a,b] \times \realset^n$ domain, $f \in \cnspace{0}{D}{\realset^n}$ und erfülle die globale Lipschitz-Bedingung auf $D$. Dann existiert für jedes $(t_0, x_0) \in D$ genau eine Lösung $x(t)$ des Anfangswertproblems 
+	\begin{align*}
+		\begin{cases}
+			x'(t) &= f(t,x(t)) \medspace \text{auf} \medspace [a,b] \\
+			x_0 &= x(t_0)
+		\end{cases}
+	\end{align*}
 \end{satz}
 
 \begin{definition}[Spezielle Differentialgleichungen]
-	content...
+	Für $u$
 \end{definition}
 
 \begin{satz}[Lösungsverfahren für DGl mit separierbar rechter Hälfte ]
@@ -1529,10 +1541,9 @@ und er definiert die Richtung des steilsten Anstiegs von $f$ im Punkt $\xi$ bzgl
 			\end{cases}
 		\end{align*} 
 		\begin{itemize}[noitemsep]
-			\item  $u$ - Geschwindigkeitsfeld abhängig von $t$
+			\item  $u$ - Geschwindigkeitsfeld abhängig von $t$,  $p$ - Druck	
 			\item  $\nu = \frac{\mu}{\rho}$ kinematische Viskosität, $\mu$ dynamische Viskosität 			
-			\item  $g$ gravitationskräfte auf dem Flui
-			\item  $p$ - Druck	
+			\item  $g$ gravitationskräfte auf dem Fluid 
 		\end{itemize}
 		\item \textbf{Flachwassergleichung} In 2D gegeben als
 		\begin{align*}
@@ -1554,9 +1565,8 @@ und er definiert die Richtung des steilsten Anstiegs von $f$ im Punkt $\xi$ bzgl
 		\end{align*} 
 	\begin{itemize}[noitemsep]
 		\item $h$ Wassertiefe zum Zeitpunkt $t$ an $x,y$
-		\item  $h u$ Geschwindigkeit in $x$-Richtung
-		\item  $h v$ Geschwindigkeit in $y$-Richtung	
-		\item  Gravitationskonstante
+		\item  $h u / H v$ Geschwindigkeit in $x / y$-Richtung
+		\item  $g$ Gravitationskonstante
 		\item  $p$ hydrostatischer Druck ausgedrückt über $\partialf{}{x}(\frac{1}{2}gh^2)$
 		\item  $s$ Zuflussterm, $b$ Bathymetrie (Vermessung der Topographie des Meeresbodens)
 	\end{itemize}
@@ -1570,10 +1580,39 @@ und er definiert die Richtung des steilsten Anstiegs von $f$ im Punkt $\xi$ bzgl
 	\end{align*}
 	Eine lineare PDGL der Ordnung $k$ hat demnach die Form
 	\begin{align*}
-		\sum_{|\alpha| < k} a_\alpha (x) D^\alpha = f(x)
+		\sum_{|a| \leq k} a_\alpha (x) D^\alpha = f(x)
 	\end{align*}
 \end{definition}
 
+\begin{definition}[System partieller Differentialgleichungen]
+	content...
+\end{definition}
+
+\begin{definition}[Randbedingungen	]
+	Eine Randbedigung muss dauerhaft auf dem Rand des Gebiets $\Omega$, $\partial \Omega$, erfüllt sein. Man unterscheidet
+	\begin{itemize}[noitemsep]
+		\item \textbf{Dirichlet-Randbedingung}: $u(x) = f(x), x \in \partial \Omega$ mit $\f{\Omega}{\realset^m}$ gibt entlang dem Rand von $\Omega$ eine messbare Funktion vor
+		\item  \textbf{Neumann-Randbedigung}: $\partialf{u}{n}(x) = f(x), x \in \partial \Omega$ mit $\f{\Omega}{\realset^m}$ gibt entlang dem Rand von $\Omega$ die Normalenableitung von $u$ vor
+	\end{itemize}
+\end{definition}
+
+\begin{definition}[Anfangsbedingungen]
+	Für zeitabhängige PDGL schreibt die Anfangsbedingung den Anfangszustand des beschriebenen Systems vor. Für die Lösung $u$ zu $t=0$ gilt also:
+	\begin{align*}
+		u(x,t = 0) = u_0(x), \forallin{x}{\Omega}
+	\end{align*}
+\end{definition}
+
+\begin{definition}[Anfangswertproblem, Cauchy-Problem]
+	Eine PDGL der Form
+	\begin{align*}
+		\begin{cases}
+			F(u(x,t),...) = 0 \\
+			u(x, 0) = u_0(x)
+,		\end{cases}
+	\end{align*}
+	heißt Anfangswertproblem oder Cauchy-Problem. Die räumliche Dimension ist also nicht durch Randbedingungen beschränkt.
+\end{definition}
 
 \begin{satz}[Methode der Charakteristiken für PDGL erster Ordnung]
 	Gegeben sei eine quasi-lineare partielle Differentialgleichung
